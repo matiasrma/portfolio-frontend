@@ -1,0 +1,9 @@
+a img {
+    width: 35px;    
+    float: right;
+    padding: 5px;
+}
+
+div > img {
+    width: 100px;
+}

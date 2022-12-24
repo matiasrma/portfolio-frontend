@@ -1,0 +1,64 @@
+#banner {
+    width: 100%; 
+}
+
+#selfie {
+    width: 200px;
+    border-radius: 100px;
+    position: absolute;    
+    bottom: 210px;
+    box-shadow: 0px 0px 5px 5px;
+}
+
+h2, p {
+    margin-bottom: 7px;
+}
+
+#cont-botones {
+    bottom: 5px;
+}
+
+button {
+    margin: 3px;
+    margin-bottom: 20px;
+}
+
+div {
+    border-radius: 20px;    
+}
+
+.card {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color: white;
+    color: #0d6efd;    
+}
+
+@media (max-width: 575px){
+    #cont-selfie {
+        height: 80px;
+    }
+
+    #selfie {
+        left: 28%;
+        right: 28%;
+        width: 170px;
+        bottom: 340px;
+    }
+    
+    h2, p {        
+        text-align: center;
+    }
+
+    .d-inline {
+        padding: 0px;
+    }
+
+    button {
+        width: 100%;
+        left: 0px;
+    }
+}

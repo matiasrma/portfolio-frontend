@@ -1,0 +1,14 @@
+.col-2 {
+    padding: 15px;
+}
+
+p {
+    text-align: center;
+}
+
+a img {
+    width: 35px;    
+    float: right;
+    padding: 5px;
+}
+

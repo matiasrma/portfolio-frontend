@@ -1,0 +1,30 @@
+div {
+    background-color: dodgerblue;
+}
+
+app-social {
+    float: right;
+    margin: 25px;
+}
+
+button {
+    background-color:black;
+    color: white;
+    font-size: 15px;
+    padding-top: 3px;
+    height: 30px;
+    float: right;
+    margin-top: 25px;
+    margin-left: 5px;
+}
+
+button:hover {
+    background-color: cyan;
+    color:black;
+}
+
+@media (max-width: 576px){
+    app-social {        
+        float: left;
+    }    
+}

@@ -1,0 +1,13 @@
+.row {
+    padding: 15px;    
+}
+
+div {
+    background-color:darkgray ;
+    text-align: left;        
+    border-radius: 20px;
+}
+
+.card {
+    margin-bottom: 5px;
+}
