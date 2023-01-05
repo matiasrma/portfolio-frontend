@@ -5,3 +5,33 @@ div {
 .card {
     margin-bottom: 5px;
 }
+
+.col-2 a img {
+    width: 33px;
+    float: right;
+    padding-right: 0px;
+}
+
+div > img {
+    width: 100px;
+}
+
+a img {
+    width: 33px;  
+    padding: 5px;
+    float: right;
+    margin: 5px;
+    border-radius: 100%;               
+}
+
+a img:hover{       
+    box-shadow: 0px 0px 5px 5px blue;         
+}
+
+a .agregar:hover{       
+    box-shadow: 0px 0px 5px 5px green;     
+}
+
+a .trash:hover{       
+    box-shadow: 0px 0px 5px 5px red;     
+}

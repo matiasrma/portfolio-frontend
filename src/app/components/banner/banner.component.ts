@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Persona } from 'src/app/Model/persona.model';
+import { PersonaService } from 'src/app/services/persona.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-banner',
@@ -7,9 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BannerComponent implements OnInit {
 
-  constructor() { }
+  switchInteres: boolean = false;
+  isLogged: boolean = false;
+  persona: Persona = new Persona("","","","","","","","");
 
-  ngOnInit(): void {
+  constructor(
+    public personaService: PersonaService,
+    public tokenService: TokenService
+    ) { }
+
+  ngOnInit(): void {    
+    this.personaService.detail(1).subscribe(data => {this.persona = data});       
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+    } else{
+      this.isLogged = false;
+    }
   }
+
+  changeInteres(): void{
+    this.switchInteres = !this.switchInteres;
+  }
+  
 
 }

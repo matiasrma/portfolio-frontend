@@ -1,21 +1,58 @@
 <div class="card container">
     <div class="row p-2">
-        <div class="col-10">
+        <div class="col-10 col-sm-11 my-2">
             <h2>Experiencia</h2>
-        </div>
-        <div class="col-2">
-            <app-boton-agregar></app-boton-agregar>
+        </div>        
+        <div class="col-1">
+            <a href="" routerLink="/nuevaexp" *ngIf="isLogged" ><img src="../../../assets/agregar.png" alt="" class="agregar"></a>
         </div>
     </div>
-    <app-item-exp></app-item-exp>
-    <app-item-exp></app-item-exp>
+    <table class="table">
+        <tbody>
+            <tr *ngFor="let Experiencia of experiencia">
+                <div class="row m-2">
+                    <div class="col-11 col-sm-3 col-lg-2">
+                        <img src="{{Experiencia.imgExp}}" alt="">
+                    </div>
+                    <div class="col-11 col-sm-7 col-lg-8">
+                        <h3>{{Experiencia.nombreExp}}</h3>
+                        <p>{{Experiencia.tiempoExp}}</p>                        
+                        <p>{{Experiencia.descripcionExp}}</p>                        
+                    </div>
+                    <div class="col-1 col-sm-2 col-lg-2 d-inline p-2">                        
+                        <a class="p-2" *ngIf="isLogged" routerLink="/editexperiencia/{{Experiencia.id}}"><img src="../../../assets/lapiz.png" alt=""></a>
+                        <a class="p-2" *ngIf="isLogged" (click)="deleteExperiencia(Experiencia.id)"><img src="../../../assets/trash.png" alt="" class="trash"></a>
+                    </div>
+                </div>
+            </tr>
+        </tbody>
+    </table>    
     <div class="row p-2">
-        <div class="col-10">
+        <div class="col-10 col-sm-11 my-2">
             <h2>Educación</h2>
         </div>
-        <div class="col-2">
-            <app-boton-agregar></app-boton-agregar>
+        <div class="col-1">
+            <a href="" routerLink="/nuevaedu" *ngIf="isLogged" ><img src="../../../assets/agregar.png" alt="" class="agregar"></a>
         </div>
     </div>
-    <app-item-edu></app-item-edu>
+    <table class="table">
+        <tbody>
+            <tr *ngFor="let Educacion of educacion">
+                <div class="row mx-2 my-2">
+                    <div class="col-11 col-sm-3 col-lg-2">
+                        <img src="{{Educacion.imgEdu}}" alt="">
+                    </div>
+                    <div class="col-11 col-sm-7 col-lg-8">
+                        <h3>{{Educacion.nombreEdu}}</h3>
+                        <p>{{Educacion.tiempoEdu}}</p>    
+                        <p>{{Educacion.descripcionEdu}}</p>                        
+                    </div>
+                    <div class="col-1 col-sm-2 col-lg-2 d-inline p-2">                        
+                        <a href="" *ngIf="isLogged" routerLink="/editeducacion/{{Educacion.id}}"><img src="../../../assets/lapiz.png" alt=""></a>
+                        <a href="" *ngIf="isLogged" (click)="deleteEducacion(Educacion.id)"><img src="../../../assets/trash.png" alt="" class="trash"></a>
+                    </div>
+                </div>
+            </tr>
+        </tbody>
+    </table>
 </div>

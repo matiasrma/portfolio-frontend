@@ -1,24 +1,27 @@
 <div class="card container col-12">    
     <div class="row">        
         <div>
-            <div class="col-12">
-                <img src="../../../assets/banner.png" alt="" id="banner">    
+            <div class="col-12">               
+                <img src="{{persona.banner}}" alt="" id="banner">                    
             </div>
-            <div class="col-12 p-2" id="cont-selfie">
-                <img src="../../../assets/selfie.jpg" alt="" id="selfie">   
+            <div class="col-12 p-2" id="cont-selfie">                
+                <img src="{{persona.img}}" alt="" id="selfie">          
+                <a routerLink="editpersona/{{persona.id}}" *ngIf="isLogged"><img src="../../../assets/lapiz.png" alt=""></a>
             </div>
             <div class="col-12 p-4" id="cont-nombre">
                 <span>
-                    <h2>Matias Rivas</h2>
-                    <p>FullStack Developer Jr</p>
-                    <p>Rio Negro (Argentina) <a href="#">Información del Contacto</a></p>
+                    <h2>{{persona.nombre}} {{persona.apellido}}</h2>
+                    <p>{{persona.descripcion}}</p>
+                    <p>{{persona.ubicacion}}</p>
                 </span>
-            </div>
-            <div class="col-12 d-inline" id="cont-botones">
-                <button type="button" class="btn btn-primary">Tengo interés en</button>
+            </div>            
+            <div class="col-12 px-4">
+                <a href="mailto:{{persona.correo}}"><button type="button" class="btn btn-primary">Contacto</button></a>
+                <!--
                 <button type="button" class="btn btn-primary">Añadir Sección</button>
                 <button type="button" class="btn btn-primary">Mas</button>
-            </div>
+                -->            
+            </div>            
         </div>
     </div>
 </div>

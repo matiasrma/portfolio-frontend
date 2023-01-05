@@ -5,3 +5,33 @@ div {
 .card {
     margin-bottom: 5px;
 }
+
+a img {
+    width: 33px;  
+    padding: 5px;
+    float: right;
+    margin: 5px;
+    border-radius: 100%;           
+}
+
+a img:hover{       
+    box-shadow: 0px 0px 5px 5px blue;     
+}
+
+a .agregar:hover{       
+    box-shadow: 0px 0px 5px 5px green;     
+}
+
+a .trash:hover{       
+    box-shadow: 0px 0px 5px 5px red;     
+}
+
+.text-center{
+    position: relative;
+}
+
+#botones{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}

@@ -3,8 +3,19 @@ img {
     margin: 3px;
 }
 
-@media (max-width: 576px){
-    img {        
-        float: inline-start;        
-    }
+.pen, .trash {
+    width: 33px;  
+    padding: 5px;
+    float: right;
+    
+    border-radius: 100%;           
 }
+
+a .pen:hover{       
+    box-shadow: 0px 0px 5px 5px blue;         
+}
+
+a .trash:hover{       
+    box-shadow: 0px 0px 5px 5px red;     
+}
+

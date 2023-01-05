@@ -1,11 +1,23 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12 col-sm-6">
+    <div class="row px-2">
+        <div class="col-12 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
             <app-logo-ap></app-logo-ap>
+        </div>        
+        <div class="col-12 col-sm-6 col-lg-9 d-flex justify-content-end align-items-center">            
+            <div id="social" class="d-flex justify-content-end align-items-center">
+                <a href="" routerLink="/nuevasocial" *ngIf="isLogged" ><img src="../../../assets/agregar.png" alt="" class="agregar"></a>    
+                <app-social class="d-flex"></app-social>                            
+            </div>
+        </div>        
+        <div *ngIf="!isLogged" class="col-12 col-sm-2 col-lg-1 d-flex justify-content-center" >            
+            <div class="d-flex align-items-center">
+                <button type="button" class="btn social" (click)="login()">Login</button>            
+            </div>
         </div>
-        <div class="col-12 col-sm-6">
-            <button type="button" class="btn">Login</button>
-            <app-social></app-social>                        
+        <div *ngIf="isLogged" class="col-12 col-sm-2 col-lg-1 d-flex justify-content-center">            
+            <div class="d-flex align-items-center">
+                <button type="button" id="salir" class="btn social" (click)="onLogout()">Logout</button>                                                 
+            </div>                            
         </div>
     </div>
 </div>

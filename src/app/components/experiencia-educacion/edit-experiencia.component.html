@@ -1,0 +1,56 @@
+<div class="float" >
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 card">
+                <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+                    <div class="d-flex justify-content-between p-2">
+                        <h3>Actualizar Experiencia</h3>
+                        <a routerLink="" ><img src="../../../assets/eliminar.png" id="back"></a>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreExp">Nombre de la Experiencia</label>
+                        <input type="text" 
+                        class="form-control" 
+                        id="nombreExp" 
+                        name="nombreExp"
+                        [(ngModel)]="experiencia.nombreExp" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcionExp">Descripcion de la experiencia</label>
+                        <input type="text" 
+                        class="form-control" 
+                        id="descripcionExp" 
+                        name="descripcionExp"
+                        [(ngModel)]="experiencia.descripcionExp" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tiempoExp">Tiempo de la experiencia</label>
+                        <input type="text" 
+                        class="form-control" 
+                        id="tiempoExp" 
+                        name="tiempoExp"
+                        [(ngModel)]="experiencia.tiempoExp" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="imgExp">Imagen Experiencia</label>
+                        <input type="file" 
+                        class="form-control" 
+                        id="imgExp" 
+                        name="imgExp"
+                        [(ngModel)]="experiencia.imgExp" required
+                        (change)="uploadImagen($event)"
+                        accept=".jpg, .jpeg, .png">
+                    </div>
+                    <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-success" [ngStyle]="{ 'width': imageExpService.uploadProgress + '%' }"></div>
+                    </div> 
+                    <button type="submit" class="button btn btn-primary">
+                        Actualizar Experiencia
+                    </button>
+                </form>                
+            </div>            
+            <div class="col-2"></div>
+        </div>        
+    </div>
+</div>

@@ -1,5 +1,11 @@
-<div>
-    <a href=""><img src="../../../assets/github.png" alt=""></a>
-    <a href=""><img src="../../../assets/linkedin.png" alt=""></a>
-    <a href=""><img src="../../../assets/insta.png" alt=""></a>    
+<div *ngFor="let Social of socials" class="mx-2">
+    <div *ngIf="islogged" class="row">
+        <a href="" (click)="deleteSocial(Social.id)" rel="noreferrer noopener"><img src="../../../assets/xroja.png" alt="" class="trash"></a>
+    </div>
+    <div>
+        <a href="{{Social.urlSocial}}" rel="noreferrer noopener" target="_blank"><img src="{{Social.imgSocial}}" alt=""></a>
+    </div>
+    <div *ngIf="islogged" class="row">
+        <a href="" routerLink="/editsocial/{{this.Social.id}}" rel="noreferrer noopener"><img src="../../../assets/lapiz.png" alt="" class="pen"></a>       
+    </div>
 </div>

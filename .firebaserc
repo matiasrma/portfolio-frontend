@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "matiasrivas-portfolio"
+  },
+  "targets": {
+    "matiasrivas-portfolio": {
+      "hosting": {
+        "miportfolio-frontend": [
+          "matiasrivas-portfolio"
+        ]
+      }
+    }
   }
 }

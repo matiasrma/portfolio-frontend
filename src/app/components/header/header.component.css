@@ -2,9 +2,14 @@ div {
     background-color: dodgerblue;
 }
 
-app-social {
-    float: right;
-    margin: 25px;
+#salir {
+    background-color: cyan;
+    color:black;
+}
+
+#salir:hover {
+    background-color: red;
+    color: white;
 }
 
 button {
@@ -12,10 +17,7 @@ button {
     color: white;
     font-size: 15px;
     padding-top: 3px;
-    height: 30px;
-    float: right;
-    margin-top: 25px;
-    margin-left: 5px;
+    height: 30px;    
 }
 
 button:hover {
@@ -23,8 +25,33 @@ button:hover {
     color:black;
 }
 
-@media (max-width: 576px){
-    app-social {        
-        float: left;
-    }    
+a img {
+    width: 33px;  
+    padding: 5px;
+    float: right;
+    margin: 5px;
+    border-radius: 100%;           
+}
+
+a img:hover{       
+    box-shadow: 0px 0px 5px 5px blue;         
+}
+
+a .agregar:hover{       
+    box-shadow: 0px 0px 5px 5px green;     
+}
+
+a .trash:hover{       
+    box-shadow: 0px 0px 5px 5px red;     
+}
+
+@media (max-width: 575px){
+    
+    button {
+        margin: 12px;
+    }
+
+    #social {
+        margin: 0 auto;
+    }
 }

@@ -1,13 +1,20 @@
-.row {
-    padding: 15px;    
-}
-
-div {
-    background-color:darkgray ;
+div {    
     text-align: left;        
     border-radius: 20px;
 }
 
 .card {
     margin-bottom: 5px;
+}
+
+a img {
+    width: 33px;  
+    margin: 5px;
+    float: right;
+    padding: 5px;
+    border-radius: 100px;          
+}
+
+a img:hover{    
+    box-shadow: 0px 0px 5px 5px #0d23e7;
 }

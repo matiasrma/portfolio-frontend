@@ -1,0 +1,34 @@
+.float {
+    background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+}
+
+.card {
+    margin-top: 50px;    
+}
+
+button {
+    margin-left: 20%;
+    width: 60%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#descripcionExp {
+    height: auto;
+}
+
+h3, label {
+    margin: 8px;
+}
+
+#back {
+    width: 28px;    
+    float: right;    
+}
+
+.progress{
+    margin: 15px;
+}

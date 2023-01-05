@@ -1,9 +1,18 @@
-<div class="card container col-xs-12">    
+<div class="card container col-12">    
     <div class="row">        
         <div>
             <span>
-                <h2>Acerca de mi</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum saepe nihil sit eveniet, voluptates fuga aperiam! Repudiandae expedita sapiente id impedit, repellendus ab magni blanditiis, reprehenderit quam laboriosam earum voluptatem.</p>
+                <div class="row m-2">
+                    <div class="col-10 col-sm-11 my-2">
+                        <h2>Acerca de mi</h2>
+                    </div>
+                    <div class="col-1">
+                        <a routerLink="/editacercade/{{acerca.id}}" class="p-2" *ngIf="isLogged"><img src="../../../assets/lapiz.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="row m-2">
+                    <p>{{acerca.textoAcercaDe}}</p>
+                </div>
             </span>
         </div>
     </div>
