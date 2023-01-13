@@ -13,6 +13,7 @@ export class EditExperienciaComponent implements OnInit {
 
   experiencia: Experiencia = null;
   imgAnterior: string;
+  enableUpload: boolean = false;
 
   constructor(
     private experienciaService: ServiceExperienciaService, 
@@ -28,6 +29,7 @@ export class EditExperienciaComponent implements OnInit {
       data=>{
         this.experiencia = data;
         this.imgAnterior = this.experiencia.imgExp;   
+        this.enableUpload = true;
       }, err =>{
         alert("Error al modificar experiencia");
         this.router.navigate(['']);

@@ -15,6 +15,7 @@ export class EditPersonaComponent implements OnInit {
   persona: Persona = null;
   imgperfilanterior: string = '';
   imgbanneranterior: string = '';
+  enableUpload: boolean = false;
 
   uploadProgress: Observable<number>;
   
@@ -35,6 +36,7 @@ export class EditPersonaComponent implements OnInit {
         this.persona = data;
         this.imgperfilanterior =  this.persona.img;
         this.imgbanneranterior =  this.persona.banner;
+        this.enableUpload = true;
       }, err =>{
         alert("No se pude cargar el perfil");
         this.router.navigate([''])
@@ -53,16 +55,18 @@ export class EditPersonaComponent implements OnInit {
         this.persona.img = this.imageService.imageurl
       }
     }
-    if (this.imageService.imageurl != '') {
-      this.persona.banner = this.imageService.imageurl 
+
+    if (this.imageService.bannerurl != '') {
+      this.persona.banner = this.imageService.bannerurl 
     } else {
       let conservar = confirm("No selecciono nueva imagen. Desea conservar la anterior?")
       if(conservar) { 
         this.persona.banner = this.imgbanneranterior; 
       } else{
-        this.persona.banner = this.imageService.imageurl
+        this.persona.banner = this.imageService.bannerurl
       }
-    }    
+    }
+
     this.personaService.update(this.persona.id, this.persona).subscribe(
       data =>{
         alert("Perfil actualizado!");

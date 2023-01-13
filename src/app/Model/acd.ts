@@ -1,9 +1,9 @@
 export class Acd {
 
     id?: number;
-    textoAcercaDe: string;
+    textoACD: string;    
 
-    constructor(textoAcercaDe: string){
-        this.textoAcercaDe = textoAcercaDe;
+    constructor(textoACD: string){
+        this.textoACD = textoACD;        
     }
 }

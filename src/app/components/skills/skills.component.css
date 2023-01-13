@@ -35,3 +35,7 @@ a .trash:hover{
     top: 0px;
     right: 0px;
 }
+
+p {
+    margin-bottom: 3rem;
+}

@@ -42,8 +42,7 @@ export class LoginComponent implements OnInit {
       }, err=>{
         this.isLogged = false;
         this.isLoginFail = true;
-        this.errMsj = err.error.mensaje;
-        alert("Error, verifique usario y contraseña");
+        this.errMsj = err.error.mensaje;        
       })
   }
 

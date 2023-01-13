@@ -13,6 +13,7 @@ export class NewSkillComponent implements OnInit {
 
   lista: Skill[] = [];
   skill: Skill;
+  enableUpload: boolean = false;
   
   constructor(
     private skillService: SkillService,
@@ -47,16 +48,16 @@ export class NewSkillComponent implements OnInit {
 
   loadSkills(): void{
     this.skillService.lista().subscribe(
-      data =>{this.lista = data;}
+      data =>{this.lista = data, this.enableUpload = true;}
     )
   }
 
   uploadImagen($event: any): void{
     let nuevoid:number = 0;
     this.lista.forEach(element => {
-      if(element.id > nuevoid) { nuevoid = element.id + 1 };
+      if(element.id > nuevoid) { nuevoid = element.id };
     }); 
-    const numero = nuevoid;
+    const numero = nuevoid + 1;
     const name = 'skill_' + numero;
     this.imageSkillService.uploadImage($event, name);
   }

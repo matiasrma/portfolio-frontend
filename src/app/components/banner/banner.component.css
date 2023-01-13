@@ -1,5 +1,6 @@
 #banner {
-    width: 100%; 
+    width: 100%;     
+    border-radius: 20px 20px 0px 0px;
 }
 
 #selfie {
@@ -25,12 +26,13 @@ button {
 }
 
 div {
-    border-radius: 20px;    
+    border-radius: 20px;       
 }
 
 .card {
     margin-bottom: 5px;
     margin-top: 5px;
+    padding: 0px;
 }
 
 button:hover {

@@ -9,5 +9,7 @@ export const environment = {
     messagingSenderId: '887446567464',
     measurementId: 'G-Y5GSYHVTVL',
   },
-  production: true
+  production: true,
+  URL: 'https://backend-matiasrma.koyeb.app/',
+  images: 'imagen/'
 };

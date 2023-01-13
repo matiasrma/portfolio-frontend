@@ -13,6 +13,7 @@ export class NewSocialComponent implements OnInit {
 
   lista: Social[] = [];
   social: Social;
+  enableUpload: boolean = false;
   
   constructor(
     private socialService: SocialService,
@@ -47,16 +48,16 @@ export class NewSocialComponent implements OnInit {
 
   loadSocial(): void{
     this.socialService.lista().subscribe(
-      data =>{this.lista = data;}
+      data =>{this.lista = data, this.enableUpload = true;}
     );
   }
 
   uploadImagen($event: any): void {
     let nuevoid:number = 0;
     this.lista.forEach(element => {
-      if(element.id > nuevoid) { nuevoid = element.id + 1 };
+      if(element.id > nuevoid) { nuevoid = element.id };
     }); 
-    const numero = nuevoid;
+    const numero = nuevoid + 1;
     const name = 'social_' + numero;
     this.imageSocialService.uploadImage($event, name);
   }

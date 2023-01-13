@@ -13,6 +13,7 @@ export class EditSocialComponent implements OnInit {
 
   social: Social = null;
   imgAnterior: string = "";
+  enableUpload: boolean = false;
 
   constructor(
     private socialService: SocialService,
@@ -31,7 +32,8 @@ export class EditSocialComponent implements OnInit {
     const id: number = this.activatedRoute.snapshot.params['id'];
     this.socialService.detail(id).subscribe(
       data => {
-        this.social = data;
+        this.social = data,
+        this.enableUpload = true;
       }, err => {
         alert("No se pudo cargar los datos");
       }

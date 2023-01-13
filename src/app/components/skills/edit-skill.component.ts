@@ -13,6 +13,7 @@ export class EditSkillComponent implements OnInit {
 
   skill: Skill;
   imgAnterior: string;
+  enableUpload: boolean = false;
 
   constructor(
     private skillService: SkillService,
@@ -62,6 +63,7 @@ export class EditSkillComponent implements OnInit {
       data => { 
         this.skill = data;
         this.imgAnterior = this.skill.imgSkill;
+        this.enableUpload = true;
       }, err => { 
         alert("No se pudo cargar skill " + err)
       }

@@ -10,7 +10,9 @@ import { ServiceproyectoService } from 'src/app/services/serviceproyecto.service
 })
 export class NewProyectoComponent implements OnInit {
 
+  lista: Proyecto[] = [];
   proyecto: Proyecto;
+  enableUpload: boolean = false;
 
   constructor(
     private proyectoService: ServiceproyectoService,
@@ -18,7 +20,14 @@ export class NewProyectoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.cargarProyectos();
     this.proyecto = new Proyecto("","","");
+  }
+
+  cargarProyectos(): void{
+    this.proyectoService.lista().subscribe(
+      data => { this.lista = data; this.enableUpload = true;}      
+    )
   }
 
   onCreate(): void{    

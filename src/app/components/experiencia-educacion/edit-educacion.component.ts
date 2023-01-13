@@ -13,6 +13,7 @@ export class EditEducacionComponent implements OnInit {
 
   educacion: Educacion = null;
   imgAnterior: string;
+  enableUpload: boolean = false;
 
   constructor(
     private educacionService: ServiceEducacionService,
@@ -29,6 +30,7 @@ export class EditEducacionComponent implements OnInit {
       data =>{
         this.educacion = data;
         this.imgAnterior = this.educacion.imgEdu;
+        this.enableUpload = true;
       }, err =>{
         alert("Error al cargar la experiencia");
         this.router.navigate([''])

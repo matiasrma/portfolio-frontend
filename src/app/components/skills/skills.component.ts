@@ -34,10 +34,7 @@ export class SkillsComponent implements OnInit {
   loadSkills(): void{
     this.skillService.lista().subscribe(
       data =>{
-        this.skills = data;
-      }, err =>{
-        alert("No se cargaron las Skills")
-      }
+        this.skills = data; }
     )
   }
 

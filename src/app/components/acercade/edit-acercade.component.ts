@@ -13,6 +13,7 @@ import { TokenService } from "src/app/services/token.service";
   export class EditAcercadeComponent implements OnInit{
 
     acerca: Acd = new Acd("");
+    enableUpload: boolean = false;
 
     constructor(
         public acdService: AcdService,
@@ -25,6 +26,7 @@ import { TokenService } from "src/app/services/token.service";
         this.acdService.detail(id).subscribe(
             data =>{
               this.acerca = data;
+              this.enableUpload = true;
             }, err =>{
               alert("No se pude cargar el perfil");
               this.router.navigate([''])

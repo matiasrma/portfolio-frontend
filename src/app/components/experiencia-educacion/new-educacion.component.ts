@@ -11,10 +11,9 @@ import { ServiceEducacionService } from 'src/app/services/service-educacion.serv
 })
 export class NewEducacionComponent implements OnInit {
 
-  lista: Educacion[] = [];
-  numero: number = null;
-
+  lista: Educacion[] = [];  
   educacion: Educacion;
+  enableUpload: boolean = false;
   
   constructor(
     private educacionService: ServiceEducacionService, 
@@ -30,7 +29,7 @@ export class NewEducacionComponent implements OnInit {
 
   loadEducacion(): void{
     this.educacionService.lista().subscribe(
-      data => {this.lista = data;}
+      data => {this.lista = data, this.enableUpload = true;}
     )
   }
 
@@ -50,9 +49,9 @@ export class NewEducacionComponent implements OnInit {
   uploadImagen($event: any): void{    
     let nuevoid:number = 0;
     this.lista.forEach(element => {
-      if(element.id > nuevoid) { nuevoid = element.id + 1 };
+      if(element.id > nuevoid) { nuevoid = element.id };
     }); 
-    const numero = nuevoid;
+    const numero = nuevoid + 1;
     const name = 'educacion_' + numero;
     this.imageEduService.uploadImage($event, name);        
   }

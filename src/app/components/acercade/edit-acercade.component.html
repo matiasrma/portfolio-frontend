@@ -1,19 +1,28 @@
-<div class="float" >
+<div class="float h-100 m-0" >
     <div class="container">
         <div class="row">
             <div class="col-2"></div>
-            <div class="col-8 card">
+            <div *ngIf="!enableUpload" class="col-8 card">
+                <div class="d-flex justify-content-between align-items-center p-2">
+                    <h3>Cargando Información...</h3>
+                    <a routerLink="" ><img src="../../../assets/eliminar.png" id="back"></a>
+                </div>
+            </div>
+            <div *ngIf="enableUpload" class="col-8 card">
                 <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
                     <div class="d-flex justify-content-between p-2">
                         <h3>Actualizar Acerca De...</h3>
                         <a routerLink="" ><img src="../../../assets/eliminar.png" id="back"></a>
                     </div>
                     <div class="form-group">
-                        <label for="textoAcercaDe">Texto Acerca de...</label>
-                        <input type="text" 
+                        <label for="textoACD">Texto</label>
+                        <textarea contenteditable="true"                        
+                        maxlength="1000"
+                        type="text" 
                         class="form-control"                         
-                        name="textoAcercaDe"
-                        [(ngModel)]="acerca.textoAcercaDe" required>
+                        name="textoACD"
+                        rows="5"
+                        [(ngModel)]="acerca.textoACD" required></textarea>
                     </div>                    
                     <button type="submit" class="button btn btn-primary">
                         Actualizar

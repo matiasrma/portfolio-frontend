@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage, ref, uploadBytesResumable, list, getDownloadURL } from '@angular/fire/storage'
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ImageService {
   public uploadImage($event: any, name: string){ 
 
     const file = $event.target.files[0];
-    const imgRef = ref(this.storage, 'imagen/' + name);
+    const imgRef = ref(this.storage, environment.images + name);
     const uploadTask = uploadBytesResumable(imgRef, file)
     this.uploadStart = true;
 
@@ -42,7 +43,7 @@ export class ImageService {
 
 
   getImages(name: string){    
-    const imageRef = ref(this.storage, 'imagen/');        
+    const imageRef = ref(this.storage, environment.images);        
     list(imageRef)
     .then(async response => {      
       for(let item of response.items){                

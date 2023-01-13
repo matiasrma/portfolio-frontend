@@ -13,6 +13,7 @@ export class NewExperienciaComponent implements OnInit {
 
   lista: Experiencia[] = [];    
   experiencia: Experiencia;
+  enableUpload: boolean = false;
 
   constructor(
     private serviceExpericia: ServiceExperienciaService, 
@@ -28,7 +29,7 @@ export class NewExperienciaComponent implements OnInit {
 
   cargarExperiencia(): void{
     this.serviceExpericia.lista().subscribe(
-      data => {this.lista = data;}
+      data => {this.lista = data, this.enableUpload = true;}      
     )
   }
 
@@ -48,9 +49,9 @@ export class NewExperienciaComponent implements OnInit {
   uploadImagen($event: any): void{    
     let nuevoid:number = 0;
     this.lista.forEach(element => {
-      if(element.id > nuevoid) { nuevoid = element.id + 1 };
+      if(element.id > nuevoid) { nuevoid = element.id};
     }); 
-    const numero = nuevoid;
+    const numero = nuevoid + 1;
     const name = 'experiencia_' + numero;
     this.imageExpService.uploadImage($event, name);        
   }

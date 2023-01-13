@@ -11,6 +11,7 @@ import { ServiceproyectoService } from 'src/app/services/serviceproyecto.service
 export class EditProyectoComponent implements OnInit {
 
   proyecto: Proyecto;
+  enableUpload: boolean = false;
 
   constructor(
     private proyectoService: ServiceproyectoService,
@@ -24,6 +25,7 @@ export class EditProyectoComponent implements OnInit {
     this.proyectoService.detail(id).subscribe(
       data =>{
         this.proyecto = data;
+        this.enableUpload = true;
       }, err => {
         alert("No se pudo cargar el proyecto")
       }

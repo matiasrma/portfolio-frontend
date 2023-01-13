@@ -1,9 +1,9 @@
 <div class="wrapper">
     <div class="logo d-flex justify-content-center">
-        <img src="../../../assets/APLogo-20-20.png" alt="">
+        <img src="../../../assets/logoMR.png" alt="">
     </div>
     <div class="text-center mt-4 name">
-        Argentina Programa
+        Ingreso
     </div>
     <form class="p-3 mt-3" #f="ngForm" (ngSubmit)="onLogin()" novalidate>
         <div class="form-field d-flex align-items-center">
@@ -15,6 +15,9 @@
             <span class="fas fa-key"></span>
             <input type="password" name="password" id="password" placeholder="Password"
             [(ngModel)]="password" required />
+        </div>
+        <div *ngIf="isLoginFail" class="text-center fs-6" style="color: red;">
+            Usuario o Passwrod incorrecto
         </div>
         <button type="submit" class="btn mt-3">Login</button>
     </form>
