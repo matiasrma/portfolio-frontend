@@ -17,7 +17,7 @@ export class BannerComponent implements OnInit {
 
   constructor(
     public personaService: PersonaService,
-    public tokenService: TokenService
+    public tokenService: TokenService    
     ) { }
 
   ngOnInit(): void {    

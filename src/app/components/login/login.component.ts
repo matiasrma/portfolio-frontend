@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginUsuario } from 'src/app/Model/login-usuario';
+import { Persona } from 'src/app/Model/persona.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { ImageService } from 'src/app/services/image.service';
+import { PersonaService } from 'src/app/services/persona.service';
 import { TokenService } from 'src/app/services/token.service';
 
 @Component({
@@ -17,9 +20,13 @@ export class LoginComponent implements OnInit {
   nombreUsuario!: string;
   password!: string;
   roles: string[] = [];
-  errMsj!: string;
+  errMsj!: string;  
 
-  constructor(private tokenService: TokenService, private authService: AuthService, private router: Router) { }
+  constructor(private tokenService: TokenService, 
+    private authService: AuthService, 
+    private router: Router,
+    private authFirebase : ImageService    
+    ) { }
 
   ngOnInit(): void {
     if(this.tokenService.getToken()){
@@ -31,13 +38,19 @@ export class LoginComponent implements OnInit {
 
   onLogin():void{
     this.loginUsuario = new LoginUsuario(this.nombreUsuario, this.password); 
+    
     this.authService.login(this.loginUsuario).subscribe(data =>{
         this.isLogged = true;
         this.isLoginFail = false;
         this.tokenService.setToken(data.token);
         this.tokenService.setUsername(data.nombreUsuario);
         this.tokenService.setAuthorities(data.authorities);
-        this.roles = data.authorities;
+        this.roles = data.authorities;            
+        
+        if (this.isLogged){
+          this.authFirebase.login(this.password);
+        }
+        
         this.router.navigate([''])
       }, err=>{
         this.isLogged = false;

@@ -20,7 +20,7 @@ export class AcercadeComponent implements OnInit {
 
   ngOnInit(): void {
     this.acdService.detail(1).subscribe(data => {this.acerca = data});      
-    if(this.tokenService.getToken()){
+    if(this.tokenService.getToken()){      
       this.isLogged = true;
     } else{
       this.isLogged = false;

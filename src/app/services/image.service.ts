@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Storage, ref, uploadBytesResumable, list, getDownloadURL } from '@angular/fire/storage'
-import { Observable } from 'rxjs';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { environment } from 'src/environments/environment';
+import { Persona } from '../Model/persona.model';
+import { PersonaService } from './persona.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,28 +12,58 @@ import { environment } from 'src/environments/environment';
 export class ImageService {
 
   imageurl: string = '';
-  bannerurl: string = "";
+  bannerurl: string = '';
 
   uploadProgress: number = 0;
   uploadProgress2: number = 0;
   uploadStart: boolean = false;
-    
-  constructor(private storage: Storage) { }
+  user : string;
 
-  public uploadImage($event: any, name: string){ 
+  persona: Persona = new Persona("","","","","","","","");
+    
+  constructor(private storage: Storage, private personaService : PersonaService) { }
+
+  public login(password: string){
+
+    this.personaService.detail(1).subscribe(data => { 
+      this.persona = data; 
+      const auth = getAuth();
+
+      signInWithEmailAndPassword(auth, this.persona.correo, password)
+        .then(() =>{
+
+          this.user = auth.currentUser.uid.toString();
+
+        })
+        .catch((error) => {
+          console.log("error of authentication Firebase!!!");        
+          
+        });
+    });          
+  }
+
+  public logout(){
+
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      console.log('logout!!!')
+      console.log(auth);      
+    })
+  }
+
+
+  public uploadImage($event: any, name: string){    
 
     const file = $event.target.files[0];
-    const imgRef = ref(this.storage, environment.images + name);
-    const uploadTask = uploadBytesResumable(imgRef, file)
+    const imgRef = ref(this.storage, environment.images + name );
+    const uploadTask = uploadBytesResumable(imgRef, file)    
     this.uploadStart = true;
-
+    
     uploadTask.on('state_changed', (snapshot) =>{
       if(name.includes("banner")){
-        this.uploadProgress2 = (snapshot.bytesTransferred / snapshot.totalBytes) *80;
-        console.log('Upload is' + this.uploadProgress2 + '% done');      
+        this.uploadProgress2 = (snapshot.bytesTransferred / snapshot.totalBytes) *80;        
       } else{
-        this.uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) *80;
-        console.log('Upload is' + this.uploadProgress + '% done');      
+        this.uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) *80;        
       }
       
     }, err => {
@@ -41,25 +74,17 @@ export class ImageService {
     )
   }
 
-
   getImages(name: string){    
-    const imageRef = ref(this.storage, environment.images);        
-    list(imageRef)
-    .then(async response => {      
-      for(let item of response.items){                
-        if((await getDownloadURL(item)).includes(name)){
-          if((await getDownloadURL(item)).includes("banner")){
-            this.bannerurl = await getDownloadURL(item);
-            this.uploadProgress2 += 20;
-            console.log("la url es: " + this.bannerurl);        
-          }else{
-            this.imageurl = await getDownloadURL(item);
-            this.uploadProgress += 20;
-            console.log("la url es: " + this.imageurl);
-          }
+    const imageRef = ref(this.storage, environment.images + name);
+    getDownloadURL(imageRef)
+      .then(data =>{
+        if ( data.includes("banner")){
+          this.bannerurl = data;      
+          this.uploadProgress2 += 20;          
+        }else{
+          this.imageurl = data;
+          this.uploadProgress += 20;          
         }
-      }
-    })
-    .catch(err => console.log(err));
-  }  
+      })
+  }    
 }
