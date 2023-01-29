@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
 
   onLogin():void{
     this.loginUsuario = new LoginUsuario(this.nombreUsuario, this.password); 
+    this.authFirebase.login(this.password);
     
     this.authService.login(this.loginUsuario).subscribe(data =>{
         this.isLogged = true;
@@ -46,12 +47,7 @@ export class LoginComponent implements OnInit {
         this.tokenService.setUsername(data.nombreUsuario);
         this.tokenService.setAuthorities(data.authorities);
         this.roles = data.authorities;            
-        
-        if (this.isLogged){
-          this.authFirebase.login(this.password);
-        }
-        
-        this.router.navigate([''])
+        this.router.navigate(['']);
       }, err=>{
         this.isLogged = false;
         this.isLoginFail = true;
