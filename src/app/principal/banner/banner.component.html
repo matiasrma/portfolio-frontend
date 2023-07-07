@@ -1,0 +1,29 @@
+<div class="card container col-12">    
+    <div class="row">        
+        <div>
+            <div class="col-12 d-flex">               
+                <img src="{{persona.banner}}" alt="" id="banner">                    
+            </div>            
+            <div class="col-12 p-2" id="cont-selfie">                
+                <img src="{{persona.img}}" alt="" id="selfie">                          
+                <a href="" routerLink="editpersona/{{persona.id}}" *ngIf="isLogged"><i class="bi bi-pencil-fill" style="color: var(--pen-color)"></i></a>             
+            </div>
+            <div class="col-12 p-4" id="cont-nombre">
+                <span>                    
+                    <h2>{{persona.nombre}} {{persona.apellido}}</h2>     
+                    <p>{{persona.descripcion}}</p>
+                    <p>{{persona.ubicacion}}</p>
+                    <p>{{persona.correo}}</p>
+                </span>
+            </div>         
+            <div class="col-12 px-4">
+                <a href="mailto:{{persona.correo}}"><button type="button" class="btn btn-primary">Abrir Correo</button></a>
+                <!--
+                <button type="button" class="btn btn-primary">Añadir Sección</button>
+                <button type="button" class="btn btn-primary">Mas</button>
+                -->            
+            </div>            
+        </div>
+    </div>
+</div>
+

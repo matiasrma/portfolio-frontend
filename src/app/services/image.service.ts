@@ -19,13 +19,13 @@ export class ImageService {
   uploadStart: boolean = false;
   user : string;
 
-  persona: Persona = new Persona("","","","","","","","");
+  persona: Persona = {} as Persona;
     
   constructor(private storage: Storage, private personaService : PersonaService) { }
 
   public login(password: string){
 
-    this.personaService.detail(1).subscribe(data => { 
+    this.personaService.Obtener(1).then(data => { 
       this.persona = data; 
       const auth = getAuth();
 

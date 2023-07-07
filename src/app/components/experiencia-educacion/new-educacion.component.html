@@ -5,51 +5,52 @@
             <div *ngIf="!enableUpload" class="col-8 card">
                 <div class="d-flex justify-content-between align-items-center p-2">
                     <h3>Cargando Información...</h3>
-                    <a routerLink="" ><img src="../../../assets/eliminar.png" id="back"></a>
+                    <a routerLink="" ><i class="bi bi-x-circle" style="color: black"></i></a>
                 </div>
             </div>
             <div *ngIf="enableUpload" class="col-8 card">
-                <form (ngSubmit)="onCreate()" novalidate #f="ngForm">                    
+                <form (ngSubmit)="onCreate()" novalidate>
+                <!-- #f="ngForm">                     -->
                     <div class="d-flex justify-content-between align-items-center p-2">
                         <h3>Ingresar Educacion</h3>
-                        <a routerLink="" ><img src="../../../assets/eliminar.png" id="back"></a>
+                        <a routerLink="" ><i class="bi bi-x-circle" style="color: black"></i></a>
                     </div>
                     <div class="form-group">
                         <label for="nombreEdu">Nombre de la Educacion</label>
                         <input type="text" 
                         class="form-control" 
                         id="nombreEdu" 
-                        name="nombreEdu"
-                        [(ngModel)]="educacion.nombreEdu" required>
+                        name="nombreEdu">
+                        <!-- [(ngModel)]="educacion.nombreEdu" required> -->
                     </div>
                     <div class="form-group">
                         <label for="descripcionEdu">Descripcion de la Educacion</label>
                         <input type="text" 
                         class="form-control" 
                         id="descripcionEdu" 
-                        name="descripcionEdu"
-                        [(ngModel)]="educacion.descripcionEdu" required>
+                        name="descripcionEdu">
+                        <!-- [(ngModel)]="educacion.descripcionEdu" required> -->
                     </div>
                     <div class="form-group">
                         <label for="tiempoEdu">Tiempo de la Educacion</label>
                         <input type="text" 
                         class="form-control" 
                         id="tiempoEdu" 
-                        name="tiempoEdu"
-                        [(ngModel)]="educacion.tiempoEdu" required>
+                        name="tiempoEdu">
+                        <!-- [(ngModel)]="educacion.tiempoEdu" required> -->
                     </div>
                     <div class="form-group">
                         <label for="imgEdu">Imagen Educacion</label>
                         <input type="file" 
                         class="form-control" 
                         id="imgEdu" 
-                        name="imgEdu"
+                        name="imgEdu">
                         [(ngModel)]="educacion.imgEdu" required
                         (change)="uploadImagen($event)"
                         accept=".jpg, .jpeg, .png">
                     </div>                    
                     <div class="progress" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar bg-success" [ngStyle]="{ 'width': imageEduService.uploadProgress + '%' }"></div>
+                        <!-- <div class="progress-bar bg-success" [ngStyle]="{ 'width': imageEduService.uploadProgress + '%' }"></div> -->
                     </div>                    
                     <button type="submit" class="button btn btn-primary">
                         Agregar Educacion

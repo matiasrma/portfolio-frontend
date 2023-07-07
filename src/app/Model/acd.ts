@@ -1,9 +1,5 @@
-export class Acd {
+export interface Acd {
 
-    id?: number;
-    textoACD: string;    
-
-    constructor(textoACD: string){
-        this.textoACD = textoACD;        
-    }
+    id: number,
+    textoacd: string,
 }

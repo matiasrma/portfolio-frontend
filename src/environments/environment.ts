@@ -14,7 +14,8 @@ export const environment = {
     measurementId: 'G-Y5GSYHVTVL',
   },
   production: false,
-  URL: 'http://localhost:8080/',
+  URL: 'https://nrg5z3sryb.execute-api.us-east-2.amazonaws.com/',
+  //URL: 'http://app-prueba-costo-env.eba-5jpcm7xt.us-east-2.elasticbeanstalk.com/api/',  
   images: 'local/'
 
 };

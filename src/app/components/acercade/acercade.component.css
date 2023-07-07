@@ -5,16 +5,20 @@ div {
 
 .card {
     margin-bottom: 5px;
+    background-color: var(--bkg-div-color);        
 }
 
-a img {
-    width: 33px;  
-    margin: 5px;
-    float: right;
-    padding: 5px;
-    border-radius: 100px;          
+h2, p {
+    color: var(--text-color);
 }
 
-a img:hover{    
-    box-shadow: 0px 0px 5px 5px #0d23e7;
+i {
+    font-size: 25px; 
+    margin: 4px;    
+    padding-inline: 5px;
+    border-radius: 100%;            
+}
+
+i:hover{       
+    box-shadow: 0px 0px 5px 5px blue;     
 }

@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    --text-color: #222;
+    --bkg-color: white;
+    --sdw-color: #222;    
+    
+    --btn-txt-color: white;
+    --btn-bg-color: black;
+
+    --bkg-hdr-color: dodgerblue;
+
+    --pen-color: blue;
+
+    --icon-sun-moon-color: yellow;
+
+    background-color: var(--bkg-color);
+}
+
+body.dark-theme {
+    --text-color: #eee;
+
+    --bkg-color: rgb(37, 37, 37);
+    --bkg-div-color: #1d2226;
+
+    --btn-txt-color: black;
+    --btn-bg-color: white;
+
+    --img-bkg-color: white;
+
+    --bkg-hdr-color: darkblue;
+
+    --pen-color: dodgerblue;
+
+    --icon-sun-moon-color: blue;
+
+    background-color: var(--bkg-color);
+}
+
+.theme {
+    background-color: var(--bkg-color);    
+}
+
+ div, h3, h2, p, .card, .col-sm-3, .agregar, body {
+    transition: all 1.0s;
+}

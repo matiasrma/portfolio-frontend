@@ -1,11 +1,13 @@
 <div *ngFor="let Social of socials" class="mx-2">
-    <div *ngIf="islogged" class="row">
-        <a href="" (click)="deleteSocial(Social.id)" rel="noreferrer noopener"><img src="../../../assets/xroja.png" alt="" class="trash"></a>
-    </div>
+    <!-- <div *ngIf="islogged" class="row">        
+        <a href="" (click)="deleteSocial(Social.id)"><i class="bi bi-trash3-fill" style="color: lightcoral"></i></a>
+    </div> -->
     <div>
-        <a href="{{Social.urlSocial}}" rel="noreferrer noopener" target="_blank"><img src="{{Social.imgSocial}}" alt=""></a>
+        <a href="{{Social.url_social}}" rel="noreferrer noopener" target="_blank"><img src="{{Social.img_social}}" alt=""></a>
     </div>
-    <div *ngIf="islogged" class="row">
-        <a href="" routerLink="/editsocial/{{this.Social.id}}" rel="noreferrer noopener"><img src="../../../assets/lapiz.png" alt="" class="pen"></a>       
+    <div *ngIf="islogged" class="row">        
+        <!-- <a href="" routerLink="/editsocial/{{Social.Id}}"><i class="bi bi-pencil-fill" style="color: var(--pen-color)"></i></a>         -->
     </div>
 </div>
+
+                

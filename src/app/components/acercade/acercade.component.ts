@@ -11,7 +11,8 @@ import { TokenService } from 'src/app/services/token.service';
 export class AcercadeComponent implements OnInit {
   
   isLogged = false;
-  acerca: Acd = new Acd("");
+  acerca: Acd = {} as Acd;
+  texto: string[] = [];  
   
   constructor(    
     public acdService: AcdService,
@@ -19,11 +20,20 @@ export class AcercadeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.acdService.detail(1).subscribe(data => {this.acerca = data});      
+
+    this.getACD();
+    
     if(this.tokenService.getToken()){      
       this.isLogged = true;
     } else{
       this.isLogged = false;
     }
   }
+
+  async getACD() {
+    // this.acerca = await this.acdService.detail(1);
+    this.texto = this.acerca.textoacd.split('\n');
+  }
+
+  
 }

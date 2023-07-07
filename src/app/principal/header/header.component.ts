@@ -10,7 +10,10 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isLogged = false;
+  mensajeClass: string = "conectando"
+  logMsj: string = "";
+  isLogged: boolean = false;   
+  isDark: boolean = false; 
 
   constructor(private router:Router, 
     private tokenService: TokenService,
@@ -23,6 +26,9 @@ export class HeaderComponent implements OnInit {
     }else{
       this.isLogged = false;
     }
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');    
+    document.body.classList.toggle('dark-theme', prefersDark.matches);
+    this.isDark = prefersDark.matches;
   }
 
   onLogout(): void{
@@ -34,5 +40,10 @@ export class HeaderComponent implements OnInit {
   login() {
     this.router.navigate(['/login'])
   }
+
+  Darkness(){
+    document.body.classList.toggle('dark-theme');
+    this.isDark = !this.isDark;
+  }  
 
 }

@@ -1,11 +1,7 @@
-export class Social {
-
-    id?: number;
-    urlSocial: string;
-    imgSocial: string;    
-
-    constructor(urlSocial: string, imgSocial: string){
-        this.imgSocial = imgSocial;
-        this.urlSocial = urlSocial;        
-    }
+export interface Social {
+    Id: number,
+    url_social: string,
+    img_social: string,
+    show_img: boolean,    
+    persona_id: number
 }

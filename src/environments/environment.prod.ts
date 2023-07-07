@@ -10,6 +10,6 @@ export const environment = {
     measurementId: 'G-Y5GSYHVTVL',
   },
   production: true,
-  URL: 'https://backend-matiasrma.koyeb.app/',
+  URL: 'https://nrg5z3sryb.execute-api.us-east-2.amazonaws.com/',
   images: 'imagen/'
 };

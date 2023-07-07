@@ -1,0 +1,62 @@
+div {
+    background-color: var(--bkg-hdr-color);
+}
+
+#salir {
+    background-color: cyan;
+    color:black;
+}
+
+#salir:hover {
+    background-color: red;
+    color: white;
+}
+
+button {
+    background-color: var(--btn-bg-color);
+    color: var(--btn-txt-color);
+    font-size: 15px;
+    padding-top: 3px;
+    height: 30px;    
+}
+
+button:hover {
+    background-color: cyan;
+    color:black;
+}
+
+a .agregar {
+    font-size: 30px;   
+    padding: 0px 5px 1px 5px;    
+    color: var(--text-color);
+    border-radius: 100%;  
+}
+
+a .agregar:hover{       
+    box-shadow: 0px 0px 5px 5px green;     
+}
+
+.bi {
+    font-size: 20px;   
+    margin-left: 3px;
+    padding: 0px 5px 1px 5px;        
+    border-radius: 100%;          
+}
+
+.bi:hover{       
+    box-shadow: 0px 0px 5px 5px var(--icon-sun-moon-color);     
+}
+#logoAP {
+    width: 150px;    
+}
+
+@media (max-width: 575px){
+    
+    button {
+        margin: 12px;
+    }
+
+    #social {
+        margin: 0 auto;
+    }
+}

@@ -1,0 +1,36 @@
+<app-header></app-header>
+<div *ngIf="isLoad">
+  <app-en-contruccion></app-en-contruccion>
+  <app-banner></app-banner>
+</div>
+<div class="container-fluid d-flex justify-content-center">
+  <div
+    *ngIf="!isLoad"
+    class="spinner-border"
+    role="status"
+    style="width: 100px; height: 100px; margin: 50px"
+  >
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<div class="card container col-12">
+  <div class="row">
+    <div>
+      <span>
+        <div class="row p-2">
+          <div class="col-10 col-sm-11 my-2">
+            <h2>Acerca de Mi</h2>
+          </div>
+          <div class="col-1">
+                        
+          </div>
+        </div>
+        <div class="row m-2">
+          <p *ngFor="let parrafo of texto">
+            {{ parrafo }}
+          </p>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

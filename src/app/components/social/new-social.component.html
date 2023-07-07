@@ -1,18 +1,18 @@
-<div class="float h-100 m-0">
+<!-- <div class="float h-100 m-0">
     <div class="container">
         <div class="row">
             <div class="col-2"></div>
             <div *ngIf="!enableUpload" class="col-8 card">
                 <div class="d-flex justify-content-between align-items-center p-2">
                     <h3>Cargando Información...</h3>
-                    <a routerLink="" ><img src="../../../assets/eliminar.png" id="back"></a>
+                    <a routerLink="" ><i class="bi bi-x-circle"></i></a>                    
                 </div>
             </div>
             <div *ngIf="enableUpload" class="col-8 card">
                 <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
                     <div class="d-flex justify-content-between align-items-center p-2">
                         <h3>Agregar Red Social</h3>
-                        <a routerLink="" ><img src="../../../assets/eliminar.png" id="back"></a>
+                        <a routerLink="" ><i class="bi bi-x-circle"></i></a>
                     </div>
                     <div class="form-group">
                         <label for="urlSocial">Direccion url de la red social</label>
@@ -20,7 +20,7 @@
                         class="form-control" 
                         id="urlSocial" 
                         name="urlSocial"
-                        [(ngModel)]="social.urlSocial" required>
+                        [(ngModel)]="social.url_social" required>
                     </div>                    
                     <div class="form-group">
                         <label for="imgSocial">Imagen de la red social</label>
@@ -28,7 +28,7 @@
                         class="form-control" 
                         id="imgSocial" 
                         name="imgSocial"
-                        [(ngModel)]="social.imgSocial" required
+                        [(ngModel)]="social.img_social" required
                         (change)="uploadImagen($event)"
                         accept=".jpg, .jpeg, .png">
                     </div>
@@ -43,4 +43,4 @@
             <div class="col-2"></div>
         </div>
     </div>
-</div>
+</div> -->

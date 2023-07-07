@@ -12,7 +12,7 @@ import { TokenService } from "src/app/services/token.service";
   })
   export class EditAcercadeComponent implements OnInit{
 
-    acerca: Acd = new Acd("");
+    acerca: Acd = null;
     enableUpload: boolean = false;
 
     constructor(
@@ -23,28 +23,25 @@ import { TokenService } from "src/app/services/token.service";
 
     ngOnInit(): void {
         const id = this.activatedRoute.snapshot.params["id"];
-        this.acdService.detail(id).subscribe(
-            data =>{
-              this.acerca = data;
-              this.enableUpload = true;
-            }, err =>{
-              alert("No se pude cargar el perfil");
-              this.router.navigate([''])
-            }
-          )    
+        this.getACD(id);
     }
 
-    onUpdate(): void{
+    async getACD(id: number) {     
+
+      this.acerca = await this.acdService.detail(id);
+      if (this.acerca === null) {
+        alert("No se pudo cargar la información");
+        this.router.navigate(['']);
+      }
+
+      this.enableUpload = true;
+
+    }
+
+    async onUpdate() {
         const id = this.activatedRoute.snapshot.params['id'];        
-        this.acdService.update(id, this.acerca).subscribe(
-        data =>{
-            alert("Actualizado!");
-            this.router.navigate([''])
-        }, err =>{
-            alert("Error al actualizar");
-            this.router.navigate([''])
-        }
-        )
+        await this.acdService.update(id, this.acerca);
+        this.router.navigate(['']);        
     }
     
   }

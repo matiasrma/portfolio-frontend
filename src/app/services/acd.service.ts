@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Acd } from '../Model/acd';
 
@@ -9,19 +9,42 @@ import { Acd } from '../Model/acd';
 })
 export class AcdService {
 
-  URL = environment.URL + 'acercade/'
+  URL = environment.URL + 'AcercaDe'
+  respuesta: any = null;
 
   constructor(private httpClient: HttpClient) { }
 
-  public detail(id: number): Observable<Acd>{
+  async Obtener(id: number): Promise<Acd>{
     
-    return this.httpClient.get<Acd>(this.URL + `detail/${id}`);
+    const data$ = this.httpClient.get(this.URL, { params: { id: id }, responseType: 'json' } );
+
+    try {
+      const value = await lastValueFrom(data$, {defaultValue: 'false'}) ?? "false"
+      this.respuesta = value;
+    } catch(e) {
+      if (e instanceof HttpErrorResponse){
+        this.respuesta = (e.error);
+      }
+    }
+
+    return this.respuesta;
 
   }
 
-  public update(id: number, acercade: Acd): Observable<any>{
+  async Guardar(acercade: Acd): Promise<Acd>{
 
-      return this.httpClient.put<any>(this.URL + `update/${id}`, acercade);
+    const data$ = this.httpClient.post(this.URL, acercade, {responseType: 'json'});
+
+    try {
+      const value = await lastValueFrom(data$, {defaultValue: 'false'}) ?? "false"
+      this.respuesta = value;
+    } catch(e) {
+      if (e instanceof HttpErrorResponse){
+        this.respuesta = (e.error);
+      }
+    }
+
+    return this.respuesta;
 
   }
 

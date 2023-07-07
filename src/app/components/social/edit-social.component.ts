@@ -29,36 +29,36 @@ export class EditSocialComponent implements OnInit {
   }
 
   detailSocial(): void{
-    const id: number = this.activatedRoute.snapshot.params['id'];
-    this.socialService.detail(id).subscribe(
-      data => {
-        this.social = data,
-        this.enableUpload = true;
-      }, err => {
-        alert("No se pudo cargar los datos");
-      }
-    )
+    // const id: number = this.activatedRoute.snapshot.params['id'];
+    // this.socialService.detail(id).subscribe(
+    //   data => {
+    //     this.social = data,
+    //     this.enableUpload = true;
+    //   }, err => {
+    //     alert("No se pudo cargar los datos");
+    //   }
+    // )
   }
 
   onUpdate(): void{        
-    if (this.imageSocialService.imageurl != '') {
-      this.social.imgSocial = this.imageSocialService.imageurl;
-      this.socialService.update(this.social.id, this.social).subscribe(
-        data =>{
-          alert("Se actualizo Social correctamente")
-          this.router.navigate([''])
-        }, err =>{
-          alert("no se pudo actualizar skill" + err)
-          this.router.navigate([''])
-        }
-      )
-    } else {
-      alert("No selecciono nueva imagen, debe seleccionar una imagen")      
-    }    
+    // if (this.imageSocialService.imageurl != '') {
+    //   this.social.imgSocial = this.imageSocialService.imageurl;
+    //   this.socialService.update(this.social.id, this.social).subscribe(
+    //     data =>{
+    //       alert("Se actualizo Social correctamente")
+    //       this.router.navigate([''])
+    //     }, err =>{
+    //       alert("no se pudo actualizar skill" + err)
+    //       this.router.navigate([''])
+    //     }
+    //   )
+    // } else {
+    //   alert("No selecciono nueva imagen, debe seleccionar una imagen")      
+    // }    
   }
 
   uploadImagen($event:any): void{
-    const name = "social_" + this.social.id;
+    const name = "social_" + this.social.Id;
     this.imageSocialService.uploadImage($event, name);
   }
 

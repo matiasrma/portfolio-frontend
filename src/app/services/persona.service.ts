@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Persona } from '../Model/persona.model';
 
@@ -9,41 +9,38 @@ import { Persona } from '../Model/persona.model';
 })
 export class PersonaService {
 
-  URL = environment.URL + 'personas/';
+  URL = environment.URL + 'Persona';
+  respuesta: any = null;
 
   constructor(private httpClient: HttpClient) { }
-
-  public lista(): Observable<Persona[]>{
+  
+  async Obtener(id: number): Promise<Persona>{
     
-    return this.httpClient.get<Persona[]>(this.URL + 'lista');
+    const data$ = this.httpClient.get<Persona[]>(this.URL, { params: { id: id }, responseType: "json" });
+
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false"
+      this.respuesta = value;
+    } catch(e) {
+      this.respuesta = e;
+    }
+
+    return this.respuesta;
 
   }
 
-  public detail(id: number): Observable<Persona>{
+  async Guardar(persona: Persona): Promise<String>{
     
-    return this.httpClient.get<Persona>(this.URL + `detail/${id}`);
+    const data$ = this.httpClient.post(this.URL, persona, { params: { responseType: "string" } });
+
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false"
+      this.respuesta = value;
+    } catch(e) {
+      this.respuesta = e;
+    }
+
+    return this.respuesta;
 
   }
-
-  /*
-  public save(experiencia: Experiencia): Observable<any>{
-    
-    return this.httpClient.post<any>(this.expURL + 'create', experiencia);
-
-  }
-  */
-
-  public update(id: number, persona: Persona): Observable<any>{
-
-      return this.httpClient.put<any>(this.URL + `update/${id}`, persona);
-
-  }
-
-  /*
-  public delete(id: number): Observable<any>{
-
-    return this.httpClient.delete<any>(this.expURL + `delete/${id}`);
-
-  }
-  */
 }

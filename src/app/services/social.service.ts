@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Social } from '../Model/social';
 
@@ -9,37 +9,53 @@ import { Social } from '../Model/social';
 })
 export class SocialService {
 
-  URL = environment.URL + 'social/'
+  URL = environment.URL + 'Social'
+
+  respuesta: any = null;
 
   constructor(private httpClient: HttpClient) { }
 
-  public lista(): Observable<Social[]>{
+  async ObtenerLista(persona_id: number): Promise<Social[]>{
     
-    return this.httpClient.get<Social[]>(this.URL + 'lista');
+    const data$ = this.httpClient.get<Social[]>(this.URL, { params: { persona_id: persona_id }, responseType: "json" });
+
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false"
+      this.respuesta = value;
+    } catch(e) {
+      this.respuesta = e;
+    }
+
+    return this.respuesta;
 
   }
   
-  public save(proyecto: Social): Observable<any>{
-    
-    return this.httpClient.post<any>(this.URL + 'create', proyecto);
+  async Guardar(social: Social): Promise<string>{
+   
+    const data$ = this.httpClient.post(this.URL, social, { params: { responseType: "string" } });
 
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false"
+      this.respuesta = value;
+    } catch(e) {
+      this.respuesta = e;
+    }
+
+    return this.respuesta;
   }
   
-  public delete(id: number): Observable<any>{
+  async Eliminar(Id: number): Promise<string>{
 
-    return this.httpClient.delete<any>(this.URL + `delete/${id}`);
+    const data$ = this.httpClient.delete(this.URL, { params: { Id: Id, responseType: "string" } });
 
-  }
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false"
+      this.respuesta = value;
+    } catch(e) {
+      this.respuesta = e;
+    }
 
-  public update(id: number, proyecto: Social): Observable<any>{
-
-    return this.httpClient.put<any>(this.URL + `update/${id}`, proyecto);
-
-  }
-
-  public detail(id: number): Observable<Social>{
-    
-    return this.httpClient.get<Social>(this.URL + `detail/${id}`);
+    return this.respuesta;
 
   }
 

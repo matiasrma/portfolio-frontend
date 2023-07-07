@@ -12,8 +12,7 @@ export class BannerComponent implements OnInit {
 
   switchInteres: boolean = false;
   isLogged: boolean = false;
-  persona: Persona = new Persona("","","","","","","","");
-  enableUpload: boolean = false;
+  persona: Persona = {} as Persona;  
 
   constructor(
     public personaService: PersonaService,
@@ -21,15 +20,15 @@ export class BannerComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {    
-    this.personaService.detail(1).subscribe(data => {this.persona = data; this.enableUpload = true;});       
+    this.personaService.Obtener(1).then(
+      data => {
+        this.persona = data; 
+      });       
     if(this.tokenService.getToken()){
       this.isLogged = true;
     } else{
       this.isLogged = false;
     }
-  }
-
-
-  
+  }  
 
 }

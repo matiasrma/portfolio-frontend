@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { LoginUsuario } from 'src/app/Model/login-usuario';
-import { Persona } from 'src/app/Model/persona.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from 'src/app/services/image.service';
-import { PersonaService } from 'src/app/services/persona.service';
 import { TokenService } from 'src/app/services/token.service';
 
 @Component({
@@ -14,45 +11,40 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class LoginComponent implements OnInit {
 
-  isLogged = false;
-  isLoginFail = false;
+  mensajeClass: string = "conectando"
+  logMsj: string = "";
   loginUsuario!: LoginUsuario;
   nombreUsuario!: string;
-  password!: string;
-  roles: string[] = [];
-  errMsj!: string;  
-
+  @ViewChild('password') password!: string;
+  roles: string[] = [];  
+  
   constructor(private tokenService: TokenService, 
     private authService: AuthService, 
-    private router: Router,
-    private authFirebase : ImageService    
+    private authFirebase : ImageService
     ) { }
 
   ngOnInit(): void {
     if(this.tokenService.getToken()){
-      this.isLogged = true;
-      this.isLoginFail = false;
       this.roles = this.tokenService.getAuthorites();      
     }
+    
   }
 
   onLogin():void{
     this.loginUsuario = new LoginUsuario(this.nombreUsuario, this.password); 
     this.authFirebase.login(this.password);
-    
+    this.logMsj = 'Conectando...';    
     this.authService.login(this.loginUsuario).subscribe(data =>{
-        this.isLogged = true;
-        this.isLoginFail = false;
+        this.logMsj = 'Ingresando!';
+        this.mensajeClass = 'ingreso';        
         this.tokenService.setToken(data.token);
         this.tokenService.setUsername(data.nombreUsuario);
         this.tokenService.setAuthorities(data.authorities);
-        this.roles = data.authorities;            
-        this.router.navigate(['']);
+        this.roles = data.authorities;             
+        location.reload();
       }, err=>{
-        this.isLogged = false;
-        this.isLoginFail = true;
-        this.errMsj = err.error.mensaje;        
+        this.logMsj = 'Error, verifique usuario y contraseña';
+        this.mensajeClass = 'errorIngreso';
       })
   }
-
 }

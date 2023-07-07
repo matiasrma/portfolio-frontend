@@ -1,0 +1,13 @@
+p,.texto {
+    color: var(--btn-bg-color);
+}
+.offcanvas{
+    background-color: var(--bkg-color);
+}
+img {
+    width: 70px;
+    height: auto;
+    padding: 5px;
+    background-color: white;
+    border-radius: 50%;
+}

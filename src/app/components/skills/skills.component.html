@@ -1,18 +1,14 @@
-<div class="card container">
+<!-- <div class="card container">
     <div class="row p-2">
         <div class="col-10 col-sm-11 my-2">
             <h2>Hard Skills & Soft Skills</h2>
         </div>
-        <div class="col-1">            
-            <a href="" routerLink="/nuevaskill" *ngIf="isLogged" ><img src="../../../assets/agregar.png" alt="" class="agregar"></a>
+        <div class="col-1" *ngIf="isLogged">                        
+            <a href="" routerLink="/nuevaskill"><i class="bi bi-plus-circle agregar"></i></a>
         </div>
     </div>
     <div class="row my-2">        
-        <div *ngFor="let Skill of skills" class="container col-12 col-sm-6 col-lg-4">
-            <div *ngIf="isLogged" class="container col-12 d-flex justify-content-center">
-                <a class="p-2" routerLink="/editskill/{{Skill.id}}"><img src="../../../assets/lapiz.png" alt=""></a>
-                <a class="p-2" (click)="deleteSkill(Skill.id)"><img src="../../../assets/trash.png" alt="" class="trash"></a>
-            </div>            
+        <div *ngFor="let Skill of skills" class="container col-12 col-sm-6 col-lg-4">            
             <div class="col-12 text-center">
                 <circle-progress
                     [percent]="Skill.percentageSkill"
@@ -20,6 +16,7 @@
                     [imageSrc]="Skill.imgSkill"
                     [showTitle]="!Skill.imgSkill"
                     [title]="Skill.nombreSkill"
+                    [titleColor]="'black'"
                     [titleFontSize]="'50'"
                     [showUnits]="false"
                     [showSubtitle]="false"
@@ -34,13 +31,17 @@
                     [animationDuration]="500"
                     >
                 </circle-progress>
-            </div>              
+            </div>
+            <div *ngIf="isLogged" class="container col-12 p-2 d-flex justify-content-center">                
+                <a href="" (click)="deleteSkill(Skill.id)"><i class="bi bi-trash3-fill" style="color: lightcoral"></i></a>
+                <a href="" routerLink="/editskill/{{Skill.id}}"><i class="bi bi-pencil-fill" style="color: var(--pen-color)"></i></a>             
+            </div>                                      
             <div class="container col-12 text-center">                
                 <h3>{{Skill.nombreSkill}}</h3>
             </div>
             <div class="container col-12 text-center">
                 <p>{{Skill.percentageSkill}}%</p>                
-            </div>                        
+            </div>                                    
         </div>   
     </div>
-</div>
+</div> -->
