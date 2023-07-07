@@ -9,6 +9,7 @@
 #enviroments
 src/enviroments
 src/enviroments/enviroment.prod.ts
+src/enviroments/enviroment.ts
 
 # Node
 /node_modules
