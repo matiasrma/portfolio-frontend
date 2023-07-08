@@ -38,6 +38,20 @@
         >
       </div>
     </div>
+    <div class="row">
+      <div class="col-4 text-end">
+        <img src="../../../assets/working.png" alt="" />
+      </div>
+      <div class="col-8 text-start">
+        <a
+          data-bs-toggle="offcanvas"
+          href="#offcanvas3"
+          role="button"
+          aria-controls="offcanvas3"
+          ><p class="display-5">(Nuevo) Migrar la BD a otro proveedor</p></a
+        >
+      </div>
+    </div>
   </div>
 </div>
 
@@ -101,6 +115,33 @@
         <li class="list-group-item">Agregar modulo de modificar/agregar/eliminar</li>
         <li class="list-group-item">Agregar Login</li>
         <li class="list-group-item">Agregar Guards</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas3" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title texto" id="offcanvasExampleLabel">
+      Cambiar el proveedor de la Base de Datos MySql
+    </h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <p>
+      La BD de MySql que tengo actualmente tiene limitadas las conexiones y eso obviamente me genera problemas con la disponinilidad de la informacion de la página.<br>
+      Mi primer opcione es AWS aunque voy a explorar otras opciones.
+    </p>
+    <div class="dropdown mt-3">
+      <ul class="list-group">
+        <li class="list-group-item active">Exportar la BD a un archivo .sql</li>
+        <li class="list-group-item">Buscar proveedor y crear la BD MySql</li>
+        <li class="list-group-item">Cambiar la conexion del backend a la nueva BD</li>
       </ul>
     </div>
   </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Proyecto } from 'src/app/Model/proyecto';
-import { ServiceproyectoService } from 'src/app/services/serviceproyecto.service';
+import { ServiceproyectoService } from 'src/app/services/proyecto.service';
 
 @Component({
   selector: 'app-edit-proyecto',

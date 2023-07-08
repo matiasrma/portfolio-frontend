@@ -1,21 +1,8 @@
-export class Skill {
-
-    id?: number;
-    nombreSkill: string;
-    percentageSkill: number;
-    imgSkill: string;    
-    showImg: boolean;
-
-    constructor(
-        nombreSkill: string,
-        percentageSkill: number,
-        imgSkill: string,
-        showImg: boolean        
-        )        
-        {
-            this.nombreSkill = nombreSkill;
-            this.percentageSkill = percentageSkill;
-            this.imgSkill = imgSkill;            
-            this.showImg = showImg;
-        }
+export interface Skill {
+    Id: number;
+    nombre_skill: string;
+    percentage_skill: number;
+    img_skill: string;    
+    show_img: boolean;
+    persona_id: number;
 }

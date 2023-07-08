@@ -1,5 +1,7 @@
-<app-header></app-header>
-<div *ngIf="isLoad">
+<div class="container-fluid" style="position: fixed; width: 100%; z-index: 1;">
+  <app-header></app-header>
+</div>
+<div *ngIf="isLoad" style="padding-top: 70px;">
   <app-en-contruccion></app-en-contruccion>
   <app-banner></app-banner>
 </div>
@@ -21,9 +23,7 @@
           <div class="col-10 col-sm-11 my-2">
             <h2>Acerca de Mi</h2>
           </div>
-          <div class="col-1">
-                        
-          </div>
+          <div class="col-1"></div>
         </div>
         <div class="row m-2">
           <p *ngFor="let parrafo of texto">
@@ -33,4 +33,101 @@
       </span>
     </div>
   </div>
+</div>
+<div class="card container">
+  <div class="row p-2">
+    <div class="col-11">
+      <h2>Experiencia</h2>
+    </div>    
+  </div>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let Experiencia of experiencia">
+        <div class="row m-2">
+          <div
+            class="container-fluid col-12 col-sm-6 col-lg-4 mb-6 d-flex align-items-center"
+          >
+            <img
+              src="{{ Experiencia.img_exp }}"
+              alt=""
+              class="rounded mx-auto d-block skill-logo"
+            />
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4">
+            <h3>{{ Experiencia.nombre_exp }}</h3>
+            <p>{{ Experiencia.tiempo_exp }}</p>
+            <p>{{ Experiencia.descripcion_exp }}</p>
+          </div>
+          <div class="col-1 col-sm-2 col-lg-2 d-flex justify-content-end p-2">
+            <!-- <a href="" (click)="deleteExperiencia(Experiencia.id)"><i class="bi bi-trash3-fill" style="color: lightcoral"></i></a>
+                        <a href="" routerLink="/editexperiencia/{{Experiencia.id}}"><i class="bi bi-pencil-fill" style="color: var(--pen-color)"></i></a>              -->
+          </div>
+        </div>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <div class="row p-2">
+    <div class="col-10 col-sm-11 my-2">
+      <h2>Educación</h2>
+    </div>
+    <div class="col-1 d-inline">
+      <a href="" routerLink="/nuevaexp"
+        ><i class="bi bi-plus-circle agregar"></i
+      ></a>
+    </div>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let Educacion of educacion">
+        <div class="row m-2">
+          <div
+            class="container-fluid col-11 col-sm-3 mb-2 col-lg-2 d-flex align-items-center"
+          >
+            <img
+              src="{{ Educacion.imgEdu }}"
+              alt=""
+              class="rounded mx-auto d-block"
+            />
+          </div>
+          <div class="col-11 col-sm-7 col-lg-8">
+            <h3>{{ Educacion.nombreEdu }}</h3>
+            <p>{{ Educacion.tiempoEdu }}</p>
+            <p>{{ Educacion.descripcionEdu }}</p>
+          </div>
+          <div class="col-1 col-sm-2 col-lg-2 d-flex justify-content-end p-2">
+            <a href="" (click)="deleteEducacion(Educacion.id)"
+              ><i class="bi bi-trash3-fill" style="color: lightcoral"></i
+            ></a>
+            <a href="" routerLink="/editeducacion/{{ Educacion.id }}"
+              ><i class="bi bi-pencil-fill" style="color: var(--pen-color)"></i
+            ></a>
+          </div>
+        </div>
+      </tr>
+    </tbody>
+  </table> -->
+</div>
+<div class="card container">
+    <div class="row p-2">
+        <div class="col-10 col-sm-11 my-2">
+            <h2>Hard Skills & Soft Skills</h2>
+        </div>
+        <!-- <div class="col-1" *ngIf="isLogged">                        
+            <a href="" routerLink="/nuevaskill"><i class="bi bi-plus-circle agregar"></i></a>
+        </div> -->
+    </div>
+    <div class="row my-2">        
+        <div *ngFor="let Skill of skills" class="container col-12 col-sm-6 my-4 col-lg-4">            
+            <div class="col-12 text-center">
+                <img class="skill-logo" [src]="Skill.img_skill" alt="">
+            </div>
+            <!-- <div *ngIf="isLogged" class="container col-12 p-2 d-flex justify-content-center">                
+                <a href="" (click)="deleteSkill(Skill.id)"><i class="bi bi-trash3-fill" style="color: lightcoral"></i></a>
+                <a href="" routerLink="/editskill/{{Skill.id}}"><i class="bi bi-pencil-fill" style="color: var(--pen-color)"></i></a>             
+            </div>                                       -->
+            <div class="container col-12 text-center">                
+                <h3>{{Skill.nombre_skill}}</h3>
+            </div>            
+        </div>   
+    </div>
 </div>

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Acd } from 'src/app/Model/acd';
+import { Experiencia } from 'src/app/Model/experiencia';
 import { AcdService } from 'src/app/services/acd.service';
 import { PersonaService } from 'src/app/services/persona.service';
+import { ServiceExperienciaService } from 'src/app/services/experiencia.service';
 import { TokenService } from 'src/app/services/token.service';
+import { Skill } from 'src/app/Model/skill';
+import { SkillService } from 'src/app/services/skill.service';
 
 
 @Component({
@@ -13,6 +17,8 @@ import { TokenService } from 'src/app/services/token.service';
 export class HomeComponent implements OnInit {
 
   constructor(
+    private skillService: SkillService,
+    private serviceExperiencia: ServiceExperienciaService,
     private personaService: PersonaService,
     private acdService: AcdService
     ) { }
@@ -20,6 +26,8 @@ export class HomeComponent implements OnInit {
   isLoad = false;  
   acercaDe: Acd = {} as Acd;
   texto: string[] = []
+  experiencia: Experiencia[] = [];  
+  skills: Skill[] = [];
 
   ngOnInit(): void {
     this.personaService.Obtener(1).then(
@@ -28,6 +36,8 @@ export class HomeComponent implements OnInit {
       }
     )    
     this.ObtenerAcercaDe();
+    this.ObtenerExperiencia();
+    this.ObtenerSkills();
   }
 
   async ObtenerAcercaDe(){
@@ -37,6 +47,12 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  
+  async ObtenerExperiencia(){
+    await this.serviceExperiencia.ObtenerLista(1).then(data => this.experiencia = data);
+  }
+
+  async ObtenerSkills(){
+    await this.skillService.ObtenerLista(1).then(data => this.skills = data);
+  }
 
 }
