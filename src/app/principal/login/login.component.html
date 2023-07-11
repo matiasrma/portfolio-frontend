@@ -1,0 +1,33 @@
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header d-block justify-content-center align-items-center">
+        <div class="logo d-flex justify-content-center">
+          <img src="../../../assets/logoMR.png" alt="">
+        </div>
+        <div class="text-center mt-4 name">
+            Ingreso
+        </div>          
+      </div>
+      <div class="modal-body">          
+        <div class="row d-flex justify-content-center align-items-center" id="inputsLogin">              
+          <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center">
+            <input class="m-2" type="text" name="nombreUsuario" id="nombreUsuario" placeholder="Username" [(ngModel)]="loginUsuario.nombre_usuario" required />                     
+          </div>          
+          <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center">
+            <input class="m-2" type="password" name="password" id="password" placeholder="Password" [(ngModel)]="loginUsuario.password" required />
+          </div>          
+        </div>
+        <div *ngIf="logMsj" class="text-center fs-6" style="color: red;">
+            <p [ngClass]="mensajeClass" *ngIf="!isLogged">{{logMsj}}</p>
+            <span *ngIf="isLogged">Bienvenido {{loginUsuario.nombre}}!</span>
+        </div>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="btnLogin" (click)="onLogin()" *ngIf="!isLogged">Ingresar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" *ngIf="!isLogged">Cancelar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" *ngIf="isLogged">Volver</button>
+      </div>
+    </div>
+  </div>
+</div>

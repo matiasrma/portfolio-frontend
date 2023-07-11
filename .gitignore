@@ -9,8 +9,7 @@ dist
 node_modules
 
 #enviroments
-src\environments\environment.ts
-src\environments\environment.prod.ts
+src/environments/
 
 # Node
 /node_modules

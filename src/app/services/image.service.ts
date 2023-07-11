@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Storage, ref, uploadBytesResumable, list, getDownloadURL } from '@angular/fire/storage'
-import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { Storage, ref, uploadBytesResumable, list, getDownloadURL } from '@angular/fire/storage';
+import { getAuth, signInWithEmailAndPassword, signOut, setPersistence, browserSessionPersistence, GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
 import { environment } from 'src/environments/environment';
 import { Persona } from '../Model/persona.model';
-import { PersonaService } from './persona.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,25 +19,40 @@ export class ImageService {
 
   persona: Persona = {} as Persona;
     
-  constructor(private storage: Storage, private personaService : PersonaService) { }
+  constructor(private storage: Storage) { }
 
-  public login(password: string){
+  login(email: string, password: string) {
 
-    this.personaService.Obtener(1).then(data => { 
-      this.persona = data; 
-      const auth = getAuth();
+    const auth = getAuth();
 
-      signInWithEmailAndPassword(auth, this.persona.correo, password)
-        .then(() =>{
+    // await signInWithEmailAndPassword(auth, email, password)
+    // .then(() =>{
+    //   this.user = auth.currentUser.uid.toString();
+    // }).catch((error) => {
+    //   console.log("error of authentication Firebase!!!");              
+    // });
 
-          this.user = auth.currentUser.uid.toString();
-
-        })
-        .catch((error) => {
-          console.log("error of authentication Firebase!!!");        
-          
-        });
-    });          
+    setPersistence(auth, browserSessionPersistence)
+      .then(() => {
+        // Existing and future Auth states are now persisted in the current
+        // session only. Closing the window would clear any existing state even
+        // if a user forgets to sign out.
+        // ...
+        // New sign-in will be persisted with session persistence.
+        return signInWithEmailAndPassword(auth, email, password);
+      })
+      .then((userCredential) => {
+        // La autenticación fue exitosa, puedes almacenar la información de usuario
+        const user = userCredential.user;
+        this.user = user.uid;
+        // Otros pasos necesarios después de la autenticación exitosa
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+      
   }
 
   public logout(){
@@ -51,6 +64,32 @@ export class ImageService {
     })
   }
 
+  public isLoggedFB(){
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    if (!user){
+      this.loginUid();
+    }
+  }
+
+  loginUid(){
+    const auth = getAuth();
+    const uid = localStorage.getItem('uid');
+
+    if (!auth.currentUser && uid) {
+      const credential = GoogleAuthProvider.credential(uid);
+  
+    signInWithCredential(auth, credential)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log('Inicio de sesión exitoso:', user);
+      })
+      .catch((error) => {
+        console.error('Error al iniciar sesión:', error);
+      });
+    }
+  }
 
   public uploadImage($event: any, name: string){    
 
@@ -69,15 +108,17 @@ export class ImageService {
     }, err => {
       console.log(err)
     }, () =>{
-      this.getImages(name)
+      //this.getImages(name)
     }
     )
   }
 
-  getImages(name: string){    
+  async getImages(name: string): Promise<string> {    
     const imageRef = ref(this.storage, environment.images + name);
-    getDownloadURL(imageRef)
+    let respuesta: any = null;
+    await getDownloadURL(imageRef)
       .then(data =>{
+        respuesta = data;
         if ( data.includes("banner")){
           this.bannerurl = data;      
           this.uploadProgress2 += 20;          
@@ -85,6 +126,8 @@ export class ImageService {
           this.imageurl = data;
           this.uploadProgress += 20;          
         }
-      })
+      });
+    
+      return respuesta;
   }    
 }

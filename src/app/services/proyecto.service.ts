@@ -1,45 +1,62 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Proyecto } from '../Model/proyecto';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceproyectoService {
+export class ProyectoService {
 
-  URL = environment.URL + 'proyecto/'
+  URL = environment.URL + 'Proyecto'
+  URLSet = environment.URL + 'ProyectoSet'
+  respuesta: any = null;
 
   constructor(private httpClient: HttpClient) { }
 
-  public lista(): Observable<Proyecto[]>{
+  async ObtenerLista(persona_id: number): Promise<Proyecto[]>{
     
-    return this.httpClient.get<Proyecto[]>(this.URL + 'lista');
+    const data$ = this.httpClient.get<Proyecto[]>(this.URL, { params: { persona_id: persona_id }, responseType: 'json' });
+
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      this.respuesta = value;
+    } catch (e: any){
+      this.respuesta = e.error;
+    }
+
+    return this.respuesta;
 
   }
 
-  public detail(id: number): Observable<Proyecto>{
+  async Guardar(lista: Proyecto[]): Promise<string>{
     
-    return this.httpClient.get<Proyecto>(this.URL + `detail/${id}`);
+    const data$ = this.httpClient.post(this.URLSet, lista, { responseType: 'json' });
+
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      this.respuesta = value;
+    } catch (e: any){
+      this.respuesta = e.error;
+    }
+
+    return this.respuesta;
 
   }
 
-  public save(proyecto: Proyecto): Observable<any>{
+  async Eliminar(lista: Proyecto[]): Promise<string>{
     
-    return this.httpClient.post<any>(this.URL + 'create', proyecto);
+    const data$ = this.httpClient.delete(this.URLSet, { body: lista, responseType: 'json' });
 
-  }
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      this.respuesta = value;
+    } catch (e: any){
+      this.respuesta = e.error;
+    }
 
-  public update(id: number, proyecto: Proyecto): Observable<any>{
-
-      return this.httpClient.put<any>(this.URL + `update/${id}`, proyecto);
-
-  }
-
-  public delete(id: number): Observable<any>{
-
-    return this.httpClient.delete<any>(this.URL + `delete/${id}`);
+    return this.respuesta;
 
   }
 

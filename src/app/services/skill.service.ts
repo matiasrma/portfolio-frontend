@@ -10,6 +10,7 @@ import { Skill } from '../Model/skill';
 export class SkillService {
 
   URL = environment.URL + 'Skill';
+  URLSet = environment.URL + 'SkillSet';
   respuesta: any = null;
 
   constructor(private httpClient: HttpClient) { }
@@ -19,40 +20,40 @@ export class SkillService {
     const data$ = this.httpClient.get<Skill[]>(this.URL, { params: { persona_id: persona_id }, responseType: 'json' });
 
     try{
-      const value = lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
       this.respuesta = value;
-    } catch (e){
-      this.respuesta = e;
+    } catch (e: any){
+      this.respuesta = e.error;
     }
 
     return this.respuesta;
 
   }
 
-  async Guardar(skill: Skill): Promise<string>{
+  async Guardar(lista: Skill[]): Promise<string>{
     
-    const data$ = this.httpClient.post(this.URL, skill, { responseType: 'json' });
+    const data$ = this.httpClient.post<string>(this.URLSet, lista, { params: { responseType: 'string' } });
 
     try{
-      const value = lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
       this.respuesta = value;
-    } catch (e){
-      this.respuesta = e;
+    } catch (e: any){
+      this.respuesta = e.error;
     }
-
+    
     return this.respuesta;
 
   }
 
-  async Eliminar(id: number): Promise<Skill[]>{
+  async Eliminar(lista: Skill[]): Promise<string>{
     
-    const data$ = this.httpClient.delete(this.URL, { params: { id: id }, responseType: 'json' });
+    const data$ = this.httpClient.delete(this.URLSet, { body: lista, params : { responseType: 'string' } });
 
     try{
-      const value = lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
       this.respuesta = value;
-    } catch (e){
-      this.respuesta = e;
+    } catch (e: any){
+      this.respuesta = e.error;
     }
 
     return this.respuesta;

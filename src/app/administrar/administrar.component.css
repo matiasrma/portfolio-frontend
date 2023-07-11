@@ -1,0 +1,17 @@
+.header{
+    position: fixed; 
+    width: 100%; 
+    z-index: 1;
+}
+.body{
+    padding-top: 100px;
+}
+
+@media (max-width: 575px){
+    .header{
+        position: relative;
+    }
+    .body{
+        padding-top: 0px;
+    }
+}

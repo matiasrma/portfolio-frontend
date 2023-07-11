@@ -10,7 +10,6 @@ import { interceptorProvider } from './services/interceptor-service';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -22,9 +21,8 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     FormsModule,
     NgbModule,
     HttpClientModule,
-    NgCircleProgressModule.forRoot({}),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
   ],
   providers: [
     interceptorProvider,

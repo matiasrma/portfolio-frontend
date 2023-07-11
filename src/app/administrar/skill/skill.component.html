@@ -1,0 +1,48 @@
+<div class="cont-botones">    
+  <div>
+    <button class="btn btn-success" (click)="Guardar()">Guardar</button>
+  </div>
+  <div>
+    <button class="btn btn-secondary" (click)="Volver()">Volver</button>
+  </div>
+  <div>
+    <button class="btn btn-primary" (click)="Agregar()">Agregar</button>
+  </div>
+</div>
+<div class="container">
+  
+      <div class="row m-4">
+        <div
+          *ngFor="let Skill of listaSkill; let i = index"
+          class="container col-12 col-sm-6 my-4 col-lg-4"
+        >
+          <div class="col-12 col-sm-1 d-flex justify-content-center p-2">
+            <a (click)="Eliminar(Skill)"><i class="bi bi-trash3-fill" style="color: lightcoral"></i></a>                       
+          </div>
+          <div class="col-12 text-center">
+            <img class="skill-logo" [src]="Skill.img_skill" alt="" />
+          </div>
+          <div class="row p-2">                  
+            <input type="file" 
+            class="form-control" 
+            id="imgExp" 
+            name="imgExp"
+            (change)="uploadImagen($event, i)"                
+            accept=".jpg, .jpeg, .png">        
+          </div>
+          <div class="container col-12 text-center">            
+            <input type="text" class="h3 text-center" [(ngModel)]="Skill.nombre_skill"  style="max-width: 80%;">
+          </div>
+        </div>
+      </div>
+    
+</div>
+
+<div [ngClass]="guardarClass" *ngIf="respuesta != ''">
+  <a (click)="borrarRespuesta()" class="cerrar-dialog" style="top: 15px;">
+    <p><strong>X</strong></p>
+  </a>        
+  <p style="font-size: 12px; text-align: center;" class="dialog">
+    {{respuesta}}
+  </p>    
+<div>

@@ -1,0 +1,76 @@
+<div class="cont-botones">    
+  <div>
+    <button class="btn btn-success" (click)="Guardar()">Guardar</button>
+  </div>
+  <div>
+    <button class="btn btn-secondary" (click)="Volver()">Volver</button>
+  </div>
+  <div>
+    <button class="btn btn-primary" (click)="Agregar()">Agregar</button>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let Experiencia of listaExperiencia; let i = index;">
+            <div class="row m-2">
+              <div class="container-fluid col-12 col-sm-4 mb-6 align-items-center">
+                <div class="row">
+                  <img
+                    src="{{ Experiencia.img_exp }}"
+                    alt=""
+                    class="rounded mx-auto d-block skill-logo"
+                  />
+                </div>                
+                <div class="row">                  
+                  <input type="file" 
+                  class="form-control" 
+                  id="imgExp" 
+                  name="imgExp"
+                  (change)="uploadImagen($event, i)"                
+                  accept=".jpg, .jpeg, .png">        
+                </div>
+              </div>
+              <div class="col-12 col-sm-6">           
+                <div class="row">
+                  <input [(ngModel)]="Experiencia.nombre_exp" class="h3">
+                </div>     
+                <div class="row">
+                  <input [(ngModel)]="Experiencia.tiempo_exp">
+                </div>
+                <div class="row"> 
+                  <textarea 
+                  [(ngModel)]="Experiencia.descripcion_exp"
+                  maxlength="1000"
+                  type="text"
+                  rows="4"                
+                  ></textarea>
+                </div>
+              </div>
+              <div class="col-12 col-sm-1 d-flex justify-content-center p-2">
+                <a (click)="Eliminar(Experiencia)"><i class="bi bi-trash3-fill" style="color: lightcoral"></i></a>                       
+              </div>
+            </div>
+            <div class="row">                  
+              <div class="container-fluid col-8 justify-content-start">                
+              
+                      
+              </div>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div [ngClass]="guardarClass" *ngIf="respuesta != ''">
+  <a (click)="borrarRespuesta()" class="cerrar-dialog" style="top: 15px;">
+    <p><strong>X</strong></p>
+  </a>        
+  <p style="font-size: 12px; text-align: center;" class="dialog">
+    {{respuesta}}
+  </p>    
+<div>

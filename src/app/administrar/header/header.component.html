@@ -3,20 +3,20 @@
         <div class="row px-2">
             <div class="col-12 col-sm-4 col-lg-2 d-flex justify-content-center align-items-center">
                 <div>
-                    <img src="assets/APLogo-20-20.png" alt="logo-argentina-programa" id="logoAP">
+                    <a routerLink="/Inicio">
+                        <img src="assets/APLogo-20-20.png" alt="logo-argentina-programa" id="logoAP" >
+                    </a>
                 </div>
             </div>        
             <div class="col-12 col-sm-6 col-lg-9 d-flex justify-content-end align-items-center">            
-                <div id="social" class="d-flex justify-content-end align-items-center">
-                    <!-- <a href="" routerLink="/nuevasocial" *ngIf="isLogged"><i class="bi bi-pencil-fill agregar"></i></a>                 -->
+                <div id="social" class="d-flex justify-content-end align-items-center">                    
                     <a href="" *ngIf="isLogged"><i class="bi bi-pencil-fill agregar"></i></a>                
                     <app-social class="d-flex"></app-social>                            
                 </div>
             </div>        
             <div class="col-12 col-sm-2 col-lg-1 d-flex justify-content-center align-items-center">
                 <div class="row">
-                    <div [ngSwitch]="isLogged" class="col-12 my-2 d-flex justify-content-center align-items-center">
-                        <button data-bs-toggle="modal" data-bs-target="#modal" *ngSwitchCase="false" type="button" class="btn social">Login</button>            
+                    <div [ngSwitch]="isLogged" class="col-12 my-2 d-flex justify-content-center align-items-center">                        
                         <!--<button *ngSwitchCase="false" type="button" class="btn social" (click)="login()">Login</button>            -->
                         <button *ngSwitchCase="true" type="button" id="salir" class="btn social" (click)="onLogout()">Logout</button>                                                 
                     </div>            

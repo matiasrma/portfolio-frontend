@@ -12,7 +12,6 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class SocialComponent implements OnInit {
 
-  //islogged: boolean = false;
   socials: Social[] = [];  
   
   constructor(
@@ -23,11 +22,6 @@ export class SocialComponent implements OnInit {
 
   ngOnInit(): void {
     this.ObtenerLista();
-    // if(this.token.getToken()){
-    //   this.islogged = true;
-    // } else{
-    //   this.islogged = false;
-    // }    
   }
 
   async ObtenerLista() {

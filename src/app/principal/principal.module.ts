@@ -8,6 +8,10 @@ import { PrincipalRoutingModule } from './principal-routing.module';
 import { EnContruccionComponent } from './en-contruccion/en-contruccion.component';
 import { SocialComponent } from './social/social.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from 'src/environments/environment';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -16,12 +20,15 @@ import { FormsModule } from '@angular/forms';
     BannerComponent,
     HeaderComponent,
     EnContruccionComponent,
-    SocialComponent
+    SocialComponent,
+    LoginComponent,    
   ],
   imports: [
     CommonModule,
     PrincipalRoutingModule,
-    FormsModule
+    FormsModule,
+    // provideFirebaseApp(() => initializeApp(environment.firebase)),
+    // provideStorage(() => getStorage())
   ]
 })
 export class PrincipalModule { }

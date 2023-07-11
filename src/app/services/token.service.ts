@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 const TOKEN_KEY = 'AuthToken';
 const USERNAME_KEY = 'AuthUsername';
 const AUTHORITIES_KEY = 'AuthAuthorities';
+const USER_FIREBASE = 'AuthUserFirebase';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,10 @@ export class TokenService {
 
   public getUsername(): string {
     return sessionStorage.getItem(USERNAME_KEY)!;
+  }
+
+  public getUserFireBase(): string{
+    return sessionStorage.getItem(USER_FIREBASE)!;
   }
 
   public setAuthorities(authorities: string[]): void{

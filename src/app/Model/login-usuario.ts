@@ -1,9 +1,8 @@
-export class LoginUsuario {
-    nombreUsuario: string;
-    password: string;
-
-    constructor(nombreUsuario: string, password: string){
-        this.nombreUsuario = nombreUsuario;
-        this.password = password;
-    }
+export interface LoginUsuario {    
+    id: number,
+    email: string,
+    nombre: string,
+    nombre_usuario: string,
+    password: string,
+    token: string,    
 }

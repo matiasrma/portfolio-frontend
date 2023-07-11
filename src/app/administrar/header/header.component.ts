@@ -10,20 +10,18 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class HeaderComponent implements OnInit {
 
+  mensajeClass: string = "conectando"
+  logMsj: string = "";
   isDark: boolean = false; 
 
   @Input() isLogged: boolean = false;   
   @Output() emmitLogout = new EventEmitter();
 
-  constructor(
+  constructor(private router:Router, 
     private authFirebase : ImageService
     ) { }
 
   ngOnInit(): void {
-    this.SwitchDarkTheme();
-  }
-
-  SwitchDarkTheme(){
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');    
     document.body.classList.toggle('dark-theme', prefersDark.matches);
     this.isDark = prefersDark.matches;
