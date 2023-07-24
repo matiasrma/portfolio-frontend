@@ -23,7 +23,7 @@ export class AcdService {
       this.respuesta = value;
     } catch(e) {
       if (e instanceof HttpErrorResponse){
-        this.respuesta = (e.error);
+        this.respuesta = null;
       }
     }
 
@@ -31,7 +31,7 @@ export class AcdService {
 
   }
 
-  async Guardar(acercade: Acd): Promise<Acd>{
+  async Guardar(acercade: Acd): Promise<string>{
 
     const data$ = this.httpClient.post(this.URL, acercade, {responseType: 'json'});
 

@@ -38,21 +38,17 @@ export class HomeComponent implements OnInit {
 
   @Input() isLogged: boolean = false;   
 
-  ngOnInit(): void {
-    this.personaService.Obtener(1).then(
-      data =>{
-        this.isLoad = true;
-      }
-    )    
+  ngOnInit(): void {    
     this.ObtenerListas();
     this.getIsLogged();
-  }
+  } 
 
-  async ObtenerListas(){
+  async ObtenerListas(){    
     await this.ObtenerProyectos();
     await this.ObtenerAcercaDe();
     await this.ObtenerExperiencia();
     await this.ObtenerSkills();
+    this.isLoad = true;
   }
 
   async ObtenerAcercaDe(){
@@ -75,14 +71,14 @@ export class HomeComponent implements OnInit {
   }
 
   getIsLogged(){
-    if(this.tokenService.getToken()){
+    let token = this.tokenService.getToken();
+    if(token != 'undefined' && token != null){
       //this.roles = this.tokenService.getAuthorites();      
       this.isLogged = true;
     } else {
       this.isLogged = false;
     }
 
-    console.log(this.isLogged);
   }
 
   async onLogout(){

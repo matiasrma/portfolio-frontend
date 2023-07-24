@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { SocialComponent } from './social/social.component';
 import { ExperienciaComponent } from './experiencia/experiencia.component';
 import { SkillComponent } from './skill/skill.component';
+import { AcercaDeComponent } from './acercade/acercade.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SkillComponent } from './skill/skill.component';
     HeaderComponent,
     SocialComponent,
     ExperienciaComponent,
-    SkillComponent
+    SkillComponent,
+    AcercaDeComponent
   ],
   imports: [
     CommonModule,

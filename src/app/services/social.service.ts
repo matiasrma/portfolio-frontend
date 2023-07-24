@@ -17,13 +17,13 @@ export class SocialService {
 
   async ObtenerLista(persona_id: number): Promise<Social[]>{
     
-    const data$ = this.httpClient.get<Social[]>(this.URL, { params: { persona_id: persona_id }, responseType: "json" });
+    const data$ = this.httpClient.get<Social[]>(this.URL, { params: { persona_id: persona_id, responseType: "json" } });
 
     try{
       const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false"
       this.respuesta = value;
     } catch(e) {
-      this.respuesta = e;
+      this.respuesta = null;
     }
 
     return this.respuesta;

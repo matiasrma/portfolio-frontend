@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   mensajeClass: string = "conectando"
   logMsj: string = "";
   loginUsuario: LoginUsuario = {} as LoginUsuario;
+  usuarioLogeado: LoginUsuario = {} as LoginUsuario;
   nombreUsuario!: string;
   @ViewChild('password') password!: string;
   roles: string[] = [];  
@@ -31,34 +32,27 @@ export class LoginComponent implements OnInit {
     
   }
 
-  getIsLogged(){
-    if(this.tokenService.getToken()){
-      //this.roles = this.tokenService.getAuthorites();      
-      this.isLogged = true;
-    }
-
-    console.log(this.isLogged);
-    
-  }
-
   async onLogin() {
     let pwd = this.loginUsuario.password;
-    this.logMsj = 'Conectando...';    
-    await this.authService.Login(this.loginUsuario).then(async data =>{
-        this.loginUsuario = data;        
-        await this.authFirebase.login(this.loginUsuario.email, pwd);
-        this.logMsj = 'Ingresando!';
-        this.mensajeClass = 'ingreso';
-        this.tokenService.setToken(this.loginUsuario.token);
-        this.tokenService.setUsername(this.loginUsuario.nombre_usuario);
-        this.isLogged = true;
-        this.emitGetIsLogged.emit();
-        //this.tokenService.setAuthorities(this.loginUsuario.authorities);
-        //this.roles = data.authorities;             
-        //location.reload();
-      }).catch (e => {
-        this.logMsj = 'Error, verifique usuario y contraseña';
-        this.mensajeClass = 'errorIngreso';
-      });
+    this.logMsj = 'Conectando...';
+
+    await this.authService.Login(this.loginUsuario).then(data =>{
+      this.usuarioLogeado = data;
+    });      
+
+    if (this.usuarioLogeado.email != null) {
+      this.logMsj = 'Ingresando!';
+      this.mensajeClass = 'ingreso';
+      await this.authFirebase.login(this.usuarioLogeado.email, pwd);
+      this.tokenService.setToken(this.usuarioLogeado.token);
+      this.tokenService.setUsername(this.usuarioLogeado.nombre_usuario);
+      this.isLogged = true;
+      this.emitGetIsLogged.emit();
+    } else {
+      this.logMsj = "Error de usuario o contraseña";
+      this.mensajeClass = 'errorIngreso';
+    }
+
   }
+
 }

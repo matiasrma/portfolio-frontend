@@ -26,9 +26,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
   imports: [
     CommonModule,
     PrincipalRoutingModule,
-    FormsModule,
-    // provideFirebaseApp(() => initializeApp(environment.firebase)),
-    // provideStorage(() => getStorage())
+    FormsModule
   ]
 })
 export class PrincipalModule { }

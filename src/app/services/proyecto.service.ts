@@ -17,13 +17,13 @@ export class ProyectoService {
 
   async ObtenerLista(persona_id: number): Promise<Proyecto[]>{
     
-    const data$ = this.httpClient.get<Proyecto[]>(this.URL, { params: { persona_id: persona_id }, responseType: 'json' });
+    const data$ = this.httpClient.get<Proyecto[]>(this.URL, { params: { persona_id: persona_id }, responseType: 'json' } );
 
     try{
       const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
       this.respuesta = value;
     } catch (e: any){
-      this.respuesta = e.error;
+      this.respuesta = null;
     }
 
     return this.respuesta;

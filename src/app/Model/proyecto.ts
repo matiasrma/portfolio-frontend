@@ -1,5 +1,5 @@
 export interface Proyecto {
-    Id: number
+    Id: number;
     nombre_proyecto: string;
     descripcion_proyecto: string;
     url_proyecto: string;

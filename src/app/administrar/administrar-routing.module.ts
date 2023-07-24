@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdministrarComponent } from './administrar.component';
 import { ExperienciaComponent } from './experiencia/experiencia.component';
 import { SkillComponent } from './skill/skill.component';
+import { AcercaDeComponent } from './acercade/acercade.component';
 
 const routes: Routes = [
   { path:'', component: AdministrarComponent,
   children: [
     { path: 'Experiencia', component: ExperienciaComponent},
     { path: 'Skill', component: SkillComponent},
+    { path: 'AcercaDe', component: AcercaDeComponent},
   ]
 } 
 ];

@@ -9,8 +9,31 @@
             Ingreso
         </div>          
       </div>
-      <div class="modal-body">          
-        <div class="row d-flex justify-content-center align-items-center" id="inputsLogin">              
+      <div class="modal-body">      
+        <form style="border-style: hidden;">
+          <div class="mb-3">
+            <label for="nombre_usuario" class="form-label">Usuario</label>
+            <input type="email" class="form-control" id="nombre_usuario" [(ngModel)]="loginUsuario.nombre_usuario" 
+            required [ngModelOptions]="{ standalone: true }"
+            autocomplete="Ingrese Usuario"
+            >
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" 
+            [(ngModel)]="loginUsuario.password" 
+            required 
+            [ngModelOptions]="{ standalone: true }"
+            autocomplete="Ingrese Contraseña"
+            >
+          </div>
+          <div *ngIf="logMsj" class="text-center fs-6">
+            <p *ngIf="!isLogged">{{logMsj}}</p>
+            <span *ngIf="isLogged">Bienvenido {{loginUsuario.nombre}}!</span>
+        </div>  
+          <button type="submit" class="btn btn-primary" (click)="onLogin()">Login</button>
+        </form>    
+        <!-- <div class="row d-flex justify-content-center align-items-center" id="inputsLogin">              
           <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center">
             <input class="m-2" type="text" name="nombreUsuario" id="nombreUsuario" placeholder="Username" [(ngModel)]="loginUsuario.nombre_usuario" required />                     
           </div>          
@@ -21,13 +44,13 @@
         <div *ngIf="logMsj" class="text-center fs-6" style="color: red;">
             <p [ngClass]="mensajeClass" *ngIf="!isLogged">{{logMsj}}</p>
             <span *ngIf="isLogged">Bienvenido {{loginUsuario.nombre}}!</span>
-        </div>        
+        </div>         -->
       </div>
-      <div class="modal-footer">
+      <!-- <div class="modal-footer">
         <button type="button" class="btn btn-primary" id="btnLogin" (click)="onLogin()" *ngIf="!isLogged">Ingresar</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" *ngIf="!isLogged">Cancelar</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" *ngIf="isLogged">Volver</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

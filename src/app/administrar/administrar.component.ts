@@ -29,4 +29,9 @@ export class AdministrarComponent implements OnInit {
     console.log(this.isLogged);
   }  
 
+  async onLogout(){
+    this.tokenService.logout();
+    this.getIsLogged();
+  }
+
 }

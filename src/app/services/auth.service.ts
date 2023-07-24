@@ -1,10 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, lastValueFrom } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { JwtDto } from '../Model/jwt-dto';
 import { LoginUsuario } from '../Model/login-usuario';
-import { NuevoUsuario } from '../Model/nuevo-usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -20,20 +18,21 @@ export class AuthService {
 
     loginUsuario.token = "";
     loginUsuario.email = "";
-    loginUsuario.id = 0;
+    loginUsuario.Id = 0;
     loginUsuario.nombre = "";
     
-    const data$ = this.httpClient.post(this.authURL, loginUsuario, { responseType: 'json' });
+    const data$ = this.httpClient.post<LoginUsuario>(this.authURL, loginUsuario, { responseType: 'json' });
 
     try{
       const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
       this.respuesta = value;
     } catch (e: any) {
-      this.respuesta = e.error;
+      if (e instanceof HttpErrorResponse) console.log(e.error.Message);
+      this.respuesta = {} as LoginUsuario;
     }
 
     return this.respuesta;
     
-  }
+  }  
 
 }

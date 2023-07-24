@@ -16,7 +16,7 @@ export class PersonaService {
   
   async Obtener(id: number): Promise<Persona>{
     
-    const data$ = this.httpClient.get<Persona[]>(this.URL, { params: { id: id }, responseType: "json" });
+    const data$ = this.httpClient.get<Persona[]>(this.URL, { params: { id: id, responseType: "json" } } );
 
     try{
       const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false"

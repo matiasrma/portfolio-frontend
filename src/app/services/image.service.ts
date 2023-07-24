@@ -21,7 +21,7 @@ export class ImageService {
     
   constructor(private storage: Storage) { }
 
-  login(email: string, password: string) {
+  async login(email: string, password: string) {
 
     const auth = getAuth();
 
@@ -59,8 +59,6 @@ export class ImageService {
 
     const auth = getAuth();
     signOut(auth).then(() => {
-      console.log('logout!!!')
-      console.log(auth);      
     })
   }
 
@@ -83,7 +81,7 @@ export class ImageService {
     signInWithCredential(auth, credential)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log('Inicio de sesión exitoso:', user);
+        //console.log('Inicio de sesión exitoso:', user);
       })
       .catch((error) => {
         console.error('Error al iniciar sesión:', error);

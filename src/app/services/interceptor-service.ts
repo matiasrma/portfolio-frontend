@@ -12,15 +12,19 @@ export class InterceptorService {
         
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
         let intReq = req;
+
         const token = this.tokenSerivice.getToken();        
-        if(token != null){
+        
+        if(token != null && token != 'undefined'){
+            
             intReq = req.clone({            
-            setHeaders: {
-                Authorization: 'Bearer ' + token
-            }
+                setHeaders: {
+                    Authorization: 'Bearer ' + token
+                }
             });
 
         }
+
         return next.handle(intReq);
     }
 }

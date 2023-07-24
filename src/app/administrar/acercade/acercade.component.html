@@ -1,0 +1,42 @@
+<div class="cont-botones">    
+  <div>
+    <button class="btn btn-success" (click)="GuardarACD()">Guardar</button>
+  </div>
+  <div>
+    <button class="btn btn-secondary" (click)="Volver()">Volver</button>
+  </div>
+</div>
+<div class="card container col-12">
+  <div class="row">
+    <div>
+      <span>
+        <div class="row p-2">
+          <div class="col-10 col-sm-11 my-2">
+            <h2>Acerca de Mi</h2>
+          </div>
+          <div class="col-2 col-sm-1">
+            
+          </div>
+          <div class="col-1"></div>
+        </div>
+        <div class="row m-2">          
+          <textarea 
+            [(ngModel)]="acercaDe.textoacd"
+            maxlength="2000"
+            type="text"
+            rows="4"                
+            ></textarea>
+          
+        </div>
+      </span>
+    </div>
+  </div>
+</div>
+<div [ngClass]="guardarClass" *ngIf="respuesta != ''">
+  <a (click)="borrarRespuesta()" class="cerrar-dialog" style="top: 15px;">
+    <p><strong>X</strong></p>
+  </a>        
+  <p style="font-size: 12px; text-align: center;" class="dialog">
+    {{respuesta}}
+  </p>    
+<div>
