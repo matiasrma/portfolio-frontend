@@ -60,6 +60,7 @@ export class HomeComponent implements OnInit {
 
   async ObtenerExperiencia(){
     await this.serviceExperiencia.ObtenerLista(1).then(data => this.listaExperiencia = data);
+    this.listaExperiencia.sort((a, b) => b.Id - a.Id);
   }
 
   async ObtenerSkills(){

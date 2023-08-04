@@ -2,7 +2,7 @@
   <app-header [isLogged]="isLogged" (emmitLogout)="onLogout()"></app-header>
 </div>
 <app-login (emitGetIsLogged)="getIsLogged()" [isLogged]="isLogged"></app-login>
-<div *ngIf="isLoad" style="padding-top: 90px">
+<div *ngIf="isLoad" class="banner">
   <!-- <app-en-contruccion [isLogged]="isLogged"></app-en-contruccion> -->
   <app-banner [isLogged]="isLogged"></app-banner>
 </div>

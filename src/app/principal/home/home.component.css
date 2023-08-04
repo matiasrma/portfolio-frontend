@@ -38,3 +38,13 @@ div > .img-exp {
     object-fit: contain;
     padding: 10px;   
 }
+
+.banner {
+    padding-top: 90px;
+}
+
+@media (max-width: 575px){
+    .banner {
+        padding-top: 212px;
+    }
+}
