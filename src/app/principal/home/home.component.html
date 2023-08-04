@@ -3,7 +3,7 @@
 </div>
 <app-login (emitGetIsLogged)="getIsLogged()" [isLogged]="isLogged"></app-login>
 <div *ngIf="isLoad" style="padding-top: 90px">
-  <app-en-contruccion [isLogged]="isLogged"></app-en-contruccion>
+  <!-- <app-en-contruccion [isLogged]="isLogged"></app-en-contruccion> -->
   <app-banner [isLogged]="isLogged"></app-banner>
 </div>
 <div class="container-fluid d-flex justify-content-center">
@@ -62,7 +62,7 @@
 <div class="card container">
   <div class="row p-2">
     <div class="col-10 col-sm-11 my-2">
-      <h2>Hard Skills & Soft Skills</h2>
+      <h2>Hard Skills</h2>
     </div>
     <div class="col-2 col-sm-1">
       <a *ngIf="isLogged" (click)="Administrar('Skill')"

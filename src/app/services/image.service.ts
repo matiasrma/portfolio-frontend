@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage, ref, uploadBytesResumable, list, getDownloadURL } from '@angular/fire/storage';
-import { getAuth, signInWithEmailAndPassword, signOut, setPersistence, browserSessionPersistence, GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, signOut, setPersistence, browserSessionPersistence, GoogleAuthProvider, signInWithCredential, browserLocalPersistence } from 'firebase/auth';
 import { environment } from 'src/environments/environment';
 import { Persona } from '../Model/persona.model';
 

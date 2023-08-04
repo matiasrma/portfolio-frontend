@@ -31,7 +31,7 @@
             <p *ngIf="!isLogged">{{logMsj}}</p>
             <span *ngIf="isLogged">Bienvenido {{loginUsuario.nombre}}!</span>
         </div>  
-          <button type="submit" class="btn btn-primary" (click)="onLogin()">Login</button>
+          <button type="submit" class="btn btn-primary" (click)="onLogin()" *ngIf="!isLogged">Login</button>          
         </form>    
         <!-- <div class="row d-flex justify-content-center align-items-center" id="inputsLogin">              
           <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center">
