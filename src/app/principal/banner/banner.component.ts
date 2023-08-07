@@ -12,6 +12,7 @@ export class BannerComponent implements OnInit {
 
   @Input() isLogged: boolean = false;
   persona: Persona = {} as Persona;  
+  isLoad: boolean = false;
 
   constructor(
     public personaService: PersonaService,
@@ -25,7 +26,8 @@ export class BannerComponent implements OnInit {
     await this.personaService.Obtener(1).then(
       data => {
         this.persona = data; 
-      });       
+    });       
+    this.isLoad = true;
   }
 
 }

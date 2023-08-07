@@ -16,7 +16,7 @@
     <span class="visually-hidden">Loading...</span>
   </div>
 </div>
-<div class="card container col-12">
+<div *ngIf="isLoad" class="card container col-12">
   <div class="row">
     <div>
       <span>
@@ -40,7 +40,7 @@
     </div>
   </div>
 </div>
-<div class="card container">
+<div *ngIf="isLoad" class="card container">
   <div class="row p-2">
       <div class="col-10 col-sm-11 my-2">
           <h2>Proyectos</h2>
@@ -59,7 +59,7 @@
       </tbody>
   </table>
 </div>
-<div class="card container">
+<div *ngIf="isLoad" class="card container">
   <div class="row p-2">
     <div class="col-10 col-sm-11 my-2">
       <h2>Hard Skills</h2>
@@ -84,7 +84,7 @@
     </div>
   </div>
 </div>
-<div class="card container">
+<div *ngIf="isLoad" class="card container">
   <div class="row p-2">
     <div class="col-11">
       <h2>Experiencia</h2>
