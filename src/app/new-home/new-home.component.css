@@ -1,0 +1,110 @@
+.newBody {
+    background-color: lavender;
+    width: calc(100vw);
+    height: calc(100vh);
+    overflow: auto;
+}
+.headerHome {
+    position: fixed;    
+    top: 10px;
+    width: 100%;
+    padding: 7px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;    
+}
+.listHeader{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;    
+    padding: 0px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255, 0.4);
+    max-width: 800px;
+}
+.headerLink{
+    color: black;
+    border-radius: 20px;
+    padding: 5px;
+    padding-inline: 10px;
+    background-color: rgb(255, 255, 255, 0.5);
+    text-align: center;
+    font-size: medium;
+    font-weight: 500;
+}
+a:link {
+    text-decoration: none;
+}
+.cardPresentation {
+    position: relative;
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;    
+}
+.cardColumn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    font-size: 50px;
+    text-align: center;
+}
+.cardRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;    
+    font-family: 'Comfortaa', sans-serif;
+    text-align: center;
+    padding-inline: 12px;
+    max-width: 100%;
+}
+.separated {
+    margin-top: 50px;
+    max-width: 500px;
+    height: max-content;
+}
+.presentation-tittle {
+    font-size: 50px;
+}
+.presentation-text {
+    font-size: 25px;
+}
+.about-text {
+    font-size: 15px;    
+}
+
+.skill-logo{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    padding: 10px;   
+}
+.skill-logo:hover {
+    transform: scale(1.08);
+    object-fit: contain;
+}
+
+.socialImg {
+    width: 40px;
+    margin: 3px;
+    padding: 5px;
+    background: transparent;
+}
+.imgPerfil {
+    width: 280px;
+    height: 280px;
+    border-radius: 100%;
+    border: 1px solid gray;
+    background-color: transparent;
+    object-fit: cover;
+}
+.row-reverse {
+    flex-direction: column-reverse;
+}
+
+@media(max-width: 530px){
+    .tittle{
+        font-size: 90%;
+    }
+}

@@ -1,0 +1,79 @@
+<div class="newBody">
+  <div id="Inicio"></div>
+  <div  class="headerHome">
+    <ul class="listHeader">
+      <a href="/NewHome#Inicio" class="headerLink" referrerpolicy="no-referrer">Inicio</a>
+      <a href="/NewHome#SobreMi" class="headerLink">Sobre Mi</a>
+      <a href="/NewHome#Proyectos" class="headerLink">Proyectos</a>
+      <a href="/NewHome#Contacto" class="headerLink" referrerpolicy="no-referrer">Contacto</a>
+    </ul>
+  </div>
+  <div class="cardPresentation">
+    <div class="cardColumn">
+      <span class="cardRow tittle">Hola! Soy Matias</span>
+      <span class="cardRow tittle">Desarrollador Web!</span>      
+      <span class="cardRow separated presentation-text">
+        Soy una persona que siempre le gusto aportar y resolver problemas. La experiencia me enseño que la constancia es clave para conseguir resultados significativos.
+      </span>      
+    </div>
+  </div>
+  <div id="SobreMi" class="cardPresentation">
+    <div>
+      <span class="cardRow separated presentation-tittle">
+        Sobre Mi
+      </span>
+      <span class="cardRow separated about-text">
+        Me gusta programar porque se puede aportar soluciones para resolver o mejorar diversas situaciones.<br><br>
+        Me permite enfrentar desafios que necesitan entusiamo y determinarcion para conseguir resultados, y cada obstaculo es una oportunidad para aprender y crecer.<br><br>
+        Tengo mi primer experiencia como desarrolador FullStack con MySQL, .NET y Angular publicando la web y haciendo mantenimiento. <br><br>
+        Ademas trabajamos en otros proyectos de la empresa agregando SQLServer con EF Core al stack y tuve mis primeras experiencias con AWS.<br><br>
+        Con AWS tengo mis primeras experiencias con Elastick Beanstalk, Lambda, API Gateway, CloudFormation, Codecomit, Amplify y S3.<br><br>
+        Tengo nivel intermedio de Ingles (B1 - B2) de acuerdo al test de EFSET. Habitualmente leo, eventualmente lo escucho y estoy en practica constante para mejorar mis habilidades.<br><br>
+      </span>
+    </div>
+  </div>
+  <div id="Proyectos" class="cardPresentation">
+    <div class="cardColumn">
+      <span class="cardRow separated presentation-tittle">
+        Proyectos
+      </span>
+      <span class="cardRow">
+        <span class="cardColumn" *ngFor="let Skill of listaSkills">
+          <img class="skill-logo" [src]="Skill.img_skill" alt=""/>          
+        </span>
+      </span>
+      <span class="cardRow">
+        <span class="cardRow row-reverse" >
+          <span class="cardColumn separated">
+            <a class="cardRow" href="Inicio/Home" rel="noreferrer noopener" target="_blank"><h3>PortFolio Personal - Primer Versión</h3></a>
+            <p class="cardRow about-text">Tengo acceso con login para modificar la información.</p>                
+          </span>
+        </span>
+      </span>
+      <span class="cardRow row-reverse" >
+        <span class="cardColumn separated" *ngFor="let Proyecto of listaProyectos">
+          <a class="cardRow" href="{{Proyecto.url_proyecto}}" rel="noreferrer noopener" target="_blank"><h3>{{Proyecto.nombre_proyecto}}</h3></a>
+          <p class="cardRow about-text">{{Proyecto.descripcion_proyecto}}</p>                
+        </span>
+      </span>      
+    </div>
+  </div>
+  <div id="Contacto" class="cardPresentation">
+    <div>
+      <span class="cardRow separated presentation-tittle">
+        Contacto
+      </span>
+      <span class="cardRow">
+        <a *ngFor="let Social of socials" href="{{Social.url_social}}" rel="noreferrer noopener" target="_blank">
+          <img class="socialImg" src="{{Social.img_social}}" alt="">
+        </a>
+      </span>
+      <span class="cardRow separated about-text">
+        <p>Email:<a href="mailto:{{persona.correo}}">{{persona.correo}}</a></p>
+      </span>
+      <span class="cardRow about-text">        
+        <p>{{persona.ubicacion}}</p>
+      </span>
+    </div>
+  </div>
+</div>

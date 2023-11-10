@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
     private router: Router
     ) { }
 
-  @Input() isLogged: boolean = false;   
+  isLogged: boolean = false;   
 
   ngOnInit(): void {    
     this.ObtenerListas();
