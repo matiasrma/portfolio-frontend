@@ -1,11 +1,11 @@
-<div class="newBody">
-  <div id="Inicio"></div>
+<div class="newBody" (scroll)="setSelectedLink($event)">
+  <div #Inicio id="Inicio"></div>
   <div  class="headerHome">
     <ul class="listHeader">
-      <a href="/NewHome#Inicio" class="headerLink" referrerpolicy="no-referrer">Inicio</a>
-      <a href="/NewHome#SobreMi" class="headerLink">Sobre Mi</a>
-      <a href="/NewHome#Proyectos" class="headerLink">Proyectos</a>
-      <a href="/NewHome#Contacto" class="headerLink" referrerpolicy="no-referrer">Contacto</a>
+      <a [ngClass]="selectedLink == 'Inicio' ? 'selectLink' : ''" (click)="goTo('Inicio')" class="headerLink">Inicio</a>
+      <a [ngClass]="selectedLink == 'SobreMi' ? 'selectLink' : ''" (click)="goTo('SobreMi')" class="headerLink">Sobre Mi</a>
+      <a [ngClass]="selectedLink == 'Proyectos' ? 'selectLink' : ''" (click)="goTo('Proyectos')" class="headerLink">Proyectos</a>
+      <a [ngClass]="selectedLink == 'Contacto' ? 'selectLink' : ''" (click)="goTo('Contacto')" class="headerLink">Contacto</a>
     </ul>
   </div>
   <div class="cardPresentation">
@@ -17,7 +17,7 @@
       </span>      
     </div>
   </div>
-  <div id="SobreMi" class="cardPresentation">
+  <div #SobreMi id="SobreMi" class="cardPresentation">
     <div>
       <span class="cardRow separated presentation-tittle">
         Sobre Mi
@@ -32,16 +32,16 @@
       </span>
     </div>
   </div>
-  <div id="Proyectos" class="cardPresentation">
+  <div #Proyectos id="Proyectos" class="cardPresentation">
     <div class="cardColumn">
       <span class="cardRow separated presentation-tittle">
         Proyectos
       </span>
       <span class="cardRow">
         <span class="cardColumn" *ngFor="let Skill of listaSkills">
-          <img class="skill-logo" [src]="Skill.img_skill" alt=""/>          
+          <img class="skill-logo" [src]="Skill.img_skill" [alt]="Skill.nombre_skill" [title]="Skill.nombre_skill"  />          
         </span>
-      </span>
+      </span>      
       <span class="cardRow">
         <span class="cardRow row-reverse" >
           <span class="cardColumn separated">
@@ -58,7 +58,7 @@
       </span>      
     </div>
   </div>
-  <div id="Contacto" class="cardPresentation">
+  <div #Contacto id="Contacto" class="cardPresentation">
     <div>
       <span class="cardRow separated presentation-tittle">
         Contacto

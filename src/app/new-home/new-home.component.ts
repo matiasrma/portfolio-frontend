@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Acd } from '../Model/acd';
 import { Experiencia } from '../Model/experiencia';
 import { Proyecto } from '../Model/proyecto';
@@ -23,6 +23,9 @@ import { SocialService } from '../services/social.service';
 })
 export class NewHomeComponent implements OnInit {
 
+  @ViewChild('Proyectos', { read: HTMLElement, static: true })
+  public Proyectos: HTMLElement;
+
   isLoad = false;  
   persona: Persona = {} as Persona;  
   acercaDe: Acd = {} as Acd;
@@ -31,20 +34,41 @@ export class NewHomeComponent implements OnInit {
   listaSkills: Skill[] = [];
   listaProyectos: Proyecto[] = [];
   socials: Social[] = [];  
-  
+
+  selectedLink = "Inicio";
+
   constructor(
     public personaService: PersonaService,
     private proyectoService: ProyectoService,
     private skillService: SkillService,
     private serviceExperiencia: ServiceExperienciaService,
     private acdService: AcdService,
-    private socialService: SocialService,
-    private router: Router
-  ) { }
+    private socialService: SocialService
+  ) { 
+  }  
 
   ngOnInit(): void {    
     this.ObtenerListas();
   } 
+
+  setSelectedLink($event:any){
+    let scrollOffset = $event.target.scrollTop;
+    
+    if (scrollOffset > 2830) {
+      this.selectedLink = "Contacto";
+    } else if (scrollOffset > 1329) {
+      this.selectedLink = "Proyectos";
+    } else if (scrollOffset > 537) {
+      this.selectedLink = "SobreMi";
+    } else {
+      this.selectedLink = "Inicio";
+    }
+  }
+
+  goTo(id: string){
+    this.Proyectos = document.getElementById(id);    
+    this.Proyectos.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+  }
 
   async ObtenerListas(){    
     await this.ObtenerDatos();

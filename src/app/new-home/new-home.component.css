@@ -32,8 +32,9 @@
     font-size: medium;
     font-weight: 500;
 }
-a:link {
+a {
     text-decoration: none;
+    cursor: pointer;
 }
 .cardPresentation {
     position: relative;
@@ -101,6 +102,11 @@ a:link {
 }
 .row-reverse {
     flex-direction: column-reverse;
+}
+
+.selectLink {
+    background-color: rgb(62, 62, 128);
+    color: white;
 }
 
 @media(max-width: 530px){
