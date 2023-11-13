@@ -31,10 +31,7 @@
     text-align: center;
     font-size: medium;
     font-weight: 500;
-}
-a {
-    text-decoration: none;
-    cursor: pointer;
+    border: 0px;
 }
 .cardPresentation {
     position: relative;

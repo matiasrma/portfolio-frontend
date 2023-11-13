@@ -2,10 +2,10 @@
   <div #Inicio id="Inicio"></div>
   <div  class="headerHome">
     <ul class="listHeader">
-      <a [ngClass]="selectedLink == 'Inicio' ? 'selectLink' : ''" (click)="goTo('Inicio')" class="headerLink">Inicio</a>
-      <a [ngClass]="selectedLink == 'SobreMi' ? 'selectLink' : ''" (click)="goTo('SobreMi')" class="headerLink">Sobre Mi</a>
-      <a [ngClass]="selectedLink == 'Proyectos' ? 'selectLink' : ''" (click)="goTo('Proyectos')" class="headerLink">Proyectos</a>
-      <a [ngClass]="selectedLink == 'Contacto' ? 'selectLink' : ''" (click)="goTo('Contacto')" class="headerLink">Contacto</a>
+      <button [ngClass]="selectedLink == 'Inicio' ? 'selectLink' : ''" (click)="goTo('Inicio')" class="headerLink">Inicio</button>
+      <button [ngClass]="selectedLink == 'SobreMi' ? 'selectLink' : ''" (click)="goTo('SobreMi')" class="headerLink">Sobre Mi</button>
+      <button [ngClass]="selectedLink == 'Proyectos' ? 'selectLink' : ''" (click)="goTo('Proyectos')" class="headerLink">Proyectos</button>
+      <button [ngClass]="selectedLink == 'Contacto' ? 'selectLink' : ''" (click)="goTo('Contacto')" class="headerLink">Contacto</button>
     </ul>
   </div>
   <div class="cardPresentation">
