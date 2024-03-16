@@ -2,11 +2,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ImageService } from 'src/app/services/image.service';
 import { TokenService } from 'src/app/services/token.service';
+import { SocialComponent } from '../social/social.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule,SocialComponent]
 })
 export class HeaderComponent implements OnInit {
 

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Social } from 'src/app/Model/social';
@@ -8,7 +9,9 @@ import { TokenService } from 'src/app/services/token.service';
 @Component({
   selector: 'app-social',
   templateUrl: './social.component.html',
-  styleUrls: ['./social.component.css']
+  styleUrls: ['./social.component.css'],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class SocialComponent implements OnInit {
 

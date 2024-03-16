@@ -8,6 +8,8 @@ import { SocialComponent } from './social/social.component';
 import { ExperienciaComponent } from './experiencia/experiencia.component';
 import { SkillComponent } from './skill/skill.component';
 import { AcercaDeComponent } from './acercade/acercade.component';
+import { HasSkillComponent } from './has_skill/has_skill.component';
+import { ProyectoComponent } from './proyecto/proyecto.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { AcercaDeComponent } from './acercade/acercade.component';
     SocialComponent,
     ExperienciaComponent,
     SkillComponent,
-    AcercaDeComponent
+    AcercaDeComponent,
+    HasSkillComponent,
+    ProyectoComponent
   ],
   imports: [
     CommonModule,

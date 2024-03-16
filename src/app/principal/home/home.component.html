@@ -46,6 +46,11 @@
       <div class="col-10 col-sm-11 my-2">
           <h2>Proyectos</h2>
       </div>      
+      <div class="col-2 col-sm-1">
+        <a *ngIf="isLogged" (click)="Administrar('Proyecto')"
+          ><i class="bi bi-pencil-fill" style="color: var(--pen-color)"></i
+        ></a>
+      </div>
   </div>
   <table class="table">
       <tbody>

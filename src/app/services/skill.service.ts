@@ -23,7 +23,7 @@ export class SkillService {
       const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
       this.respuesta = value;
     } catch (e: any){
-      this.respuesta = null;
+      this.respuesta = [];
     }
 
     return this.respuesta;

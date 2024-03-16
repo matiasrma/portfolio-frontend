@@ -1,0 +1,45 @@
+
+.addChat {
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+    font-size: 50px;    
+    color: var(--text-color);
+    cursor: pointer;
+    z-index: 1;
+}
+
+@media (max-width: 575px){
+    .messengerContainer {
+        padding-top: 212px;
+    }
+}
+
+.cardPresentation {
+    position: relative;
+    margin-top: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;    
+    flex-wrap: wrap;
+}
+.cardColumn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.cardRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    
+    font-family: 'Comfortaa', sans-serif;
+    text-align: center;
+    padding-inline: 12px;
+    max-width: 100%;
+}
+.separated {
+    margin-top: 50px;
+    max-width: 700px;
+    height: max-content;
+}

@@ -4,6 +4,7 @@ import { AdministrarComponent } from './administrar.component';
 import { ExperienciaComponent } from './experiencia/experiencia.component';
 import { SkillComponent } from './skill/skill.component';
 import { AcercaDeComponent } from './acercade/acercade.component';
+import { ProyectoComponent } from './proyecto/proyecto.component';
 
 const routes: Routes = [
   { path:'', component: AdministrarComponent,
@@ -11,6 +12,7 @@ const routes: Routes = [
     { path: 'Experiencia', component: ExperienciaComponent},
     { path: 'Skill', component: SkillComponent},
     { path: 'AcercaDe', component: AcercaDeComponent},
+    { path: 'Proyecto', component: ProyectoComponent},
   ]
 } 
 ];

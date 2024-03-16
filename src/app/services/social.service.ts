@@ -20,10 +20,10 @@ export class SocialService {
     const data$ = this.httpClient.get<Social[]>(this.URL, { params: { persona_id: persona_id, responseType: "json" } });
 
     try{
-      const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false"
+      const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false";
       this.respuesta = value;
     } catch(e) {
-      this.respuesta = null;
+      this.respuesta = [];
     }
 
     return this.respuesta;

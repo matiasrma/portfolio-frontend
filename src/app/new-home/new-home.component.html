@@ -1,23 +1,33 @@
 <div class="newBody" (scroll)="setSelectedLink($event)">
   <div #Inicio id="Inicio"></div>
   <div  class="headerHome">
-    <ul class="listHeader">
-      <button [ngClass]="selectedLink == 'Inicio' ? 'selectLink' : ''" (click)="goTo('Inicio')" class="headerLink">Inicio</button>
-      <button [ngClass]="selectedLink == 'SobreMi' ? 'selectLink' : ''" (click)="goTo('SobreMi')" class="headerLink">Sobre Mi</button>
-      <button [ngClass]="selectedLink == 'Proyectos' ? 'selectLink' : ''" (click)="goTo('Proyectos')" class="headerLink">Proyectos</button>
-      <button [ngClass]="selectedLink == 'Contacto' ? 'selectLink' : ''" (click)="goTo('Contacto')" class="headerLink">Contacto</button>
-    </ul>
+    <button *ngIf="this.menu" (click)="changeMenu()" class="headerLink">Menu</button>
+    <div class="listHeader">      
+      <button *ngIf="!this.menu || selectedLink == 'Inicio'" (click)="changeMenu()" [ngClass]="selectedLink == 'Inicio' ? 'selectLink' : 'headerLink'" (click)="goTo(this.Inicio)" class="headerLink">Inicio</button>
+      <button *ngIf="!this.menu || selectedLink == 'SobreMi'" (click)="changeMenu()" [ngClass]="selectedLink == 'SobreMi' ? 'selectLink' : 'headerLink'" (click)="goTo(this.SobreMi)" class="headerLink">Sobre Mi</button>
+      <button *ngIf="!this.menu || selectedLink == 'SkillsTag'" (click)="changeMenu()" [ngClass]="selectedLink == 'SkillsTag' ? 'selectLink' : 'headerLink'" (click)="goTo(this.SkillsTag)" class="headerLink">Skills</button>
+      <button *ngIf="!this.menu || selectedLink == 'Experiencias'" (click)="changeMenu()" [ngClass]="selectedLink == 'Experiencias' ? 'selectLink' : 'headerLink'" (click)="goTo(this.Experiencias)" class="headerLink">Experiencia</button>
+      <button *ngIf="!this.menu || selectedLink == 'Proyectos'" (click)="changeMenu()" [ngClass]="selectedLink == 'Proyectos' ? 'selectLink' : 'headerLink'" (click)="goTo(this.Proyectos)" class="headerLink">Proyectos</button>
+      <button *ngIf="!this.menu || selectedLink == 'Contacto'" (click)="changeMenu()" [ngClass]="selectedLink == 'Contacto' ? 'selectLink' : 'headerLink'" (click)="goTo(this.Contacto)" class="headerLink">Contacto</button>
+    </div>
   </div>
-  <div class="cardPresentation">
+  <div class="cardPresentation spin-loader" *ngIf="!isLoad">
+    <div class="cardRow">
+      <div class="spinner-border" role="status" style="width: 100px; height: 100px; margin: 50px;">        
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>    
+  </div>
+  <div #Hola class="cardPresentation toLoad" [ngClass]="classLoaded">
     <div class="cardColumn">
-      <span class="cardRow tittle">Hola! Soy Matias</span>
+      <span class="cardRow tittle">Hola! Soy Matias.</span>
       <span class="cardRow tittle">Desarrollador Web!</span>      
       <span class="cardRow separated presentation-text">
         Soy una persona que siempre le gusto aportar y resolver problemas. La experiencia me enseño que la constancia es clave para conseguir resultados significativos.
       </span>      
     </div>
   </div>
-  <div #SobreMi id="SobreMi" class="cardPresentation">
+  <div #SobreMi id="SobreMi" class="cardPresentation toLoad" [ngClass]="classLoaded">
     <div>
       <span class="cardRow separated presentation-tittle">
         Sobre Mi
@@ -32,48 +42,119 @@
       </span>
     </div>
   </div>
-  <div #Proyectos id="Proyectos" class="cardPresentation">
+  <div #SkillsTag id="SkillsTag" class="cardPresentation toLoad" [ngClass]="classLoaded">
     <div class="cardColumn">
       <span class="cardRow separated presentation-tittle">
-        Proyectos
+        Skills
       </span>
-      <span class="cardRow">
+      <p class="cardRow about-text">(Seleccionar)</p>      
+      <span class="cardRow row about-text" *ngIf="listaProyectos.length == 0 && isLoad">Error al cargar las skills</span>
+      <span class="cardRow" *ngIf="listaSkills.length > 0">
         <span class="cardColumn" *ngFor="let Skill of listaSkills">
-          <img class="skill-logo" [src]="Skill.img_skill" [alt]="Skill.nombre_skill" [title]="Skill.nombre_skill"  />          
-        </span>
-      </span>      
-      <span class="cardRow">
-        <span class="cardRow row-reverse" >
-          <span class="cardColumn separated">
-            <a class="cardRow" href="Inicio/Home" rel="noreferrer noopener" target="_blank"><h3>PortFolio Personal - Primer Versión</h3></a>
-            <p class="cardRow about-text">Tengo acceso con login para modificar la información.</p>                
-          </span>
+          <img class="skill-logo skill" 
+            (load)="imageLoaded()" 
+            [src]="Skill.img_skill" 
+            [alt]="Skill.nombre_skill" 
+            [title]="Skill.nombre_skill" 
+            *ngIf="Skill.img_skill"
+            (click)="changeActive(Skill)"
+            [ngClass]="{ 'active': Skill.active }"/>
         </span>
       </span>
-      <span class="cardRow row-reverse" >
-        <span class="cardColumn separated" *ngFor="let Proyecto of listaProyectos">
-          <a class="cardRow" href="{{Proyecto.url_proyecto}}" rel="noreferrer noopener" target="_blank"><h3>{{Proyecto.nombre_proyecto}}</h3></a>
-          <p class="cardRow about-text">{{Proyecto.descripcion_proyecto}}</p>                
+    </div>
+  </div>
+
+  <div #Experiencias id="Experiencias" class="cardPresentation toLoad" [ngClass]="classLoaded">
+    <div class="cardColumn">
+      <span class="cardRow separated presentation-tittle">
+        Experiencia
+      </span>      
+      <span class="cardRow row about-text" *ngIf="listaExperiencia.length == 0 && isLoad">Error al cargar experiencia</span>
+      <span class="cardRow row" *ngIf="listaExperiencia.length > 0">
+        <span class="cardColumn separated" *ngFor="let Experiencia of listaExperiencia">
+          <div class="cardRow">
+            <div class="col">
+              <img class="skill-logo exp" 
+                (load)="imageLoaded()" 
+                [src]="Experiencia.img_exp" 
+                [alt]="Experiencia.nombre_exp" 
+                [title]="Experiencia.nombre_exp"  
+                *ngIf="Experiencia.img_exp"                
+                />          
+            </div>
+            <div class="col">
+              <h3 style="display: inline-flex;">{{Experiencia.nombre_exp}}</h3>
+            </div>
+          </div>
+          <div class="cardRow">
+            <div class="cardColumn">
+              <p class="cardRow about-text" >{{Experiencia.descripcion_exp}}<br></p>      
+              <span class="cardRow" *ngIf="Experiencia.has_skills.length > 0">
+                <span class="cardColumn" *ngFor="let Skill of Experiencia.has_skills">
+                  <img class="skill-logo skill" 
+                    (load)="imageLoaded()" 
+                    [src]="Skill.img_skill" 
+                    [alt]="Skill.nombre_skill" 
+                    [title]="Skill.nombre_skill"  
+                    *ngIf="Skill.img_skill"
+                    (click)="changeActive(Skill)"
+                    [ngClass]="{ 'active': Skill.active }"/>
+                </span>
+              </span>
+            </div>            
+          </div>
         </span>
       </span>      
     </div>
   </div>
-  <div #Contacto id="Contacto" class="cardPresentation">
+
+  <div #Proyectos id="Proyectos" class="cardPresentation toLoad" [ngClass]="classLoaded">
+    <div class="cardColumn">
+      <span class="cardRow separated presentation-tittle">
+        Proyectos
+      </span>      
+      <span class="cardRow row about-text" *ngIf="listaProyectos.length == 0 && isLoad">Error al cargar los proyectos</span>
+
+      <span class="cardRow row" *ngIf="listaProyectos.length > 0">
+        <span class="cardColumn separated" *ngFor="let Proyecto of listaProyectos">
+          <a class="cardRow" href="{{Proyecto.url_proyecto}}" rel="noreferrer noopener" target="_blank"><h3>{{Proyecto.nombre_proyecto}}</h3></a>
+          <!-- <p class="cardRow about-text">{{Proyecto.descripcion_proyecto}}</p>                 -->
+          <p class="cardRow about-text" *ngFor="let line of listaTextoProy[Proyecto.Id]">{{line}}<br></p>      
+          <span class="cardRow" *ngIf="Proyecto.has_skills.length > 0">
+            <span class="cardColumn" *ngFor="let Skill of Proyecto.has_skills">
+              <img class="skill-logo skill" 
+                (load)="imageLoaded()" 
+                [src]="Skill.img_skill" 
+                [alt]="Skill.nombre_skill" 
+                [title]="Skill.nombre_skill"  
+                *ngIf="Skill.img_skill"
+                (click)="changeActive(Skill)"
+                [ngClass]="{ 'active': Skill.active }"/>
+            </span>
+          </span>
+        </span>
+      </span>      
+    </div>
+  </div>
+  <div #Contacto id="Contacto" class="cardPresentation toLoad" [ngClass]="classLoaded">
     <div>
       <span class="cardRow separated presentation-tittle">
         Contacto
       </span>
       <span class="cardRow">
-        <a *ngFor="let Social of socials" href="{{Social.url_social}}" rel="noreferrer noopener" target="_blank">
+        <a *ngFor="let Social of socials" href="{{Social.url_social}}" rel="noreferrer noopener" target="_blank" >
           <img class="socialImg" src="{{Social.img_social}}" alt="">
         </a>
       </span>
       <span class="cardRow separated about-text">
-        <p>Email:<a href="mailto:{{persona.correo}}">{{persona.correo}}</a></p>
+        <p>Email: <a href="mailto:matias.mar1988@gmail.com">matias.mar1988@gmail.com</a></p>
       </span>
       <span class="cardRow about-text">        
-        <p>{{persona.ubicacion}}</p>
+        <p>Allen, Rio Negro (Argentina)</p>
       </span>
     </div>
   </div>
+  <div class="cardColumn">
+    <app-chat></app-chat>
+  </div>  
 </div>

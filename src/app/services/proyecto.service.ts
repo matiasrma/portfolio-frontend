@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Proyecto } from '../Model/proyecto';
+import { Skill } from '../Model/skill';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class ProyectoService {
       const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
       this.respuesta = value;
     } catch (e: any){
-      this.respuesta = null;
+      this.respuesta = [];
     }
 
     return this.respuesta;
@@ -56,6 +57,42 @@ export class ProyectoService {
       this.respuesta = e.error;
     }
 
+    return this.respuesta;
+
+  }
+
+  async AddSKill(skills: Skill[], proyecto_id: number): Promise<string>{
+
+    const data$ = this.httpClient.post(this.URLSet + "/AddSkill/" + proyecto_id, skills, { responseType: 'json' });
+
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      this.respuesta = value;
+    } catch (e: any){
+      console.log("error");      
+      this.respuesta = e.error;
+    }
+
+    console.log(this.respuesta);
+    
+    return this.respuesta;
+
+  }
+
+  async DeleteSKill(skills: Skill[], proyecto_id: number): Promise<string>{
+
+    const data$ = this.httpClient.delete(this.URLSet + "/DeleteSkill/" + proyecto_id, { body: skills ,params: { responseType: 'text' } });
+
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      this.respuesta = value;
+    } catch (e: any){
+      console.log("error");      
+      this.respuesta = e.error;
+    }
+
+    console.log(this.respuesta);
+    
     return this.respuesta;
 
   }

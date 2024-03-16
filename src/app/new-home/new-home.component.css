@@ -20,7 +20,7 @@
     padding: 0px;
     border-radius: 20px;
     background-color: rgb(255, 255, 255, 0.4);
-    max-width: 800px;
+    max-width: 800px;    
 }
 .headerLink{
     color: black;
@@ -35,7 +35,7 @@
 }
 .cardPresentation {
     position: relative;
-    margin-top: 100px;
+    margin-top: 70px;
     width: 100%;
     display: flex;
     justify-content: center;    
@@ -59,7 +59,7 @@
 }
 .separated {
     margin-top: 50px;
-    max-width: 500px;
+    max-width: 700px;
     height: max-content;
 }
 .presentation-tittle {
@@ -73,14 +73,25 @@
 }
 
 .skill-logo{
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
-    padding: 10px;   
+    padding: 10px;
 }
-.skill-logo:hover {
-    transform: scale(1.08);
+.skill:hover {
+    transform: scale(1.5);
     object-fit: contain;
+}
+.exp {
+    width: 150px;
+    height: 150px;
+}
+.toLoad {
+    opacity: 0;   
+    transition: opacity 1s ease;
+}
+.toLoad.loaded {
+    opacity: 1;
 }
 
 .socialImg {
@@ -106,8 +117,30 @@
     color: white;
 }
 
+.spin-loader {
+    position: fixed;    
+}
+
+.active {
+    transform: scale(1.5);
+    object-fit: contain;
+    filter: drop-shadow(0 0 0.8rem #4444dd);
+}
+
+app-chat {
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+    font-size: 20px;
+}
+
 @media(max-width: 530px){
     .tittle{
         font-size: 90%;
     }
+
+    .listHeader {
+        flex-direction: column;
+    }
+    
 }

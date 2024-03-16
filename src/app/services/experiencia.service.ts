@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Experiencia } from '../Model/experiencia';
+import { Skill } from '../Model/skill';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,10 @@ export class ServiceExperienciaService {
     const data$ = this.httpClient.get<Experiencia[]>(this.expURL, { params: { persona_id: persona_id , responseType: 'json' } });
 
     try{
-      const value = await lastValueFrom(data$, { defaultValue: 'false' } ) ?? 'false'
+      const value = await lastValueFrom(data$, { defaultValue: 'false' } ) ?? 'false';
       this.respuesta = value;
     } catch (e: any){
-      this.respuesta = null;
+      this.respuesta = [];
     }
 
     return this.respuesta;
@@ -48,6 +49,42 @@ export class ServiceExperienciaService {
   async Eliminar(lista: Experiencia[]): Promise<string>{
 
     const data$ = this.httpClient.delete(this.expURLset, { body:  lista, params: { responseType: 'string' } });
+
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      this.respuesta = value;
+    } catch (e: any){
+      console.log("error");      
+      this.respuesta = e.error;
+    }
+
+    console.log(this.respuesta);
+    
+    return this.respuesta;
+
+  }
+
+  async AddSKill(skills: Skill[], experiencia_id: number): Promise<string>{
+
+    const data$ = this.httpClient.post(this.expURLset + "/AddSkill/" + experiencia_id, skills, { params: { responseType: 'string' } });
+
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      this.respuesta = value;
+    } catch (e: any){
+      console.log("error");      
+      this.respuesta = e.error;
+    }
+
+    console.log(this.respuesta);
+    
+    return this.respuesta;
+
+  }
+
+  async DeleteSKill(skills: Skill[], experiencia_id: number): Promise<string>{
+
+    const data$ = this.httpClient.delete(this.expURLset + "/DeleteSkill/" + experiencia_id, { body: skills , params: { responseType: 'string' } });
 
     try{
       const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';

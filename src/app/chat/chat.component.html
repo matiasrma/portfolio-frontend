@@ -1,0 +1,61 @@
+<div class="chatBox">
+    <div *ngIf="!isShowChat">
+        <i class="bi bi-chat-fill" (click)="showChat()"></i>
+    </div>
+    <div *ngIf="!joined && isShowChat">
+        <div class="form-group row mb-2">
+            <div class="col">
+                <strong>Chat</strong>
+            </div>
+            <div class="col" style="text-align: end;">                
+                <i class="bi bi-x-circle" (click)="showChat()"></i>            
+            </div>
+        </div>
+        <div class="form-group row mb-2" *ngIf="isLogged">
+            <label class="col-form-label col-md-3">Chatear con</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="groupName" [(ngModel)]="groupName" />
+            </div>
+        </div>        
+        <div class="form-group row mb-2"  *ngIf="!isLogged">
+            <label class="col-form-label">Ingrese un nombre para comenzar</label>
+        </div>
+        <div class="form-group row mb-2" *ngIf="!isLogged">
+            <div class="col">
+                <input alt="Ingrese su nombre" type="text" class="form-control" name="userName" [(ngModel)]="userName" (keydown)="Keyboard($event, 'join')"/>
+            </div>
+        </div>
+        <div class="form-group row mb-2 justify-content-center">
+            <button [disabled]="sendign || userName.length < 3 && !isLogged" type="button" class="btn btn-primary col-9" (click)="join()">
+                Nuevo Chat
+            </button>            
+        </div>
+    </div>
+    
+    <div *ngIf="joined && isShowChat" class="open">
+        <div class="form-group row mb-2" *ngIf="isLogged">
+            <div class="col">
+                <strong>Chat con {{groupName}}</strong>
+            </div>
+            <div class="col-2" style="text-align: end;">                
+                <i class="bi bi-x-circle" (click)="showChat()"></i>            
+            </div>
+        </div>
+        <div class="form-group row mb-2" *ngIf="!isLogged">
+            <div class="col">
+                <strong>Chat con Matias</strong>
+            </div>
+            <div class="col-2" style="text-align: end;">                
+                <i class="bi bi-x-circle" (click)="showChat()"></i>            
+            </div>
+        </div>
+        <div id="chat">
+            <div *ngFor="let message of conversation">
+                <div><strong>{{message.userName}}:</strong> {{message.message}}</div>
+            </div>
+        </div>        
+        <input class="form-control mb-1" type="text" [(ngModel)]="messageToSend" name="messageToSend" (keydown)="Keyboard($event, 'sendMessage')" />
+        <button [disabled]="sendign || messageToSend == ''" class="btn btn-primary" (click)="sendMessage()">Enviar</button>
+        <!-- <button class="btn btn-secondary" (click)="leave()">Leave</button> -->
+    </div>
+</div>

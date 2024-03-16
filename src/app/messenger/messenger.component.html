@@ -1,0 +1,12 @@
+<div class="container-fluid" style="width: 100%; z-index: 1">
+    <app-header [isLogged]="isLogged" (emmitLogout)="onLogout()"></app-header>
+</div>
+<i class="bi bi-plus-circle addChat" (click)="AddChat()" style="color: green;"></i>
+
+<div class="cardPresentation" >    
+    <div class="cardRow" *ngFor="let chat of listChats">
+        <div class="cardColumn">
+            <app-chat [isShowChat]="true" [isLogged]="isLogged"></app-chat>
+        </div>
+    </div>
+</div>

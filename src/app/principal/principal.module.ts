@@ -18,15 +18,15 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     PrincipalComponent,
     HomeComponent,
     BannerComponent,
-    HeaderComponent,
     EnContruccionComponent,
-    SocialComponent,
     LoginComponent,    
   ],
   imports: [
     CommonModule,
     PrincipalRoutingModule,
-    FormsModule
+    FormsModule,
+    SocialComponent,
+    HeaderComponent
   ]
 })
 export class PrincipalModule { }

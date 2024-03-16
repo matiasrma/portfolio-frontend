@@ -1,0 +1,71 @@
+<div class="cont-botones">    
+  <div>
+    <button class="btn btn-success" (click)="Guardar()">Guardar</button>
+  </div>
+  <div>
+    <button class="btn btn-secondary" (click)="Volver()">Volver</button>
+  </div>
+  <div>
+    <button class="btn btn-primary" (click)="Agregar()">Agregar</button>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let Proyecto of listaProyecto; let i = index;">
+            <div class="row m-2">              
+              <div class="col-10">           
+                <div class="row">
+                  <input [(ngModel)]="Proyecto.nombre_proyecto" class="h3">
+                </div>     
+                <div class="row">
+                  <input [(ngModel)]="Proyecto.indexProyecto" class="h3" type="number">
+                </div>  
+                <div class="row">
+                  <input [(ngModel)]="Proyecto.url_proyecto">
+                </div>
+                <div class="row"> 
+                  <textarea 
+                  [(ngModel)]="Proyecto.descripcion_proyecto"
+                  maxlength="1000"
+                  type="text"
+                  rows="4"                
+                  ></textarea>
+                </div>
+              </div>
+              <div class="col-12 col-sm-1 d-flex justify-content-center p-2">
+                <a (click)="Eliminar(Proyecto)"><i class="bi bi-trash3-fill" style="color: lightcoral"></i></a>                       
+              </div>
+            </div>      
+            <div class="cardRow m-2">
+              <div class="cardColumn">
+                <h4 class="tittle" style="color: white;">Skills</h4>
+              </div>
+            </div>
+            <span class="cardRow" *ngIf="Proyecto.has_skills.length > 0">
+              <span class="cardColumn" *ngFor="let Skill of Proyecto.has_skills">
+                <img class="skill-logo" [src]="Skill.img_skill" [alt]="Skill.nombre_skill" [title]="Skill.nombre_skill"  *ngIf="Skill.img_skill"/>
+              </span>
+            </span>
+            <div class="row m-2">
+              <div class="col">
+                <button class="btn btn-success btn-Skill" data-bs-toggle="modal" data-bs-target="#modal" (click)="ModificarSkills(Proyecto.Id, Proyecto.has_skills)">Modificar Skills {{Proyecto.nombre_proyecto}} </button>
+              </div>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<app-has_skill [listaActivos]="listaActivos" [listaSkill]="listaSkills" [listaEliminarSkills]="listaEliminarSkills" [Id_selected]="proy_Id_selected"></app-has_skill>
+<div [ngClass]="guardarClass" *ngIf="respuesta != ''">
+  <a (click)="borrarRespuesta()" class="cerrar-dialog" style="top: 15px;">
+    <p><strong>X</strong></p>
+  </a>        
+  <p style="font-size: 12px; text-align: center;" class="dialog">
+    {{respuesta}}
+  </p>    
+<div>

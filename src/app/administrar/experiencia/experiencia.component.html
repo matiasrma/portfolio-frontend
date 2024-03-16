@@ -38,6 +38,9 @@
                   <input [(ngModel)]="Experiencia.nombre_exp" class="h3">
                 </div>     
                 <div class="row">
+                  <input [(ngModel)]="Experiencia.indexExperiencia" class="h3" type="number">
+                </div>    
+                <div class="row">
                   <input [(ngModel)]="Experiencia.tiempo_exp">
                 </div>
                 <div class="row"> 
@@ -52,11 +55,20 @@
               <div class="col-12 col-sm-1 d-flex justify-content-center p-2">
                 <a (click)="Eliminar(Experiencia)"><i class="bi bi-trash3-fill" style="color: lightcoral"></i></a>                       
               </div>
+            </div>      
+            <div class="cardRow m-2">
+              <div class="cardColumn">
+                <h4 class="tittle" style="color: white;">Skills</h4>
+              </div>
             </div>
-            <div class="row">                  
-              <div class="container-fluid col-8 justify-content-start">                
-              
-                      
+            <span class="cardRow" *ngIf="Experiencia.has_skills.length > 0">
+              <span class="cardColumn" *ngFor="let Skill of Experiencia.has_skills">
+                <img class="skill-logo" [src]="Skill.img_skill" [alt]="Skill.nombre_skill" [title]="Skill.nombre_skill"  *ngIf="Skill.img_skill"/>
+              </span>
+            </span>
+            <div class="row m-2">
+              <div class="col">
+                <button class="btn btn-success btn-Skill" data-bs-toggle="modal" data-bs-target="#modal" (click)="ModificarSkills(Experiencia.Id, Experiencia.has_skills)">Modificar Skills {{Experiencia.nombre_exp}}</button>
               </div>
             </div>
           </tr>
@@ -65,7 +77,7 @@
     </div>
   </div>
 </div>
-
+<app-has_skill [listaActivos]="listaActivos" [listaSkill]="listaSkills" [listaEliminarSkills]="listaEliminarSkills" [Id_selected]="exp_Id_selected"></app-has_skill>
 <div [ngClass]="guardarClass" *ngIf="respuesta != ''">
   <a (click)="borrarRespuesta()" class="cerrar-dialog" style="top: 15px;">
     <p><strong>X</strong></p>
