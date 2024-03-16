@@ -1,5 +1,5 @@
-<div class="chatBox">
-    <div *ngIf="!isShowChat">
+<div class="chatBox" [ngClass]="{'animationFloat':!isShowChat}">
+    <div *ngIf="!isShowChat" >
         <i class="bi bi-chat-fill" (click)="showChat()"></i>
     </div>
     <div *ngIf="!joined && isShowChat">

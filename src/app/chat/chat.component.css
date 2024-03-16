@@ -6,6 +6,7 @@
     border-radius: 25px;
     padding: 10px;
     background-color: white;
+    padding-block: 5px;
 }
 
 .bi {
@@ -20,3 +21,33 @@
     overflow-y: auto;
     max-height: 350px;
 }
+
+.animationFloat {
+    animation: float 3s ease-in-out infinite, colorRandom 6s linear infinite;    
+}
+
+.animationColor {    
+    animation: colorRandom 6s ease-in-out infinite;    
+    border-radius: 100%;
+}
+
+@keyframes float {
+    0% {
+        transform: translatey(0px);
+    }
+    50% {
+        box-shadow:0 25px 15px 0px rgba(0,0,0,0.3);
+        transform: translatey(-40px);
+    }
+    100% {
+        transform: translatey(0px);        
+    }
+  }
+
+  @keyframes colorRandom {
+    0% { background-color: white;}
+    25% { background-color: rgb(183, 255, 75);}
+    50% { background-color: rgb(165, 226, 73);}
+    75% { background-color: rgb(183, 255, 75);}
+    100% { background-color: white;}
+  }
