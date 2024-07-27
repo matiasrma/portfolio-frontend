@@ -164,7 +164,11 @@ export class NewHomeComponent implements OnInit {
     }
 
     this.countImageLoaded += 1;
-    let countImage = this.listaProyectos.map(e => e.has_skills.length).reduce((acc, curr) => { return acc + curr });    
+    let countImage = 0;
+    //this.listaProyectos.map(e => e.has_skills.length).reduce((acc, curr) => { return acc + curr });
+    this.listaProyectos.forEach(p => {
+        if (p.has_skills) countImage += p.has_skills.length
+    });
     
     if (this.countImageLoaded >= this.listaSkills.length && this.countImageLoaded >= countImage){
       this.classLoaded = "loaded";

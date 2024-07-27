@@ -89,7 +89,7 @@
           <div class="cardRow">
             <div class="cardColumn">
               <p class="cardRow about-text" >{{Experiencia.descripcion_exp}}<br></p>      
-              <span class="cardRow" *ngIf="Experiencia.has_skills.length > 0">
+              <span class="cardRow" *ngIf="Experiencia.has_skills?.length > 0">
                 <span class="cardColumn" *ngFor="let Skill of Experiencia.has_skills">
                   <img class="skill-logo skill" 
                     (load)="imageLoaded()" 
@@ -120,7 +120,7 @@
           <a class="cardRow" href="{{Proyecto.url_proyecto}}" rel="noreferrer noopener" target="_blank"><h3>{{Proyecto.nombre_proyecto}}</h3></a>
           <!-- <p class="cardRow about-text">{{Proyecto.descripcion_proyecto}}</p>                 -->
           <p class="cardRow about-text" *ngFor="let line of listaTextoProy[Proyecto.Id]">{{line}}<br></p>      
-          <span class="cardRow" *ngIf="Proyecto.has_skills.length > 0">
+          <span class="cardRow" *ngIf="Proyecto.has_skills?.length > 0">
             <span class="cardColumn" *ngFor="let Skill of Proyecto.has_skills">
               <img class="skill-logo skill" 
                 (load)="imageLoaded()" 
