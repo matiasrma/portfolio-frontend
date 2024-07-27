@@ -84,17 +84,12 @@ export class NewHomeComponent implements OnInit {
     const estilo = window.getComputedStyle(this.SobreMi.nativeElement);
     const marginTop = parseInt(estilo.getPropertyValue('margin-top').toString().replace('px',''));
 
-    console.log(marginTop);
-    
-
     let heightHola = marginTop + this.Hola.nativeElement.offsetHeight;
     let heightSobreMi = heightHola + marginTop + this.SobreMi.nativeElement.offsetHeight;
     let heightSkills = heightSobreMi + marginTop + this.SkillsTag.nativeElement.offsetHeight;  
     let heightExperiencia = heightSkills + marginTop + this.Experiencias.nativeElement.offsetHeight;  
     let heightProyecto = heightExperiencia + marginTop + this.Proyectos.nativeElement.offsetHeight;  
         
-    console.log(heightProyecto);
-
     if (scrollOffset + windowHeigth > heightProyecto + marginTop) {
       this.selectedLink = "Contacto";
     } else if (scrollOffset > heightExperiencia) {
@@ -178,9 +173,9 @@ export class NewHomeComponent implements OnInit {
   }
 
   changeActive(skill: Skill){    
-
+    
     this.listaSkills.forEach(s => { 
-      s.active = s.Id == skill.Id;      
+      s.active = s.Id == skill.Id;   
     });
 
     this.listaProyectos.forEach(proy =>{

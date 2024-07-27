@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
   } 
 
   async ObtenerListas(){    
+    console.log("INICIO: " + new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getSeconds());     
     await this.ObtenerProyectos();
     await this.ObtenerAcercaDe();
     await this.ObtenerExperiencia();
@@ -54,21 +55,32 @@ export class HomeComponent implements OnInit {
   async ObtenerAcercaDe(){
     await this.acdService.Obtener(1).then(data => {
       this.acercaDe = data;
+      console.log(new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getSeconds());     
       if (this.acercaDe.textoacd != undefined) this.texto = this.acercaDe.textoacd.split('\n');
     })
   }
 
   async ObtenerExperiencia(){
-    await this.serviceExperiencia.ObtenerLista(1).then(data => this.listaExperiencia = data);
+    await this.serviceExperiencia.ObtenerLista(1).then(data => {
+      this.listaExperiencia = data
+      console.log(new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getSeconds());     
+    });
+      
     this.listaExperiencia.sort((a, b) => b.Id - a.Id);
   }
 
   async ObtenerSkills(){
-    await this.skillService.ObtenerLista(1).then(data => this.listaSkills = data);
+    await this.skillService.ObtenerLista(1).then(data => {
+      this.listaSkills = data
+      console.log(new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getSeconds());     
+    });
   }
 
   async ObtenerProyectos(){
-    await this.proyectoService.ObtenerLista(1).then(data => this.listaProyectos = data);
+    await this.proyectoService.ObtenerLista(1).then(data => {
+      this.listaProyectos = data
+      console.log(new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getSeconds());     
+    });
   }
 
   getIsLogged(){
