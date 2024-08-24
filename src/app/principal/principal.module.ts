@@ -9,9 +9,6 @@ import { EnContruccionComponent } from './en-contruccion/en-contruccion.componen
 import { SocialComponent } from './social/social.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { environment } from 'src/environments/environment';
-import { getStorage, provideStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [

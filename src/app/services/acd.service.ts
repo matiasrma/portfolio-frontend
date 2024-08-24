@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
-import { lastValueFrom, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Acd } from '../Model/acd';
 

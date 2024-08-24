@@ -1,0 +1,62 @@
+<dx-scroll-view height="100%" width="100%">
+    <div class="content-center h-dvh">
+        <div class="grid grid-cols-3 justify-items-center">
+            <div></div>
+            <div class="dx-card w-fit p-4">
+                <div class="header">
+                    <div class="titulo text-center">Login</div>
+                </div>
+                <form class="login-form" (submit)="loguearse()">
+                    <dx-form [formData]="usuario" [disabled]="loading">
+
+                        <dxi-item dataField="nombre_usuario" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', placeholder: 'Usuario' }">
+                            <dxi-validation-rule type="required" message="Campo requerido"></dxi-validation-rule>
+                            <dxo-label [visible]="false"></dxo-label>
+                        </dxi-item>
+
+                        <dxi-item dataField="password" editorType="dxTextBox"
+                            [editorOptions]="{ stylingMode: 'filled', placeholder: 'Contraseña', mode: passwordMode, buttons: buttonPassword  }">
+                            <dxi-validation-rule type="required" message="Requerido"></dxi-validation-rule>
+                            <dxo-label [visible]="false"></dxo-label>
+                        </dxi-item>
+
+
+                        <dxi-item itemType="button">
+                            <dxo-button-options width="100%" type="default" [useSubmitBehavior]="true"
+                                [template]="'signInTemplate'">
+                            </dxo-button-options>
+                        </dxi-item>
+
+
+                        <ng-container *dxTemplate="let item of 'signInTemplate'">
+                            <div>
+                                <span class="dx-button-text">
+                                    <ng-container *ngIf="loading; else notLoading">
+                                        <dx-load-indicator width="24px" height="24px"
+                                            [visible]="true"></dx-load-indicator>
+                                    </ng-container>
+                                    <ng-template #notLoading>Ingresar</ng-template>
+                                </span>
+                            </div>
+                        </ng-container>
+
+                    </dx-form>
+                    <div *ngIf="mensajeError != ''"
+                        class="bg-red-100 border border-red-400 text-red-700 my-5 px-4 py-3 rounded relative"
+                        role="alert">
+                        <span class="block">{{mensajeError}}</span>
+                        <span class="absolute top-0 bottom-0 right-0 px-4 py-3" (click)="mensajeError = ''">
+                            <svg class="fill-current h-6 w-6 text-red-500" role="button"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <title>Close</title>
+                                <path
+                                    d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                            </svg>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</dx-scroll-view>
