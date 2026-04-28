@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "strict": true,
@@ -22,11 +21,7 @@
       "dom"
     ],
     "useDefineForClassFields": false,
-    "skipLibCheck": true,
-    "paths": {
-      "src/environments/environment": ["src/environments/environment.ts"],
-      "src/environments/environment/*": ["src/environments/*"]
-    }
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

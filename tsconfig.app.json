@@ -3,23 +3,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": [],
-    "paths": {
-      "src/environments/environment": ["src/environments/environment.ts"],
-      "src/environments/environment/*": ["src/environments/*"],
-      "globalize": [
-        "node_modules/globalize/dist/globalize"
-      ],
-      "globalize/*": [
-        "node_modules/globalize/dist/globalize/*"
-      ],
-      "cldr": [
-        "node_modules/cldrjs/dist/cldr"
-      ],
-      "cldr/*": [
-        "node_modules/cldrjs/dist/cldr/*"
-      ]
-    }
+    "types": []
   },
   "files": [
     "src/main.ts",
