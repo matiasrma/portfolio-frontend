@@ -40,12 +40,12 @@ jobs:
       - name: Install dependencies
         run: |
           cd ${{ github.workspace }}
-          npm install
+          npm ci
 
       - name: Build
         run: |
           cd ${{ github.workspace }}
-          npm run build
+          npx ng build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
