@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { environment } from '../environments/environment';
+import { environment } from '@environments/environment';
 import { Experiencia } from '../Model/experiencia';
 import { Skill } from '../Model/skill';
 

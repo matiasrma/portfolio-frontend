@@ -9,7 +9,6 @@ dist
 node_modules
 
 #enviroments
-src/app/environments/environment.ts
 
 # Node
 /node_modules
