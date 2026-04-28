@@ -16,9 +16,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: miportfolio-frontend
     steps:
       - name: Checkout
         uses: actions/checkout@v4
