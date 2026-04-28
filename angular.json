@@ -21,14 +21,15 @@
               "src/polyfills.ts"
             ],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-                "node_modules/bootstrap/dist/css/bootstrap.css",
-                "src/styles.scss"
-            ],
+             "assets": [
+               "src/favicon.ico",
+               "src/assets",
+               "src/404.html"
+             ],
+             "styles": [
+                 "node_modules/bootstrap/dist/css/bootstrap.css",
+                 "src/styles.scss"
+             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.js"
             ],
