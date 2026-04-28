@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, lastValueFrom } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Experiencia } from '../Model/experiencia';
 import { Skill } from '../Model/skill';
@@ -8,17 +8,16 @@ import { Skill } from '../Model/skill';
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceExperienciaService {
+export class ExperienciaService {
 
-  expURL = environment.URL + 'Experiencia'
-  expURLset = environment.URL + 'ExperienciaSet'
+  URL = environment.URL + 'Experiencia'
   respuesta: any = null;
 
   constructor(private httpClient: HttpClient) { }
 
   async ObtenerLista(persona_id: number): Promise<Experiencia[]>{
     
-    const data$ = this.httpClient.get<Experiencia[]>(this.expURL, { params: { persona_id: persona_id , responseType: 'json' } });
+    const data$ = this.httpClient.get<Experiencia[]>(this.URL + '/lista/' + persona_id, { responseType: 'json' });
 
     try{
       const value = await lastValueFrom(data$, { defaultValue: 'false' } ) ?? 'false';
@@ -33,7 +32,7 @@ export class ServiceExperienciaService {
   
   async Guardar(lista: Experiencia[]): Promise<string>{
 
-    const data$ = this.httpClient.post(this.expURLset, lista, { responseType: 'json' });
+    const data$ = this.httpClient.post(this.URL, lista, { responseType: 'json' });
 
     try{
       const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
@@ -48,54 +47,45 @@ export class ServiceExperienciaService {
 
   async Eliminar(lista: Experiencia[]): Promise<string>{
 
-    const data$ = this.httpClient.delete(this.expURLset, { body:  lista, params: { responseType: 'string' } });
+    const data$ = this.httpClient.delete(this.URL, { body: lista, responseType: 'json' });
 
     try{
       const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
       this.respuesta = value;
-    } catch (e: any){
-      console.log("error");      
+    } catch (e: any){  
       this.respuesta = e.error;
     }
 
-    console.log(this.respuesta);
-    
     return this.respuesta;
 
   }
 
   async AddSKill(skills: Skill[], experiencia_id: number): Promise<string>{
 
-    const data$ = this.httpClient.post(this.expURLset + "/AddSkill/" + experiencia_id, skills, { params: { responseType: 'string' } });
+    const data$ = this.httpClient.post(this.URL + "/AddSkill/" + experiencia_id, skills, { responseType: 'json' });
 
     try{
       const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
       this.respuesta = value;
-    } catch (e: any){
-      console.log("error");      
+    } catch (e: any){  
       this.respuesta = e.error;
     }
 
-    console.log(this.respuesta);
-    
     return this.respuesta;
 
   }
 
   async DeleteSKill(skills: Skill[], experiencia_id: number): Promise<string>{
 
-    const data$ = this.httpClient.delete(this.expURLset + "/DeleteSkill/" + experiencia_id, { body: skills , params: { responseType: 'string' } });
+    const data$ = this.httpClient.delete(this.URL + "/DeleteSkill/" + experiencia_id, { body: skills, responseType: 'json' });
 
     try{
       const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
       this.respuesta = value;
-    } catch (e: any){
-      console.log("error");      
+    } catch (e: any){  
       this.respuesta = e.error;
     }
 
-    console.log(this.respuesta);
-    
     return this.respuesta;
 
   }

@@ -17,20 +17,18 @@ export class MainService {
     }
 
 
-    public Post(controller: string, accion: string, payload: any){
-
+    public Post(controller: string, accion: string, payload: any): Observable<any> {
         let headers = new HttpHeaders();
-		headers = headers.set("Content-Type", "application/json");
-		headers = headers.set("Accept", "application/json");
+        headers = headers.set("Content-Type", "application/json");
+        headers = headers.set("Accept", "application/json");
 
         const url = `${environment.URL}${controller}/${accion}`;
         return this.http.post(url, payload, { headers: headers });
-
     }
 
-    headers(){
+    headers(): HttpHeaders {
         let headers = new HttpHeaders();
-		headers = headers.set("Content-Type", "application/json");
+        headers = headers.set("Content-Type", "application/json");
         return headers;
     }
   

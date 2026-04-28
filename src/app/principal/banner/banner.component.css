@@ -5,6 +5,66 @@
     object-fit: cover ;    
 }
 
+.banner-container {
+    position: relative;
+    width: 100%;
+}
+
+.edit-banner-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.edit-banner-btn i {
+    font-size: 20px;
+    color: var(--pen-color);
+}
+
+.edit-banner-btn:hover {
+    transform: scale(1.1);
+}
+
+.edit-selfie-btn {
+    position: absolute;    
+    bottom: 210px;
+    left: 240px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 10;
+}
+
+.edit-selfie-btn i {
+    font-size: 20px;
+    color: var(--pen-color);
+}
+
+.edit-selfie-btn:hover {
+    opacity: 1 !important;
+    transform: scale(1.1);
+}
+
+#cont-selfie:hover .edit-selfie-btn {
+    opacity: 1;
+}
+
 #selfie {
     width: 40%;
     max-width: 250px;
@@ -60,21 +120,6 @@ div {
 button:hover {
     background-color: white;
     color: #0d6efd;    
-}
-
-a i{        
-    width: 40px;  
-    height: 40px;
-    padding: 0px 5px 1px 5px;        
-    font-size: 30px;
-    border-radius: 100px;        
-    position: absolute;    
-    bottom: 210px;
-    left: 240px;        
-}
-
-a i:hover{    
-    box-shadow: 0px 0px 5px 5px;    
 }
 
 h2 {

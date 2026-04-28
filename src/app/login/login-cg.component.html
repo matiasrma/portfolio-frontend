@@ -1,62 +1,69 @@
-<dx-scroll-view height="100%" width="100%">
-    <div class="content-center h-dvh">
-        <div class="grid grid-cols-3 justify-items-center">
-            <div></div>
-            <div class="dx-card w-fit p-4">
-                <div class="header">
-                    <div class="titulo text-center">Login</div>
-                </div>
-                <form class="login-form" (submit)="loguearse()">
-                    <dx-form [formData]="usuario" [disabled]="loading">
-
-                        <dxi-item dataField="nombre_usuario" editorType="dxTextBox"
-                            [editorOptions]="{ stylingMode: 'filled', placeholder: 'Usuario' }">
-                            <dxi-validation-rule type="required" message="Campo requerido"></dxi-validation-rule>
-                            <dxo-label [visible]="false"></dxo-label>
-                        </dxi-item>
-
-                        <dxi-item dataField="password" editorType="dxTextBox"
-                            [editorOptions]="{ stylingMode: 'filled', placeholder: 'Contraseña', mode: passwordMode, buttons: buttonPassword  }">
-                            <dxi-validation-rule type="required" message="Requerido"></dxi-validation-rule>
-                            <dxo-label [visible]="false"></dxo-label>
-                        </dxi-item>
-
-
-                        <dxi-item itemType="button">
-                            <dxo-button-options width="100%" type="default" [useSubmitBehavior]="true"
-                                [template]="'signInTemplate'">
-                            </dxo-button-options>
-                        </dxi-item>
-
-
-                        <ng-container *dxTemplate="let item of 'signInTemplate'">
-                            <div>
-                                <span class="dx-button-text">
-                                    <ng-container *ngIf="loading; else notLoading">
-                                        <dx-load-indicator width="24px" height="24px"
-                                            [visible]="true"></dx-load-indicator>
-                                    </ng-container>
-                                    <ng-template #notLoading>Ingresar</ng-template>
-                                </span>
-                            </div>
-                        </ng-container>
-
-                    </dx-form>
-                    <div *ngIf="mensajeError != ''"
-                        class="bg-red-100 border border-red-400 text-red-700 my-5 px-4 py-3 rounded relative"
-                        role="alert">
-                        <span class="block">{{mensajeError}}</span>
-                        <span class="absolute top-0 bottom-0 right-0 px-4 py-3" (click)="mensajeError = ''">
-                            <svg class="fill-current h-6 w-6 text-red-500" role="button"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <title>Close</title>
-                                <path
-                                    d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
-                            </svg>
-                        </span>
-                    </div>
-                </form>
-            </div>
+<div class="h-screen overflow-auto">
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="bg-white shadow-xl rounded-lg p-8 w-full max-w-md">
+      <h1 class="text-2xl font-bold text-center mb-6">Login</h1>
+      
+      <form [formGroup]="form" (ngSubmit)="loguearse()" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Usuario</label>
+          <input 
+            type="text" 
+            formControlName="nombre_usuario"
+            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+                   focus:border-blue-500 focus:ring-blue-500 p-2 border"
+            placeholder="Usuario">
+          @if (form.get('nombre_usuario')?.hasError('required') && 
+               form.get('nombre_usuario')?.touched) {
+            <p class="text-red-500 text-sm mt-1">Campo requerido</p>
+          }
         </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Contraseña</label>
+          <div class="relative">
+            <input 
+              [type]="passwordMode" 
+              formControlName="password"
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+                     focus:border-blue-500 focus:ring-blue-500 p-2 border"
+              placeholder="Contraseña">
+            <button 
+              type="button"
+              (click)="togglePassword()"
+              class="absolute right-2 top-3 text-gray-500">
+              {{ passwordMode === 'password' ? '👁️' : '🙈' }}
+            </button>
+          </div>
+          @if (form.get('password')?.hasError('required') && 
+               form.get('password')?.touched) {
+            <p class="text-red-500 text-sm mt-1">Requerido</p>
+          }
+        </div>
+
+        <button 
+          type="submit" 
+          [disabled]="!form.valid || loading"
+          class="w-full bg-blue-500 text-white py-2 px-4 rounded-md 
+                 hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed
+                 flex items-center justify-center">
+          @if (loading) {
+            <span class="animate-spin mr-2">⟳</span>
+          }
+          Ingresar
+        </button>
+      </form>
+
+      @if (mensajeError) {
+        <div class="mt-4 bg-red-100 border border-red-400 text-red-700 
+                    px-4 py-3 rounded relative">
+          <span>{{ mensajeError }}</span>
+          <button 
+            class="absolute top-0 bottom-0 right-0 px-4 py-3"
+            (click)="mensajeError = ''">
+            ✕
+          </button>
+        </div>
+      }
     </div>
-</dx-scroll-view>
+  </div>
+</div>

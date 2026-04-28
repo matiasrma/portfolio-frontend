@@ -1,37 +1,91 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Educacion } from '../Model/educacion';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceEducacionService {
+export class EducacionService {
 
-  eduURL = environment.URL + 'educacion/'
+  URL = environment.URL + 'Educacion';
+  respuesta: any = null;
 
   constructor(private httpClient: HttpClient) { }
 
-  public lista(): Observable<Educacion[]>{
+  async ObtenerLista(persona_id: number): Promise<Educacion[]>{
     
-    return this.httpClient.get<Educacion[]>(this.eduURL + 'lista');
+    const data$ = this.httpClient.get<Educacion[]>(this.URL + '/lista/' + persona_id, { responseType: 'json' } );
+
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      this.respuesta = value;
+    } catch (e: any){
+      this.respuesta = [];
+    }
+
+    return this.respuesta;
+
+  }
+  
+  async Obtener(id: number): Promise<Educacion>{
+    
+    const data$ = this.httpClient.get<Educacion>(this.URL + '/detail/' + id, { responseType: 'json' } );
+
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      this.respuesta = value;
+    } catch (e: any){
+      this.respuesta = null;
+    }
+
+    return this.respuesta;
 
   }
 
-  public detail(id: number): Observable<Educacion>{
-    return this.httpClient.get<Educacion>(this.eduURL + `detail/${id}`);
+  async Guardar(educacion: Educacion): Promise<string>{
+    
+    const data$ = this.httpClient.post(this.URL, educacion, { responseType: 'json' });
+
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      this.respuesta = value;
+    } catch (e: any){
+      this.respuesta = e.error;
+    }
+
+    return this.respuesta;
+
   }
 
-  public save(educacion: Educacion): Observable<any>{
-    return this.httpClient.post<any>(this.eduURL + 'create', educacion);
+  async Update(id: number, educacion: Educacion): Promise<string>{
+    
+    const data$ = this.httpClient.put(this.URL + '/' + id, educacion, { responseType: 'json' });
+
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      this.respuesta = value;
+    } catch (e: any){
+      this.respuesta = e.error;
+    }
+
+    return this.respuesta;
+
   }
 
-  public update(id: number, educacion: Educacion): Observable<any>{
-    return this.httpClient.put<any>(this.eduURL + `update/${id}`, educacion);
-  }
+  async Delete(id: number): Promise<string>{
+    
+    const data$ = this.httpClient.delete(this.URL + '/' + id, { responseType: 'json' });
 
-  public delete(id: number): Observable<any>{
-    return this.httpClient.delete<any>(this.eduURL + `delete/${id}`);
+    try{
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
+      this.respuesta = value;
+    } catch (e: any){
+      this.respuesta = e.error;
+    }
+
+    return this.respuesta;
+
   }
 }

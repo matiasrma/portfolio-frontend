@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  standalone: true,
+  imports: [RouterOutlet],
+  template: `<router-outlet />`,
+  styles: []
 })
-export class AppComponent {
-  title = 'miportfolio-frontend';
-}
+export class AppComponent {}

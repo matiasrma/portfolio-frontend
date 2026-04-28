@@ -1,49 +1,39 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { LoginUsuario } from 'src/app/Model/login-usuario';
-import { AuthService } from 'src/app/services/auth.service';
-import { ImageService } from 'src/app/services/image.service';
-import { TokenService } from 'src/app/services/token.service';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { LoginUsuario } from '../../Model/login-usuario';
+import { AuthService } from '../../services/auth.service';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  private authService = inject(AuthService);
+  private tokenService = inject(TokenService);
 
-  mensajeClass: string = "conectando"
-  logMsj: string = "";
+  mensajeClass = "conectando";
+  logMsj = "";
   loginUsuario: LoginUsuario = {} as LoginUsuario;
   usuarioLogeado: LoginUsuario = {} as LoginUsuario;
-  nombreUsuario!: string;
-  @ViewChild('password') password!: string;
-  roles: string[] = [];  
-
-  @Input() isLogged: boolean = false;
-
-  @Output() emitGetIsLogged = new EventEmitter();
+  nombreUsuario = "";
+  @Input() isLogged = false;
+  @Output() emitGetIsLogged = new EventEmitter<void>();
   
-  constructor(private tokenService: TokenService, 
-    private authService: AuthService, 
-    private authFirebase : ImageService
-    ) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    
-  }
-
-  async onLogin() {
-    let pwd = this.loginUsuario.password;
+  async onLogin(): Promise<void> {
     this.logMsj = 'Conectando...';
 
-    await this.authService.Login(this.loginUsuario).then(data =>{
-      this.usuarioLogeado = data;
-    });      
-
+    this.usuarioLogeado = await this.authService.Login(this.loginUsuario);
+    
     if (this.usuarioLogeado.email != null) {
       this.logMsj = 'Ingresando!';
       this.mensajeClass = 'ingreso';
-      await this.authFirebase.login(this.usuarioLogeado.email, pwd);
       this.tokenService.setToken(this.usuarioLogeado.token);
       this.tokenService.setUsername(this.usuarioLogeado.nombre_usuario);
       this.isLogged = true;
@@ -52,7 +42,5 @@ export class LoginComponent implements OnInit {
       this.logMsj = "Error de usuario o contraseña";
       this.mensajeClass = 'errorIngreso';
     }
-
   }
-
 }

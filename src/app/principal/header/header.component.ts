@@ -1,47 +1,41 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { ImageService } from 'src/app/services/image.service';
-import { TokenService } from 'src/app/services/token.service';
-import { SocialComponent } from '../social/social.component';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { TokenService } from '../../services/token.service';
+import { SocialComponent } from '../social/social.component';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule,SocialComponent]
+  imports: [CommonModule, FormsModule, RouterModule, SocialComponent],
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  isDark = false; 
+  @Input() isLogged = false;   
+  @Output() emitLogout = new EventEmitter<boolean>();
 
-  isDark: boolean = false; 
-
-  @Input() isLogged: boolean = false;   
-  @Output() emmitLogout = new EventEmitter();
-
-  constructor(
-    private authFirebase : ImageService
-    ) { }
+  private tokenService = inject(TokenService);
 
   ngOnInit(): void {
     this.SwitchDarkTheme();
   }
 
-  SwitchDarkTheme(){
+  SwitchDarkTheme(): void {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');    
     document.body.classList.toggle('dark-theme', prefersDark.matches);
     this.isDark = prefersDark.matches;
   }
 
-  async onLogout(){
-    this.authFirebase.logout();
-    this.emmitLogout.emit();
+  onLogout(): void {
+    this.tokenService.logout();
+    this.emitLogout.emit(true);
   }
 
-  Darkness(){
+  Darkness(): void {
     document.body.classList.toggle('dark-theme');
     this.isDark = !this.isDark;
   }  
-
 }

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 const TOKEN_KEY = 'AuthToken';
 const USERNAME_KEY = 'AuthUsername';
 const AUTHORITIES_KEY = 'AuthAuthorities';
-const USER_FIREBASE = 'AuthUserFirebase';
 
 @Injectable({
   providedIn: 'root'
@@ -15,46 +14,52 @@ export class TokenService {
   constructor() { }
 
   public setToken(token: string): void {
-    window.sessionStorage.removeItem(TOKEN_KEY);
-    window.sessionStorage.setItem(TOKEN_KEY, token);    
+    window.localStorage.removeItem(TOKEN_KEY);
+    window.localStorage.setItem(TOKEN_KEY, token);
+    window.localStorage.setItem(TOKEN_KEY + '_expiry', (Date.now() + 86400000).toString());
   }
 
   public getToken(): string {
-    return sessionStorage.getItem(TOKEN_KEY)!;
+    const expiry = window.localStorage.getItem(TOKEN_KEY + '_expiry');
+    if (expiry && Date.now() > parseInt(expiry)) {
+      this.logout();
+      return '';
+    }
+    return localStorage.getItem(TOKEN_KEY) ?? '';
   }
 
   public setUsername(userName: string): void {
-    window.sessionStorage.removeItem(USERNAME_KEY);
-    window.sessionStorage.setItem(USERNAME_KEY, userName);
+    window.localStorage.removeItem(USERNAME_KEY);
+    window.localStorage.setItem(USERNAME_KEY, userName);
   }
 
   public getUsername(): string {
-    return sessionStorage.getItem(USERNAME_KEY)!;
+    return localStorage.getItem(USERNAME_KEY) ?? '';
   }
 
-  public getUserFireBase(): string{
-    return sessionStorage.getItem(USER_FIREBASE)!;
-  }
-
-  public setAuthorities(authorities: string[]): void{
-    window.sessionStorage.removeItem(AUTHORITIES_KEY);
-    window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities))
+  public setAuthorities(authorities: string[]): void {
+    window.localStorage.removeItem(AUTHORITIES_KEY);
+    window.localStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities))
   } 
 
-  public getAuthorites(): string[]{
+  public getAuthorities(): string[] {
     this.roles = [];
-    if(sessionStorage.getItem(AUTHORITIES_KEY)!){
-      JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)!).forEach((authority:any) => {
+    const authorities = localStorage.getItem(AUTHORITIES_KEY);
+    if (authorities) {
+      JSON.parse(authorities).forEach((authority: any) => {
         this.roles.push(authority.authority);
       });      
     }
-    
     return this.roles;
   }
 
   public logout(): void {
-    window.sessionStorage.clear();
+    window.localStorage.clear();
+  }
+
+  public isLogged(): boolean {
+    const token = this.getToken();
+    return token !== '';
   }
 
 }
-

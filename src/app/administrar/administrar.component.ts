@@ -1,37 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 import { TokenService } from '../services/token.service';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-administrar',
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, HeaderComponent],
   templateUrl: './administrar.component.html',
   styleUrls: ['./administrar.component.css']
 })
 export class AdministrarComponent implements OnInit {
-
-  isLogged: boolean = false;  
-
-  constructor(
-    private tokenService: TokenService
-  ) { }
+  private tokenService = inject(TokenService);
+  isLogged = false;  
 
   ngOnInit(): void {
     this.getIsLogged();
   }
 
-  getIsLogged(){
-    if(this.tokenService.getToken()){
-      //this.roles = this.tokenService.getAuthorites();      
-      this.isLogged = true;
-    } else {
-      this.isLogged = false;
-    }
-
-    console.log(this.isLogged);
+  getIsLogged(): void {
+    this.isLogged = !!this.tokenService.getToken();
   }  
 
-  async onLogout(){
+  onLogout(): void {
     this.tokenService.logout();
     this.getIsLogged();
   }
-
 }

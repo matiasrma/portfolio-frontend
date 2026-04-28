@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Subir {{ data.field === 'banner' ? 'Banner' : 'Imagen' }}</h2>
+<mat-dialog-content>
+  <div class="preview-container">
+    <img [src]="previewUrl" alt="Preview" class="preview-image">
+  </div>
+  <div class="file-input-container">
+    <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*">
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onUpload()" [disabled]="!selectedFile || uploading">
+    {{ uploading ? 'Subiendo...' : 'Subir' }}
+  </button>
+</mat-dialog-actions>

@@ -1,17 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-en-contruccion',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './en-contruccion.component.html',
   styleUrls: ['./en-contruccion.component.css']
 })
-export class EnContruccionComponent implements OnInit {
-
-  @Input() isLogged: boolean = false;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class EnContruccionComponent {
+  @Input() isLogged = false;
 }

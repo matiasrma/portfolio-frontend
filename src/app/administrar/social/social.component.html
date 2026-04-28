@@ -1,13 +1,48 @@
-<div *ngFor="let Social of socials" class="mx-2">
-    <!-- <div *ngIf="islogged" class="row">        
-        <a href="" (click)="deleteSocial(Social.id)"><i class="bi bi-trash3-fill" style="color: lightcoral"></i></a>
-    </div> -->
-    <div>
-        <a href="{{Social.url_social}}" rel="noreferrer noopener" target="_blank"><img src="{{Social.img_social}}" alt=""></a>
-    </div>
-    <!-- <div *ngIf="islogged" class="row">        
-        <a href="" routerLink="/editsocial/{{Social.Id}}"><i class="bi bi-pencil-fill" style="color: var(--pen-color)"></i></a>        
-    </div> -->
+<div class="cont-botones">    
+  <div>
+    <button class="btn btn-success" (click)="Guardar()">Guardar</button>
+  </div>
+  <div>
+    <button class="btn btn-secondary" (click)="Volver()">Volver</button>
+  </div>
+  <div>
+    <button class="btn btn-primary" (click)="Agregar()">Agregar</button>
+  </div>
 </div>
+<div class="container">
+    <div class="row m-4">
+      <div
+        *ngFor="let Social of socials; let i = index"
+        class="container col-12 col-sm-6 my-4 col-lg-4"
+      >
+        <div class="col-12 col-sm-1 d-flex justify-content-center p-2">
+          <a (click)="Eliminar(Social)"><i class="bi bi-trash3-fill" style="color: lightcoral"></i></a>                       
+        </div>
+        <div class="col-12 text-center">
+          <img class="skill-logo" [src]="Social.img_social" alt="" />
+        </div>
+        <div class="row p-2">                  
+          <input type="file" 
+          class="form-control" 
+          id="imgExp" 
+          name="imgExp"
+          (change)="uploadImagen($event, i)"                
+          accept=".jpg, .jpeg, .png">        
+        </div>
+        <div class="container col-12 text-center">            
+          <input type="text" class="h3 text-center" [(ngModel)]="Social.url_social"  style="max-width: 80%;">
+        </div>
+      </div>
+    </div>  
+</div>
+
+<div [ngClass]="guardarClass" *ngIf="respuesta != ''">
+  <a (click)="borrarRespuesta()" class="cerrar-dialog" style="top: 15px;">
+    <p><strong>X</strong></p>
+  </a>        
+  <p style="font-size: 12px; text-align: center;" class="dialog">
+    {{respuesta}}
+  </p>    
+<div>
 
                 

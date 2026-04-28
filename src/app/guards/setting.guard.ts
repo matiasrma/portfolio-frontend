@@ -1,30 +1,31 @@
 import { inject } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
+import { CanActivateFn, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
-import { JwtHelperService } from "@auth0/angular-jwt";
+import { jwtDecode } from "jwt-decode";
+import { TokenService } from "../services/token.service";
 
 export const SettingGuard: CanActivateFn = (
-  route: ActivatedRouteSnapshot,
+  route: any,
   state: RouterStateSnapshot,
-):
-  | Observable<boolean | UrlTree>
-  | Promise<boolean | UrlTree>
-  | boolean
-  | UrlTree => {
-  
-  const stringToken = sessionStorage.getItem("session")!; 
-  const token = JSON.parse(stringToken);
-  const helper = new JwtHelperService();
-  const decodeToken = helper.decodeToken(token.jwt);
-  console.log(token);
-  console.log(decodeToken);
-  
-  // 👇 Redirects to another route  
-  if (!stringToken || decodeToken.role >= 6) {
-    return inject(Router).createUrlTree(["/", "Login"]);
+): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree => {
+
+  const tokenService = inject(TokenService);
+  const token = tokenService.getToken();
+  const router = inject(Router);
+
+  if (!token) {
+    return router.createUrlTree(["/", "Login"]);
   }
 
-  // 👇 Grants or deny access to this route
-  const attemptsToAccessItsOwnPage = stringToken !== null;
-  return attemptsToAccessItsOwnPage;
+  try {
+    const decodedToken: any = jwtDecode(token);
+
+    if (decodedToken.role >= 6) {
+      return router.createUrlTree(["/", "Login"]);
+    }
+  } catch (e) {
+    return router.createUrlTree(["/", "Login"]);
+  }
+
+  return token !== null;
 };

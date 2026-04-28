@@ -1,109 +1,91 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Acd } from 'src/app/Model/acd';
-import { Experiencia } from 'src/app/Model/experiencia';
-import { AcdService } from 'src/app/services/acd.service';
-import { PersonaService } from 'src/app/services/persona.service';
-import { ServiceExperienciaService } from 'src/app/services/experiencia.service';
-import { TokenService } from 'src/app/services/token.service';
-import { Skill } from 'src/app/Model/skill';
-import { SkillService } from 'src/app/services/skill.service';
+import { Component, Input, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { ProyectoService } from 'src/app/services/proyecto.service';
-import { Proyecto } from 'src/app/Model/proyecto';
-
+import { AcdService } from '../../services/acd.service';
+import { ExperienciaService } from '../../services/experiencia.service';
+import { SkillService } from '../../services/skill.service';
+import { ProyectoService } from '../../services/proyecto.service';
+import { TokenService } from '../../services/token.service';
+import { Acd } from '../../Model/acd';
+import { Experiencia } from '../../Model/experiencia';
+import { Skill } from '../../Model/skill';
+import { Proyecto } from '../../Model/proyecto';
+import { HeaderComponent } from '../header/header.component';
+import { LoginComponent } from '../login/login.component';
+import { BannerComponent } from '../banner/banner.component';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
+  imports: [CommonModule, HeaderComponent, LoginComponent, BannerComponent],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  private acdService = inject(AcdService);
+  private experienciaService = inject(ExperienciaService);
+  private skillService = inject(SkillService);
+  private proyectoService = inject(ProyectoService);
+  private tokenService = inject(TokenService);
+  private router = inject(Router);
 
+  @Input() isLogged = false;
   isLoad = false;  
   acercaDe: Acd = {} as Acd;
-  texto: string[] = []
+  texto: string[] = [];
   listaExperiencia: Experiencia[] = [];  
   listaSkills: Skill[] = [];
   listaProyectos: Proyecto[] = [];
 
-  constructor(
-    private tokenService: TokenService, 
-    private proyectoService: ProyectoService,
-    private skillService: SkillService,
-    private serviceExperiencia: ServiceExperienciaService,
-    private personaService: PersonaService,
-    private acdService: AcdService,
-    private router: Router
-    ) { }
-
-  isLogged: boolean = false;   
-
-  ngOnInit(): void {    
+  ngOnInit(): void {
+    this.isLogged = this.tokenService.isLogged();
     this.ObtenerListas();
-    this.getIsLogged();
   } 
 
-  async ObtenerListas(){    
-    console.log("INICIO: " + new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getSeconds());     
-    await this.ObtenerProyectos();
-    await this.ObtenerAcercaDe();
-    await this.ObtenerExperiencia();
-    await this.ObtenerSkills();
+  async ObtenerListas(): Promise<void> {
+    await Promise.all([
+      this.ObtenerProyectos(),
+      this.ObtenerAcercaDe(),
+      this.ObtenerExperiencia(),
+      this.ObtenerSkills()
+    ]);
     this.isLoad = true;
   }
 
-  async ObtenerAcercaDe(){
-    await this.acdService.Obtener(1).then(data => {
-      this.acercaDe = data;
-      console.log(new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getSeconds());     
-      if (this.acercaDe.textoacd != undefined) this.texto = this.acercaDe.textoacd.split('\n');
-    })
-  }
-
-  async ObtenerExperiencia(){
-    await this.serviceExperiencia.ObtenerLista(1).then(data => {
-      this.listaExperiencia = data
-      console.log(new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getSeconds());     
-    });
-      
-    this.listaExperiencia.sort((a, b) => b.Id - a.Id);
-  }
-
-  async ObtenerSkills(){
-    await this.skillService.ObtenerLista(1).then(data => {
-      this.listaSkills = data
-      console.log(new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getSeconds());     
-    });
-  }
-
-  async ObtenerProyectos(){
-    await this.proyectoService.ObtenerLista(1).then(data => {
-      this.listaProyectos = data
-      console.log(new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getSeconds());     
-    });
-  }
-
-  getIsLogged(){
-    let token = this.tokenService.getToken();
-    if(token != 'undefined' && token != null){
-      //this.roles = this.tokenService.getAuthorites();      
-      this.isLogged = true;
-    } else {
-      this.isLogged = false;
+  async ObtenerAcercaDe(): Promise<void> {
+    const data = await this.acdService.Obtener(1);
+    this.acercaDe = data;
+    if (this.acercaDe.textoacd) {
+      this.texto = this.acercaDe.textoacd.split('\n');
     }
-
   }
 
-  async onLogout(){
+  async ObtenerExperiencia(): Promise<void> {
+    const data = await this.experienciaService.ObtenerLista(1);
+    this.listaExperiencia = data.sort((a, b) => b.Id - a.Id);
+  }
+
+  async ObtenerSkills(): Promise<void> {
+    this.listaSkills = await this.skillService.ObtenerLista(1);
+  }
+
+  async ObtenerProyectos(): Promise<void> {
+    this.listaProyectos = await this.proyectoService.ObtenerLista(1);
+  }
+
+  onLogout(): void {
     this.tokenService.logout();
-    this.getIsLogged();
+    this.isLogged = false;
   }
 
-  Administrar(tipo: string){
-    let userName = this.tokenService.getUsername();
-    this.router.navigate(["Administrar/" + tipo],
-    { queryParams: { user_name: userName } }
-    )
+  getIsLogged(): void {
+    this.isLogged = this.tokenService.isLogged();
   }
 
+  Administrar(tipo: string): void {
+    const userName = this.tokenService.getUsername();
+    this.router.navigate(["Administrar/" + tipo], {
+      queryParams: { user_name: userName }
+    });
+  }
 }

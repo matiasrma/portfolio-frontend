@@ -16,7 +16,7 @@ export class AcdService {
 
   async Obtener(id: number): Promise<Acd>{
     
-    const data$ = this.httpClient.get(this.URL, { params: { id: id }, responseType: 'json' } );
+    const data$ = this.httpClient.get(this.URL + '/detail/' + id, { responseType: 'json' } );
 
     try {
       const value = await lastValueFrom(data$, {defaultValue: 'false'}) ?? "false"

@@ -1,25 +1,26 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { ImageService } from 'src/app/services/image.service';
-import { TokenService } from 'src/app/services/token.service';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { TokenService } from '../../services/token.service';
+import { SocialComponent } from '../social/social.component';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
+  imports: [CommonModule, RouterLink, FormsModule, SocialComponent],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  mensajeClass = "conectando";
+  logMsj = "";
+  isDark = false; 
+  @Input() isLogged = false;   
+  @Output() emitLogout = new EventEmitter<boolean>();
 
-  mensajeClass: string = "conectando"
-  logMsj: string = "";
-  isDark: boolean = false; 
-
-  @Input() isLogged: boolean = false;   
-  @Output() emmitLogout = new EventEmitter();
-
-  constructor(private router:Router, 
-    private authFirebase : ImageService
-    ) { }
+  private tokenService = inject(TokenService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');    
@@ -27,14 +28,14 @@ export class HeaderComponent implements OnInit {
     this.isDark = prefersDark.matches;
   }
 
-  async onLogout(){
-    this.authFirebase.logout();
-    this.emmitLogout.emit();
+  onLogout(): void {
+    this.tokenService.logout();
+    this.emitLogout.emit(true);
+    this.router.navigate(['/']);
   }
 
-  Darkness(){
+  Darkness(): void {
     document.body.classList.toggle('dark-theme');
     this.isDark = !this.isDark;
   }  
-
 }

@@ -1,85 +1,80 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Skill } from 'src/app/Model/skill';
-import { SkillService } from 'src/app/services/skill.service';
-import { ImageService } from 'src/app/services/image.service';
+import { Skill } from '../../Model/skill';
+import { SkillService } from '../../services/skill.service';
+import { ImageService } from '../../services/image.service';
 
 @Component({
   selector: 'app-skill',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './skill.component.html',
   styleUrls: ['./skill.component.css']
 })
 export class SkillComponent implements OnInit {
+  private SkillService = inject(SkillService);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  imageService = inject(ImageService);
 
   listaSkill: Skill[] = [];
-  userName: string = "";
-
+  userName = "";
   listaEliminar: Skill[] = [];
-  
-  respuesta: string = "";
-  guardarClass: string = "guardar";
-
-  constructor(
-    public imageService: ImageService,
-    private SkillService: SkillService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) { 
-    activatedRoute.queryParamMap.subscribe(
-      params => {
-        this.userName = (params.get("user_name"));
-      }
-    )
-  }
+  respuesta = "";
+  guardarClass = "guardar";
 
   ngOnInit(): void {
+    this.activatedRoute.queryParamMap.subscribe(
+      params => {
+        this.userName = (params.get("user_name") ?? '');
+      }
+    );
     this.obtenerListaSkill();
   }
 
-  async obtenerListaSkill(){
-    await this.SkillService.ObtenerLista(1).then(data => this.listaSkill = data);
+  async obtenerListaSkill(): Promise<void> {
+    this.listaSkill = await this.SkillService.ObtenerLista(1);
   }
 
-  Volver(){
-    this.router.navigate(['Inicio']);
+  Volver(): void {
+    this.router.navigate(['Administrar']);
   }
 
-  Agregar(){
+  Agregar(): void {
     this.listaSkill.push({} as Skill);
   }
 
-  Eliminar(Skill: Skill){
-    this.listaEliminar.push(Skill);
-    let indexEliminar = this.listaSkill.findIndex(exp => exp.Id == Skill.Id);
-    this.listaSkill.splice(indexEliminar,1);    
+  Eliminar(skill: Skill): void {
+    this.listaEliminar.push(skill);
+    const indexEliminar = this.listaSkill.findIndex(exp => exp.Id == skill.Id);
+    this.listaSkill.splice(indexEliminar, 1);    
   }
 
-  async Guardar(){
+  async Guardar(): Promise<void> {
     this.respuesta = "Guardando Informacion";
-    await this.SkillService.Guardar(this.listaSkill).then(data =>{
-      console.log(data);      
-      this.respuesta = data.toString();
-      this.respuesta.includes("correctamente")? this.guardarClass = "guardar" : this.guardarClass = "guardar error" ;
-    });
-    if (this.listaEliminar.length > 0){
-      await this.SkillService.Eliminar(this.listaEliminar).then(data => {
-        this.respuesta += data;
-        this.respuesta.includes("correctamente")? this.guardarClass = "guardar" : this.guardarClass = "guardar error" ;
-      });
-    }    
+    this.respuesta = await this.SkillService.Guardar(this.listaSkill);
+    this.guardarClass = this.respuesta.includes("correctamente") ? "guardar" : "guardar error";
+    
+    if (this.listaEliminar.length > 0) {
+      const result = await this.SkillService.Eliminar(this.listaEliminar);
+      this.respuesta += result;
+      this.guardarClass = this.respuesta.includes("correctamente") ? "guardar" : "guardar error";
+    }
+    
     await this.obtenerListaSkill();
   }
 
-  borrarRespuesta(){
+  borrarRespuesta(): void {
     this.respuesta = '';
   }
 
-  async uploadImagen($event: any, i: number){
-    
+  async uploadImagen($event: any, i: number): Promise<void> {
     let id = 0;
-    if (this.listaSkill[i].Id < 1){
+    if (this.listaSkill[i].Id < 1) {
       this.listaSkill.forEach(exp => {
-        if(exp.Id > id) id = exp.Id;
+        if (exp.Id > id) id = exp.Id;
       });
     } else {
       id = this.listaSkill[i].Id;
@@ -87,11 +82,7 @@ export class SkillComponent implements OnInit {
     
     const name = 'Skill_' + id;
     this.imageService.uploadImage($event, name);
-    this.imageService.getImages(name).then(data =>{
-      console.log(data);      
-      this.listaSkill[i].img_skill = data;
-    });
-      
+    const data = await this.imageService.getImages(name);
+    this.listaSkill[i].img_skill = data;
   }
-
 }

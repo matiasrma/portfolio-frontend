@@ -1,0 +1,70 @@
+{
+  "$schema": "https://docs.opencode.ai/skill.schema.json",
+  "name": "angular-modernization",
+  "description": "Modernize Angular templates by replacing deprecated structural directives with Angular 17+ control flow syntax",
+  "version": "1.0.0",
+  "rules": [
+    {
+      "name": "replace-ngif",
+      "description": "Replace *ngIf with @if control flow",
+      "patterns": [
+        {
+          "find": "*ngIf=\"(.+?)\"",
+          "replace": "@if ($1) {"
+        },
+        {
+          "find": "*ngIf=\"(.+?); as (.+?)\"",
+          "replace": "@if ($1; as $2) {"
+        }
+      ],
+      "examples": [
+        {
+          "before": "<div *ngIf=\"isLogged\">Content</div>",
+          "after": "@if (isLogged) {<div>Content</div>}"
+        },
+        {
+          "before": "<div *ngIf=\"items$ | async as items\">",
+          "after": "@if (items$ | async; as items) {"
+        }
+      ]
+    },
+    {
+      "name": "replace-ngfor",
+      "description": "Replace *ngFor with @for control flow",
+      "patterns": [
+        {
+          "find": "*ngFor=\"let (.+?) of (.+?)\"",
+          "replace": "@for ($1 of $2; track $1) {"
+        }
+      ],
+      "examples": [
+        {
+          "before": "<li *ngFor=\"let item of items\">{{item.name}}</li>",
+          "after": "@for (item of items; track item) {<li>{{item.name}}</li>}"
+        }
+      ]
+    },
+    {
+      "name": "replace-ngswitch",
+      "description": "Replace *ngSwitch with @switch control flow",
+      "patterns": [
+        {
+          "find": "*ngSwitchCase=\"(.+?)\"",
+          "replace": "@case ($1) {"
+        },
+        {
+          "find": "*ngSwitchDefault",
+          "replace": "@default {"
+        }
+      ],
+      "examples": [
+        {
+          "before": "<div *ngSwitchCase=\"'a'\">Case A</div>",
+          "after": "@case ('a') {<div>Case A</div>}"
+        }
+      ]
+    }
+  ],
+  "priority": "high",
+  "appliesTo": ["**/*.html"]
+}

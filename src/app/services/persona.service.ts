@@ -16,7 +16,7 @@ export class PersonaService {
   
   async Obtener(id: number): Promise<Persona>{
     
-    const data$ = this.httpClient.get<Persona[]>(this.URL, { params: { id: id, responseType: "json" } } );
+    const data$ = this.httpClient.get<Persona>(this.URL + '/detail/' + id, { responseType: 'json' } );
 
     try{
       const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false"
@@ -31,7 +31,7 @@ export class PersonaService {
 
   async Guardar(persona: Persona): Promise<String>{
     
-    const data$ = this.httpClient.post(this.URL, persona, { params: { responseType: "string" } });
+    const data$ = this.httpClient.post(this.URL, persona, { responseType: 'json' });
 
     try{
       const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false"

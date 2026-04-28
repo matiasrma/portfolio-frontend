@@ -3,12 +3,12 @@
   <div  class="headerHome">
     <button *ngIf="this.menu" (click)="changeMenu()" class="headerLink">Menu</button>
     <div class="listHeader">      
-      <button *ngIf="!this.menu || selectedLink == 'Inicio'" (click)="changeMenu()" [ngClass]="selectedLink == 'Inicio' ? 'selectLink' : 'headerLink'" (click)="goTo(this.Inicio)" class="headerLink">Inicio</button>
-      <button *ngIf="!this.menu || selectedLink == 'SobreMi'" (click)="changeMenu()" [ngClass]="selectedLink == 'SobreMi' ? 'selectLink' : 'headerLink'" (click)="goTo(this.SobreMi)" class="headerLink">Sobre Mi</button>
-      <button *ngIf="!this.menu || selectedLink == 'SkillsTag'" (click)="changeMenu()" [ngClass]="selectedLink == 'SkillsTag' ? 'selectLink' : 'headerLink'" (click)="goTo(this.SkillsTag)" class="headerLink">Skills</button>
-      <button *ngIf="!this.menu || selectedLink == 'Experiencias'" (click)="changeMenu()" [ngClass]="selectedLink == 'Experiencias' ? 'selectLink' : 'headerLink'" (click)="goTo(this.Experiencias)" class="headerLink">Experiencia</button>
-      <button *ngIf="!this.menu || selectedLink == 'Proyectos'" (click)="changeMenu()" [ngClass]="selectedLink == 'Proyectos' ? 'selectLink' : 'headerLink'" (click)="goTo(this.Proyectos)" class="headerLink">Proyectos</button>
-      <button *ngIf="!this.menu || selectedLink == 'Contacto'" (click)="changeMenu()" [ngClass]="selectedLink == 'Contacto' ? 'selectLink' : 'headerLink'" (click)="goTo(this.Contacto)" class="headerLink">Contacto</button>
+      <button *ngIf="!this.menu || selectedLink == 'Inicio'" (click)="changeMenu()" [ngClass]="selectedLink == 'Inicio' ? 'selectLink' : 'headerLink'" (click)="goTo(Inicio)" class="headerLink">Inicio</button>
+      <button *ngIf="!this.menu || selectedLink == 'SobreMi'" (click)="changeMenu()" [ngClass]="selectedLink == 'SobreMi' ? 'selectLink' : 'headerLink'" (click)="goTo(SobreMi)" class="headerLink">Sobre Mi</button>
+      <button *ngIf="!this.menu || selectedLink == 'SkillsTag'" (click)="changeMenu()" [ngClass]="selectedLink == 'SkillsTag' ? 'selectLink' : 'headerLink'" (click)="goTo(SkillsTag)" class="headerLink">Skills</button>
+      <button *ngIf="!this.menu || selectedLink == 'Experiencias'" (click)="changeMenu()" [ngClass]="selectedLink == 'Experiencias' ? 'selectLink' : 'headerLink'" (click)="goTo(Experiencias)" class="headerLink">Experiencia</button>
+      <button *ngIf="!this.menu || selectedLink == 'Proyectos'" (click)="changeMenu()" [ngClass]="selectedLink == 'Proyectos' ? 'selectLink' : 'headerLink'" (click)="goTo(Proyectos)" class="headerLink">Proyectos</button>
+      <button *ngIf="!this.menu || selectedLink == 'Contacto'" (click)="changeMenu()" [ngClass]="selectedLink == 'Contacto' ? 'selectLink' : 'headerLink'" (click)="goTo(Contacto)" class="headerLink">Contacto</button>
     </div>
   </div>
   <div class="cardPresentation spin-loader" *ngIf="!isLoad">

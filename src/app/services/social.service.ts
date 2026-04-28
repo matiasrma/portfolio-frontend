@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, lastValueFrom } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Social } from '../Model/social';
 
@@ -10,17 +10,16 @@ import { Social } from '../Model/social';
 export class SocialService {
 
   URL = environment.URL + 'Social'
-
   respuesta: any = null;
 
   constructor(private httpClient: HttpClient) { }
 
   async ObtenerLista(persona_id: number): Promise<Social[]>{
     
-    const data$ = this.httpClient.get<Social[]>(this.URL, { params: { persona_id: persona_id, responseType: "json" } });
+    const data$ = this.httpClient.get<Social[]>(this.URL + '/lista/' + persona_id, { responseType: 'json' });
 
     try{
-      const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false";
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
       this.respuesta = value;
     } catch(e) {
       this.respuesta = [];
@@ -30,29 +29,30 @@ export class SocialService {
 
   }
   
-  async Guardar(social: Social): Promise<string>{
-   
-    const data$ = this.httpClient.post(this.URL, social, { params: { responseType: "string" } });
+  async Guardar(lista: Social[]): Promise<string>{
+     
+    const data$ = this.httpClient.post(this.URL+"/lista", lista, { responseType: 'json' });
 
     try{
-      const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false"
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
       this.respuesta = value;
-    } catch(e) {
-      this.respuesta = e;
+    } catch(e: any) {
+      this.respuesta = e.error;
     }
-
+    
     return this.respuesta;
+
   }
   
-  async Eliminar(Id: number): Promise<string>{
-
-    const data$ = this.httpClient.delete(this.URL, { params: { Id: Id, responseType: "string" } });
+  async Eliminar(lista: Social[]): Promise<string>{
+    
+    const data$ = this.httpClient.delete(this.URL, { body: lista, responseType: 'json' });
 
     try{
-      const value = await lastValueFrom(data$, { defaultValue: "false" }) ?? "false"
+      const value = await lastValueFrom(data$, { defaultValue: 'false' }) ?? 'false';
       this.respuesta = value;
-    } catch(e) {
-      this.respuesta = e;
+    } catch(e: any) {
+      this.respuesta = e.error;
     }
 
     return this.respuesta;

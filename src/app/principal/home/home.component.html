@@ -55,7 +55,7 @@
   <table class="table">
       <tbody>
           <tr *ngFor="let Proyecto of listaProyectos">
-              <div class="row">                    
+              <div class="row card-proyecto">                    
                   <div class="col-9">
                       <a href="{{Proyecto.url_proyecto}}" rel="noreferrer noopener" target="_blank"><h3>{{Proyecto.nombre_proyecto}}</h3></a>
                       <p>{{Proyecto.descripcion_proyecto}}</p>        
@@ -81,7 +81,7 @@
       *ngFor="let Skill of listaSkills"
       class="container col-12 col-sm-6 my-4 col-lg-4"
     >
-      <div class="col-12 text-center">          
+      <div class="col-12 text-center flex justify-content-center">          
           <img class="skill-logo" [src]="Skill.img_skill" alt=""/>
       </div>
       <div class="container col-12 text-center">
@@ -108,7 +108,7 @@
   <table class="table">
     <tbody>
       <tr *ngFor="let Experiencia of listaExperiencia">
-        <div class="row m-2">
+        <div class="row m-2 card-proyecto">
           <div
             class="container-fluid col-12 col-sm-6 col-lg-4 mb-6 d-flex align-items-center"
           >

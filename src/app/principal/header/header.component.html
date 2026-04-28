@@ -9,16 +9,21 @@
             <div class="col-12 col-sm-6 col-lg-9 d-flex justify-content-end align-items-center">            
                 <div id="social" class="d-flex justify-content-end align-items-center">
                     <!-- <a href="" routerLink="/nuevasocial" *ngIf="isLogged"><i class="bi bi-pencil-fill agregar"></i></a>                 -->
-                    <a href="" *ngIf="isLogged"><i class="bi bi-pencil-fill agregar"></i></a>                
+                    <a routerLink="/Administrar/Social" *ngIf="isLogged"><i class="bi bi-pencil-fill agregar"></i></a>                
                     <app-social class="d-flex"></app-social>                            
                 </div>
             </div>        
             <div class="col-12 col-sm-2 col-lg-1 d-flex justify-content-center align-items-center">
                 <div class="row">
-                    <div [ngSwitch]="isLogged" class="col-12 my-2 d-flex justify-content-center align-items-center">
-                        <button data-bs-toggle="modal" data-bs-target="#modal" *ngSwitchCase="false" type="button" class="btn social">Login</button>            
+                    
+                    <div class="col-12 my-2 d-flex justify-content-center align-items-center">
+                        @if (!isLogged) {
+                        <button data-bs-toggle="modal" data-bs-target="#modal" type="button" class="btn social">Login</button>            
+                        }
+                        @else{
                         <!--<button *ngSwitchCase="false" type="button" class="btn social" (click)="login()">Login</button>            -->
-                        <button *ngSwitchCase="true" type="button" id="salir" class="btn social" (click)="onLogout()">Logout</button>                                                 
+                        <button type="button" id="salir" class="btn social" (click)="onLogout()">Logout</button>                                                 
+                        }
                     </div>            
                     <div class="col-12 my-2 d-flex justify-content-center align-items-center">
                         <div class="form-check form-switch d-flex justify-content-center align-items-center">
