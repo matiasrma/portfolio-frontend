@@ -5,6 +5,8 @@
     "outDir": "./out-tsc/app",
     "types": [],
     "paths": {
+      "src/environments/environment": ["src/environments/environment.ts"],
+      "src/environments/environment/*": ["src/environments/*"],
       "globalize": [
         "node_modules/globalize/dist/globalize"
       ],
