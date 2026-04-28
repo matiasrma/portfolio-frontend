@@ -45,7 +45,7 @@ jobs:
       - name: Build
         run: |
           cd ${{ github.workspace }}
-          npx ng build
+          npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
