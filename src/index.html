@@ -11,15 +11,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet">
-  <script>
-    (function() {
-      var redirect = sessionStorage.redirect;
-      delete sessionStorage.redirect;
-      if (redirect && redirect !== location.pathname + location.search + location.hash) {
-        history.replaceState(null, null, redirect);
-      }
-    })();
-  </script>
 </head>
 <body>
   <app-root></app-root>  
